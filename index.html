@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="th">
 <head>
@@ -436,4 +435,1896 @@ input.field{flex:1;min-width:160px}select.field{flex:1;min-width:130px}
 .item-desc{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
 </style></head>
 <body><main class="app">
-<header
+<header class="top" style="margin-bottom:10px">
+  <div>
+    <div class="brand" aria-label="OMNidex">
+      <svg class="omni-o" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="13.5" fill="var(--ball-bottom)" stroke="var(--text)" stroke-width="2.6"/>
+        <path d="M2.5 16A13.5 13.5 0 0 1 29.5 16H2.5Z" fill="var(--ball-top)"/>
+        <line x1="2.5" y1="16" x2="11.2" y2="16" stroke="var(--ball-band)" stroke-width="2.6" stroke-linecap="round"/>
+        <line x1="20.8" y1="16" x2="29.5" y2="16" stroke="var(--ball-band)" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="4.6" fill="var(--panel)" stroke="var(--ball-ring)" stroke-width="2.5"/>
+        <circle cx="16" cy="16" r="1.7" fill="var(--ball-band)"/>
+      </svg><span>MNidex</span>
+    </div>
+    <div class="sub">Living Dex · Alternative Forms · ✨ Shiny Dex · Stat & Type Calc · Items · Breeding</div>
+  </div>
+  <div class="status" id="loadStatus">กำลังเตรียมฐานข้อมูล…</div>
+</header>
+
+<div class="top-bar">
+  <div class="prof-group">
+    <span class="tiny" style="font-weight:700">PROFILE:</span>
+    <select id="profileSelect" class="prof-select" title="สลับโปรไฟล์"></select>
+    <button class="icon-btn" id="newProfileBtn" title="สร้างโปรไฟล์ใหม่">+ ใหม่</button>
+    <button class="icon-btn" id="renameProfileBtn" title="เปลี่ยนชื่อโปรไฟล์">✎</button>
+    <button class="icon-btn" id="delProfileBtn" title="ลบโปรไฟล์นี้">🗑</button>
+  </div>
+  <div class="theme-group">
+    <button class="theme-pill active" data-set-theme="navy"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0f1c34" stroke="#38bdf8" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#2563eb"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#93c5fd" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#081020" stroke="#93c5fd" stroke-width="2.2"/></svg>Navy</button>
+    <button class="theme-pill" data-set-theme="pokeball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ffffff" stroke="#18181b" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#dc2626"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#18181b" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#ffffff" stroke="#18181b" stroke-width="2.2"/></svg>Poké</button>
+    <button class="theme-pill" data-set-theme="ultraball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f8fafc" stroke="#1f2937" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#1f2937"/><path d="M6.2 5.2L9.2 8.2M17.8 5.2L14.8 8.2" stroke="#eab308" stroke-width="2.2" stroke-linecap="round"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#1f2937" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#ffffff" stroke="#eab308" stroke-width="2.2"/></svg>Ultra</button>
+    <button class="theme-pill" data-set-theme="masterball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3b0764" stroke="#a855f7" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#7e22ce"/><circle cx="7.5" cy="7.5" r="1.8" fill="#f472b6"/><circle cx="16.5" cy="7.5" r="1.8" fill="#f472b6"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#1e1b4b" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#f5f3ff" stroke="#a855f7" stroke-width="2.2"/></svg>Master</button>
+    <button class="theme-pill" data-set-theme="safariball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#d6b87c" stroke="#2b4c27" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#4d8b46"/><circle cx="12" cy="7" r="1.5" fill="#d6b87c"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#2b4c27" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#f8fbf5" stroke="#2b4c27" stroke-width="2.2"/></svg>Safari</button>
+    <button class="theme-pill" data-set-theme="diveball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#38bdf8" stroke="#0284c7" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#0284c7"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#e0f2fe" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#eff8ff" stroke="#0284c7" stroke-width="2.2"/></svg>Dive</button>
+    <button class="theme-pill" data-set-theme="loveball"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ffffff" stroke="#be185d" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#ec4899"/><path d="M8.2 5.4c.7-1 2.2-1 2.8 0 .6-1 2.1-1 2.8 0 .6.9.2 2.2-1.4 3.2-1.6-1-2-2.3-1.4-3.2z" fill="#ffffff"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#be185d" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#ffffff" stroke="#be185d" stroke-width="2.2"/></svg>Love</button>
+    <button class="theme-pill" data-set-theme="premier"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#f8fafc" stroke="#475569" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#ffffff"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#e11d48" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#ffffff" stroke="#e11d48" stroke-width="2.2"/></svg>Premier</button>
+    <button class="theme-pill" data-set-theme="luxury"><svg class="ball-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#18181f" stroke="#d4af37" stroke-width="2.2"/><path d="M2.2 12A9.8 9.8 0 0 1 21.8 12Z" fill="#272732"/><line x1="2.2" y1="12" x2="21.8" y2="12" stroke="#e53935" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4" fill="#18181f" stroke="#d4af37" stroke-width="2.2"/></svg>Luxury</button>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="dex">Living Dex</button>
+  <button class="tab shiny-tab" data-tab="shiny">✨ Shiny Dex</button>
+  <button class="tab" data-tab="calc">Stat & Type Calc</button>
+  <button class="tab" data-tab="items">Items & Berries</button>
+  <button class="tab" data-tab="breed">Breeding</button>
+  <button class="tab" data-tab="backup">Backup</button>
+</nav>
+
+<!-- 1. LIVING DEX -->
+<section id="dex" class="view">
+ <div class="panel"><div class="section-head"><div><div class="h">National Pokédex & Alternative Forms</div><div class="tagline">แสดงธาตุทั้ง 18 ธาตุใต้ชื่อทุกตัวและทุกร่าง · กดที่การ์ดเพื่อดู Stat/ท่า หรือติ๊กสะสมแยกจาก Shiny Dex</div></div><button class="btn small" id="refresh">อัปเดตข้อมูล</button></div>
+ <div class="stats"><div class="stat"><b id="totalCount">—</b><span>Species loaded</span></div><div class="stat"><b id="caughtCount">0</b><span>เก็บแล้ว</span></div><div class="stat"><b id="caughtPct">0%</b><span>ความคืบหน้า</span></div></div><div class="progress"><i id="dexProgress"></i></div>
+ <div class="controls" style="margin-top:13px">
+   <input id="dexSearch" class="field" placeholder="ค้นหาชื่อหรือเลข National Dex / Form…">
+   <select id="dexTypeFilter" class="field" style="max-width:165px"><option value="all">ทุกธาตุ (All Types)</option></select>
+   <select id="dexCaught" class="field" style="max-width:155px"><option value="all">ทั้งหมด</option><option value="no">ยังไม่ได้เก็บ</option><option value="yes">เก็บแล้ว</option></select>
+ </div></div>
+ 
+ <div class="cat-tabs">
+   <button class="btn primary" id="dexViewSpecies">National Dex</button>
+   <button class="btn" id="dexViewRegional">Regional Forms</button>
+   <button class="btn" id="dexViewMega">Mega & Primal</button>
+   <button class="btn" id="dexViewGmax">Gigantamax</button>
+   <button class="btn" id="dexViewSpecial">Special & Battle Forms</button>
+   <button class="btn" id="dexViewCosmetic">Cosmetic & Patterns</button>
+ </div>
+ 
+ <div id="dexList" class="grid"></div>
+ <div id="formContainer" class="hidden"></div>
+</section>
+
+<!-- 2. SHINY LIVING DEX -->
+<section id="shiny" class="view hidden">
+ <div class="panel">
+  <div class="section-head">
+   <div><div class="h" style="color:var(--shiny)">✨ Shiny Living Dex & Alternative Forms</div><div class="tagline">แสดงรูปสี Shiny และธาตุของทุกสายพันธุ์และทุกร่าง · ติ๊กเก็บแยกจาก Living Dex ปกติ</div></div>
+   <span class="chip s">Shiny Tracker</span>
+  </div>
+  <div class="stats">
+   <div class="stat"><b id="shinyTotalCount">—</b><span>Species loaded</span></div>
+   <div class="stat"><b id="shinyCaughtCount" style="color:var(--shiny)">0</b><span>Shiny ที่เก็บแล้ว</span></div>
+   <div class="stat"><b id="shinyCaughtPct" style="color:var(--shiny)">0%</b><span>ความคืบหน้า Shiny</span></div>
+  </div>
+  <div class="progress shiny-prog"><i id="shinyProgress"></i></div>
+  <div class="controls" style="margin-top:13px">
+   <input id="shinySearch" class="field" placeholder="ค้นหาชื่อหรือเลข National Dex / Form (Shiny)…">
+   <select id="shinyTypeFilter" class="field" style="max-width:165px"><option value="all">ทุกธาตุ (All Types)</option></select>
+   <select id="shinyCaught" class="field" style="max-width:155px"><option value="all">ทั้งหมด</option><option value="no">ยังไม่มี Shiny</option><option value="yes">มี Shiny แล้ว</option></select>
+  </div>
+ </div>
+
+ <div class="cat-tabs">
+   <button class="btn shiny-btn" id="shinyViewSpecies">National Dex (Shiny)</button>
+   <button class="btn" id="shinyViewRegional">Regional Forms</button>
+   <button class="btn" id="shinyViewMega">Mega & Primal</button>
+   <button class="btn" id="shinyViewGmax">Gigantamax</button>
+   <button class="btn" id="shinyViewSpecial">Special & Battle Forms</button>
+   <button class="btn" id="shinyViewCosmetic">Cosmetic & Patterns</button>
+ </div>
+
+ <div id="shinyList" class="grid"></div>
+ <div id="shinyFormContainer" class="hidden"></div>
+</section>
+
+<!-- 3. STAT & TYPE CALCULATOR -->
+<section id="calc" class="view hidden">
+ <!-- 3.1 Stat Calculator -->
+ <div class="panel">
+  <div class="section-head">
+   <div><div class="h">Pokémon Stat Calculator (IV / EV / Nature / Min-Max)</div><div class="tagline">คำนวณค่าสเตตัสจริงตาม Level, IVs (0–31), EVs (0–252), Nature พร้อมเทียบค่า Min / Max ของตัวนั้น</div></div>
+   <span class="chip a">Stat Calc</span>
+  </div>
+  <div class="controls">
+   <input id="calcPokeInput" class="field" list="pokeOptions" placeholder="พิมพ์ชื่อ Pokémon เช่น Garchomp, Charizard…">
+   <select id="calcFormSelect" class="field" style="max-width:220px"><option value="">ร่างหลัก (Default)</option></select>
+   <button class="btn primary" id="loadCalcPoke">ดึงค่า Base Stat</button>
+  </div>
+  <div class="controls" style="margin-top:9px;align-items:center">
+   <label class="row"><span class="tiny">Level:</span><input type="number" id="calcLevel" class="calc-num" value="50" min="1" max="100"></label>
+   <button class="btn small" id="btnLv50">Lv.50 (Ranked)</button>
+   <button class="btn small" id="btnLv100">Lv.100</button>
+   <label class="row" style="flex:1;min-width:190px"><span class="tiny">Nature:</span><select id="calcNature" class="field"></select></label>
+   <button class="btn small" id="btnAll31IV">31 IVs ทั้งหมด</button>
+   <button class="btn small" id="btnResetEV">ล้าง EVs (0)</button>
+  </div>
+  <div class="result-note" id="calcSummary">เลือก Pokémon ด้านบน แล้วปรับ Level / IV / EV / Nature ระบบจะคำนวณสเตตัสจริงและ Min-Max ให้ทันที</div>
+  <div id="calcTableWrap" class="hidden" style="overflow-x:auto">
+   <table class="ref-table">
+    <thead>
+     <tr>
+      <th>Stat</th>
+      <th>Base</th>
+      <th>IV (0-31)</th>
+      <th>EV (0-252)</th>
+      <th>ผลลัพธ์จริง</th>
+      <th>Min (0 IV / -Nature)</th>
+      <th>Max (31 IV / 252 EV / +Nature)</th>
+     </tr>
+    </thead>
+    <tbody id="calcStatBody"></tbody>
+   </table>
+   <div class="row" style="justify-content:space-between;margin-top:8px">
+    <span class="tiny" id="calcEvTotal">EV รวม: 0 / 510</span>
+    <span class="tiny">สูตรมาตรฐาน Gen 3–9 · Shedinja HP = 1 เสมอ</span>
+   </div>
+  </div>
+ </div>
+
+ <!-- 3.2 Dual-Type Effectiveness Calculator -->
+ <div class="panel">
+  <div class="section-head">
+   <div><div class="h">Dual-Type Effectiveness Calculator</div><div class="tagline">เลือก 1 หรือ 2 ธาตุ เพื่อเช็กจุดอ่อน 4× / 2× และความต้านทาน 0.5× / 0.25× / 0×</div></div>
+   <span class="chip p">Type Matchup</span>
+  </div>
+  <div class="two">
+   <label><div class="tiny" style="margin-bottom:5px">TYPE 1 (ธาตุหลัก)</div><select id="typeCalc1" class="field"></select></label>
+   <label><div class="tiny" style="margin-bottom:5px">TYPE 2 (ธาตุรอง - เลือก None ได้)</div><select id="typeCalc2" class="field"></select></label>
+  </div>
+  <div id="typeCalcResult" style="margin-top:10px"></div>
+ </div>
+</section>
+
+<!-- 4. ITEMS & BERRIES & NATURES -->
+<section id="items" class="view hidden">
+ <div class="panel">
+  <div class="section-head">
+   <div><div class="h">Items, Poké Balls, Berries & Natures Database</div><div class="tagline">รวมไอเท็มทั้งหมดในเกมพร้อมความสามารถ, Poké Balls ครบทุกลูกพร้อมเงื่อนไขตัวคูณจับ, เบอรี่, ยา/วิตามิน/Mints และตาราง Nature</div></div>
+  </div>
+  <div class="controls">
+   <input id="itemSearch" class="field" placeholder="ค้นหาชื่อไอเท็ม, บอล, ตัวคูณ (เช่น 5×, 8×, 4×), เบอรี่, Mint หรือความสามารถ…">
+  </div>
+  <div class="cat-tabs">
+   <button class="btn primary" id="itemTabAll">ไอเท็มทั้งหมด</button>
+   <button class="btn" id="itemTabEvo">ไอเท็มพัฒนาร่าง</button>
+   <button class="btn" id="itemTabHeldMeta">Hold แบทเทิลยอดนิยม</button>
+   <button class="btn" id="itemTabHeldAll">Hold ทั้งหมด</button>
+   <button class="btn" id="itemTabBalls">Poké Balls & ตัวคูณจับ</button>
+   <button class="btn" id="itemTabMedicine">ยา / วิตามิน / Mints</button>
+   <button class="btn" id="itemTabBerry">เบอรี่ (Berries)</button>
+   <button class="btn" id="itemTabNature">ตาราง Nature 25 แบบ</button>
+  </div>
+  <div id="itemResultNote" class="result-note"></div>
+  <div id="itemGrid" class="item-grid"></div>
+  <div id="natureWrap" class="hidden" style="overflow-x:auto">
+   <table class="ref-table">
+    <thead><tr><th>Nature</th><th>เพิ่ม (+10%)</th><th>ลด (-10%)</th><th>สายที่นิยมใช้</th></tr></thead>
+    <tbody id="natureTableBody"></tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<!-- 5. BREEDING -->
+<section id="breed" class="view hidden">
+ <!-- 1. Chain Breeding Finder -->
+ <div class="panel">
+  <div class="section-head"><div><div class="h">Chain Breeding Bridge Finder</div><div class="tagline">หา "ตัวกลางเชื่อม Egg Group" เพื่อส่งต่อ IVs หรือท่าจากพ่อพันธุ์ตัวหนึ่งไปยังอีกตัวหนึ่ง</div></div><span class="chip a">Chain Bridge</span></div>
+  <div class="two">
+   <label><div class="tiny" style="margin-bottom:5px">พ่อพันธุ์ต้นทาง (DONOR / พ่อ)</div><input id="chainFrom" class="field" list="pokeOptions" placeholder="เช่น Pikachu, Charizard…"></label>
+   <label><div class="tiny" style="margin-bottom:5px">สายพันธุ์เป้าหมาย (TARGET / แม่)</div><input id="chainTo" class="field" list="pokeOptions" placeholder="เช่น Squirtle, Garchomp…"></label>
+  </div>
+  <div class="controls" style="margin-top:10px">
+   <button class="btn primary" id="findChain">หาเส้นทางตัวกลางเชื่อมกลุ่ม</button>
+   <button class="btn" id="swapChain">สลับต้นทาง-เป้าหมาย</button>
+  </div>
+  <div class="result-note" id="chainSummary">ใส่ชื่อพ่อพันธุ์ต้นทางและสายพันธุ์เป้าหมาย ระบบจะหาตัวที่มี 2 Egg Group เชื่อมตรงกลางให้ทันที</div>
+  <div id="chainResults" class="chain-box"></div>
+  <div class="notice">เงื่อนไขสำคัญของ Chain Breeding: ตัวกลาง (Bridge) ต้องเป็น <b>ตัวผู้ (♂)</b> ในขั้นสุดท้ายเพื่อส่งต่อให้แม่พันธุ์เป้าหมาย และตัวต้นทางต้องไม่ใช่ตัวเมียล้วน (100% ♀)</div>
+ </div>
+
+ <!-- 2. Egg Move Parent Finder -->
+ <div class="panel">
+  <div class="section-head"><div><div class="h">Egg Move Parent Finder</div><div class="tagline">เช็กท่า Egg Moves ทั้งหมดของเป้าหมาย พร้อมหาพ่อพันธุ์ในกลุ่มเดียวกันที่มีท่านั้น</div></div><span class="chip p">Egg Moves</span></div>
+  <div class="controls">
+   <input id="eggMoveSearch" class="field" list="pokeOptions" placeholder="พิมพ์ชื่อ Pokémon เป้าหมาย เช่น Azumarill, Lucario…">
+   <select id="eggMoveVer" class="field" style="max-width:190px">
+    <option value="scarlet-violet">Scarlet / Violet</option>
+    <option value="sword-shield">Sword / Shield</option>
+    <option value="brilliant-diamond-and-shining-pearl">BDSP</option>
+    <option value="ultra-sun-ultra-moon">Ultra Sun / Ultra Moon</option>
+   </select>
+   <button class="btn primary" id="findEggMoves">ค้นหาพ่อพันธุ์ Egg Move</button>
+  </div>
+  <div class="result-note" id="eggMoveSummary">ค้นหาว่า Pokémon เป้าหมายมีท่า Egg Move อะไรบ้าง และตัวไหนใน Egg Group เดียวกันเรียนท่านั้นได้</div>
+  <div id="eggMoveResults"></div>
+ </div>
+
+ <!-- 3. Exact Pair Finder -->
+ <div class="panel"><div class="section-head"><div><div class="h">Egg Group Finder</div><div class="tagline">เลือก 2 กลุ่มเพื่อหา Pokémon ที่มีทั้งสองกลุ่มพร้อมกัน</div></div><span class="chip a">Exact Pair</span></div>
+ <div class="two"><label><div class="tiny" style="margin-bottom:5px">EGG GROUP 1</div><select id="pairA" class="field"></select></label><label><div class="tiny" style="margin-bottom:5px">EGG GROUP 2</div><select id="pairB" class="field"></select></label></div>
+ <div class="controls" style="margin-top:10px"><button class="btn primary" id="findPair">ค้นหาคู่กลุ่มไข่</button><button class="btn" id="swapPair">สลับกลุ่ม</button></div><div class="result-note" id="pairSummary">เลือก Egg Group ทั้งสองกลุ่มแล้วกดค้นหา</div><div id="pairResults" class="grid"></div>
+ <div class="notice">Exact Pair จะไม่แสดงตัวที่มีเพียงกลุ่มเดียว และจะไม่แสดงกลุ่มอื่นแทนคู่ที่เลือก เช่น Water 1 + Field ต้องมีทั้งสองกลุ่มจริง ๆ</div></div>
+
+ <!-- 4. Browse Egg Groups -->
+ <div class="panel"><div class="section-head"><div><div class="h">Browse Egg Groups</div><div class="tagline">เปิดดูสมาชิกทั้งหมดของกลุ่มใดกลุ่มหนึ่ง</div></div></div><div id="groupButtons" class="group-list"></div><div id="groupSummary" class="result-note">เลือกกลุ่มเพื่อดูสมาชิก</div><div id="groupResults" class="grid"></div></div>
+
+ <!-- 5. Breeding Compatibility -->
+ <div class="panel"><div class="section-head"><div><div class="h">Breeding Compatibility</div><div class="tagline">เลือก Pokémon เพื่อหาตัวที่มี Egg Group ร่วมกัน (คำนวณเพศให้แล้ว)</div></div></div><div class="controls"><input id="compatSearch" class="field" list="pokeOptions" placeholder="พิมพ์ชื่อ Pokémon…"><datalist id="pokeOptions"></datalist><button class="btn primary" id="findCompat">ค้นหาคู่บรีด</button></div><div id="compatSummary" class="result-note">ค้นหาจาก Egg Group ที่ใช้ร่วมกัน พร้อมตรวจสอบเงื่อนไขเพศ 100% ♂ / 100% ♀</div><div id="compatResults" class="grid"></div></div>
+
+ <!-- 6. Breeder Box -->
+ <div class="panel"><div class="section-head"><div><div class="h">Breeder Box</div><div class="tagline">เก็บรายชื่อพ่อพันธุ์แม่พันธุ์ พร้อมจดโน้ตเพศ / นิสัย / 31 IVs</div></div><span class="chip p" id="breederCount">0 ตัว</span></div><div class="controls"><input id="breederSearch" class="field" list="pokeOptions" placeholder="ค้นหา Pokémon เพื่อเพิ่ม…"><button class="btn primary" id="addBreeder">เพิ่มเข้ากล่อง</button></div><div class="result-note">สามารถพิมพ์โน้ตกำกับใต้ชื่อแต่ละตัวได้ เช่น ♂ Adamant 5IV (-SpA) หรือ HA</div><div id="breederList" class="grid"></div></div>
+</section>
+     
+<!-- 6. BACKUP -->
+<section id="backup" class="view hidden"><div class="panel"><div class="h">ข้อมูลของฉัน</div><div class="tagline">สำรองและย้ายข้อมูลระหว่างเครื่องได้</div><div class="controls" style="margin-top:14px"><button class="btn primary" id="exportBtn">Export JSON</button><label class="btn">Import JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label><button class="btn" id="clearBtn">ล้างข้อมูลการติ๊ก</button></div><div class="notice">ข้อมูลที่บันทึกในเครื่องนี้จะแยกตามโปรไฟล์ (Living Dex, Forms, ✨ Shiny Dex และ Breeder Box) และ Export/Import รวมทุกโปรไฟล์พร้อมกัน</div><p class="tiny" id="backupStatus"></p></div>
+ <div class="panel"><div class="h">เกี่ยวกับฐานข้อมูล</div><p class="muted">ใช้ PokéAPI เป็นแหล่งข้อมูลมาตรฐานสำหรับรายชื่อสายพันธุ์, ธาตุทั้ง 18 ธาตุ (ทั้งร่างหลักและ Alternative Forms), Egg Groups, รูปปกติ & รูป Shiny แยกตามฟอร์ม และ Gender Ratio ข้อมูลจะถูกแคชไว้ในเบราว์เซอร์หลังโหลดสำเร็จครั้งแรก</p></div></section>
+<div class="footer">OMNidex · 18 Type SVG Badges · Alternative Forms · Multi-Profile · Shiny Living Dex · Stat & Type Calc</div>
+</main>
+<div id="detailOverlay" class="detail-overlay" role="dialog" aria-modal="true"><div class="detail-sheet"><div class="row"><span class="tiny">POKÉMON DATABASE</span><button class="btn small detail-close" id="detailClose">ปิด ✕</button></div><div id="detailContent"><div class="empty">กำลังโหลดข้อมูล Pokémon…</div></div></div></div>
+<script>
+const API='https://pokeapi.co/api/v2/pokemon-species?limit=2000';
+const GROUPS=['Monster','Water 1','Water 2','Water 3','Bug','Flying','Field','Fairy','Grass','Human-Like','Mineral','Amorphous','Dragon','Ditto','Undiscovered'];
+const nice=s=>s.split('-').map(x=>x?x[0].toUpperCase()+x.slice(1):'').join(' ');
+
+// =========================================================================
+// 18 TYPES WITH AUTHENTIC COLORS & CUSTOM INLINE SVG SYMBOLS
+// =========================================================================
+const TYPE_META={
+  normal:{label:'Normal',color:'#A8A77A',svg:'<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#fff" stroke-width="2.6"/><circle cx="12" cy="12" r="3.6" fill="#fff"/></svg>'},
+  fire:{label:'Fire',color:'#EE8130',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12.6 2.2c.4 3.2-1.2 5.3-3 7.2-1.6 1.7-2.8 3.3-2.8 5.6 0 3.3 2.5 5.8 5.8 5.8 3.6 0 6.2-2.7 6.2-6.4 0-3.3-2-6.2-4.2-8.2-.2 1.7-1.1 2.7-2 3.1.5-2.3.4-4.8 0-7.1z"/></svg>'},
+  water:{label:'Water',color:'#6390F0',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.5S5.5 10.1 5.5 14.8a6.5 6.5 0 0 0 13 0C18.5 10.1 12 2.5 12 2.5zm-2.3 14.3a3.6 3.6 0 0 1-1.4-2.8c0-.6.5-1 1-1s1 .4 1 1c0 .7.3 1.2.8 1.6.4.3.5.9.2 1.3-.4.4-1.1.4-1.6-.1z"/></svg>'},
+  electric:{label:'Electric',color:'#F7D02C',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M13.8 2 5.5 13.4h5.6L9.8 22l8.7-11.6h-5.6L13.8 2z"/></svg>'},
+  grass:{label:'Grass',color:'#7AC74C',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M19.8 4.2C13 4 7.4 6.8 5.3 12.1c-.9 2.2-.7 4.5.3 6.3l3.9-3.9c-.4-.3-.5-.9-.1-1.3.4-.4 1-.3 1.3.1l1.6-1.6c-.4-.3-.5-.9-.1-1.3.4-.4 1-.3 1.3.1l2.4-2.4c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-2.4 2.4c.4.3.5.9.1 1.3-.4.4-1 .3-1.3-.1l-1.6 1.6c.4.3.5.9.1 1.3-.4.4-1 .3-1.3-.1l-3.8 3.8c1.9 1 4.3 1.1 6.6.1 5.2-2.2 7.8-7.9 7.2-14.6z"/></svg>'},
+  ice:{label:'Ice',color:'#96D9D6',svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="2.5" x2="12" y2="21.5"/><line x1="3.8" y1="7.2" x2="20.2" y2="16.8"/><line x1="20.2" y1="7.2" x2="3.8" y2="16.8"/><circle cx="12" cy="12" r="2.6" fill="#fff"/></svg>'},
+  fighting:{label:'Fighting',color:'#C22E28',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M8.5 6.5a2 2 0 0 1 2 2v2h1V7.5a2 2 0 0 1 4 0v3h1V8.5a1.8 1.8 0 0 1 3.5.5v5.2c0 3.5-2.6 6.3-6.2 6.3h-2.6c-3.2 0-5.7-2.2-6.1-5.3L4.4 11a1.8 1.8 0 0 1 3.3-1.2l.8 1.2V8.5a2 2 0 0 1 2-2z"/></svg>'},
+  poison:{label:'Poison',color:'#A33EA1',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3c-4.4 0-8 3.2-8 7.2 0 2.5 1.4 4.7 3.5 6v2.3c0 .8.7 1.5 1.5 1.5h6c.8 0 1.5-.7 1.5-1.5v-2.3c2.1-1.3 3.5-3.5 3.5-6C20 6.2 16.4 3 12 3zm-2.8 8.6a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4zm5.6 0a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4z"/></svg>'},
+  ground:{label:'Ground',color:'#E2BF65',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M9.5 6 2 18.5h15L9.5 6zm6.5 4.2-3.4 5.6 1.7 2.7H22l-6-8.3z"/></svg>'},
+  flying:{label:'Flying',color:'#A98FF3',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M21 5.5c-5.8.2-10.7 2.5-14.2 6.4L3 11.2l3.2 3.1c-.8 1.4-1.4 3-1.7 4.7 3.2-1.8 6.8-2.6 10.6-2.3-1.4-.9-2.2-2-2.4-3.3 2.5.4 4.8-.3 6.7-1.9-1.7-.2-3-.9-3.8-2.1 2.2-.2 4-1.6 5.4-3.9z"/></svg>'},
+  psychic:{label:'Psychic',color:'#F95587',svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M2.2 12S6 5.8 12 5.8 21.8 12 21.8 12 18 18.2 12 18.2 2.2 12 2.2 12Z"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>'},
+  bug:{label:'Bug',color:'#A6B91A',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M9.2 4.2 7.5 2.5M14.8 4.2l1.7-1.7" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M12 6c-3.3 0-6 2.7-6 6v2.5c0 3.3 2.7 6 6 6s6-2.7 6-6V12c0-3.3-2.7-6-6-6zm-1 3.5h2v8h-2v-8z"/></svg>'},
+  rock:{label:'Rock',color:'#B6A136',svg:'<svg viewBox="0 0 24 24" fill="#fff"><polygon points="8.5,3.5 16.8,4.8 21,11.5 17.5,19.5 7.5,20.2 3,13.2"/></svg>'},
+  ghost:{label:'Ghost',color:'#735797',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3c-4.4 0-8 3.5-8 7.9V20l2.7-2.1L9.3 20l2.7-2.1L14.7 20l2.6-2.1L20 20v-9.1C20 6.5 16.4 3 12 3zm-2.6 8.2a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zm5.2 0a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"/></svg>'},
+  dragon:{label:'Dragon',color:'#6F35FC',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M18.5 3.5c-2.6.4-4.7 1.8-5.9 3.9-1.4-.6-3.1-.7-4.8-.1L4.5 4.8l1.2 4.4C4.2 10.9 3.5 13 3.8 15.3c.5 3.4 3.4 5.7 6.9 5.7 4.7 0 8.5-3.8 8.5-8.5 0-1.6-.4-3.1-1.2-4.4l2.3-2.6-1.8-2z"/></svg>'},
+  dark:{label:'Dark',color:'#705746',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M14.8 3.2A8.8 8.8 0 1 0 20.8 16a7.2 7.2 0 0 1-6-12.8z"/></svg>'},
+  steel:{label:'Steel',color:'#B7B7CE',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.5 3.8 7.2v9.6L12 21.5l8.2-4.7V7.2L12 2.5zm0 13.2a3.7 3.7 0 1 1 0-7.4 3.7 3.7 0 0 1 0 7.4z"/></svg>'},
+  fairy:{label:'Fairy',color:'#D685AD',svg:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2 14.3 9l6.7 2.3-6.7 2.3L12 20.4l-2.3-6.8L3 11.3 9.7 9 12 2.2zM18.8 3.5l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1z"/></svg>'}
+};
+const TYPE_LIST=Object.keys(TYPE_META);
+
+function typeBadgeHTML(t,lg=false){
+  const m=TYPE_META[t]||TYPE_META.normal;
+  return `<span class="type-badge${lg?' lg':''}" style="background:${m.color}">${m.svg}<span>${m.label}</span></span>`;
+}
+function typeBadgesRow(types,lg=false){
+  return (types||[]).map(t=>typeBadgeHTML(t,lg)).join('');
+}
+
+let species=[],byName=new Map(),typesById=new Map(),caught=new Set(),breeders=new Set(),breederNotes={},caughtForms=new Set();
+let shinyCaught=new Set(),shinyCaughtForms=new Set();
+let cacheKey='pbdex_species_cache_v2';
+let typesCacheKey='pbdex_types_map_v1';
+let currentView='species',currentShinyView='species',currentItemTab='all';
+const $=id=>document.getElementById(id);
+
+let storeData={activeId:'default',theme:'navy',profiles:{default:{name:'Main Profile',caught:[],breeders:[],breederNotes:{},caughtForms:[],shinyCaught:[],shinyCaughtForms:[]}}};
+
+const THEME_META_COLOR={
+  navy:'#081020',
+  pokeball:'#dc2626',
+  ultraball:'#0e1014',
+  masterball:'#0d0a14',
+  safariball:'#9ec98f',
+  diveball:'#081421',
+  loveball:'#ec4899',
+  premier:'#f4f5f7',
+  luxury:'#0c0c10'
+};
+function applyTheme(t){
+  const valid=Object.keys(THEME_META_COLOR);
+  const theme=valid.includes(t)?t:'navy';
+  document.documentElement.setAttribute('data-theme',theme);
+  const meta=$('metaThemeColor');
+  if(meta)meta.setAttribute('content',THEME_META_COLOR[theme]);
+  document.querySelectorAll('[data-set-theme]').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.setTheme===theme);
+  });
+  storeData.theme=theme;
+}
+
+function loadActiveProfileToSets(){
+  const p=storeData.profiles[storeData.activeId]||Object.values(storeData.profiles)[0];
+  caught=new Set(p.caught||[]);
+  breeders=new Set(p.breeders||[]);
+  breederNotes={...(p.breederNotes||{})};
+  caughtForms=new Set(p.caughtForms||[]);
+  shinyCaught=new Set(p.shinyCaught||[]);
+  shinyCaughtForms=new Set(p.shinyCaughtForms||[]);
+}
+
+function renderProfileBar(){
+  const sel=$('profileSelect');
+  if(!sel)return;
+  sel.innerHTML=Object.entries(storeData.profiles).map(([id,p])=>`<option value="${esc(id)}" ${id===storeData.activeId?'selected':''}>${esc(p.name)} (${(p.caught||[]).length})</option>`).join('');
+  $('delProfileBtn').disabled=Object.keys(storeData.profiles).length<=1;
+}
+
+function loadSaved(){
+  try{
+    const rawMulti=JSON.parse(localStorage.getItem('omnidex_multi_v1')||'null');
+    if(rawMulti&&rawMulti.profiles&&Object.keys(rawMulti.profiles).length){
+      storeData=rawMulti;
+      if(!storeData.profiles[storeData.activeId])storeData.activeId=Object.keys(storeData.profiles)[0];
+    }else{
+      const legacy=JSON.parse(localStorage.getItem('pbdex_save_v1')||'null');
+      if(legacy){
+        storeData.profiles.default={
+          name:'Main Profile',
+          caught:legacy.caught||[],
+          breeders:legacy.breeders||[],
+          breederNotes:legacy.breederNotes||{},
+          caughtForms:legacy.caughtForms||[],
+          shinyCaught:legacy.shinyCaught||[],
+          shinyCaughtForms:legacy.shinyCaughtForms||[]
+        };
+      }
+    }
+  }catch{}
+  applyTheme(storeData.theme||'navy');
+  loadActiveProfileToSets();
+  renderProfileBar();
+}
+
+function save(){
+  const cur=storeData.profiles[storeData.activeId];
+  if(cur){
+    cur.caught=[...caught];
+    cur.breeders=[...breeders];
+    cur.breederNotes={...breederNotes};
+    cur.caughtForms=[...caughtForms];
+    cur.shinyCaught=[...shinyCaught];
+    cur.shinyCaughtForms=[...shinyCaughtForms];
+  }
+  localStorage.setItem('omnidex_multi_v1',JSON.stringify(storeData));
+  renderProfileBar();
+  updateStats();
+}
+
+function setupProfileAndThemeUI(){
+  document.querySelectorAll('[data-set-theme]').forEach(btn=>{
+    btn.onclick=()=>{applyTheme(btn.dataset.setTheme);save()};
+  });
+  $('profileSelect').onchange=e=>{
+    storeData.activeId=e.target.value;
+    loadActiveProfileToSets();
+    save();
+    handleFilterChange();
+    handleShinyFilterChange();
+    renderBreeders();
+  };
+  $('newProfileBtn').onclick=()=>{
+    const name=prompt('ตั้งชื่อโปรไฟล์ใหม่ (เช่น ไอดีรอง, Server Silver, Gen 9):');
+    if(!name||!name.trim())return;
+    const id='prof_'+Date.now();
+    storeData.profiles[id]={name:name.trim(),caught:[],breeders:[],breederNotes:{},caughtForms:[],shinyCaught:[],shinyCaughtForms:[]};
+    storeData.activeId=id;
+    loadActiveProfileToSets();
+    save();
+    handleFilterChange();
+    handleShinyFilterChange();
+    renderBreeders();
+  };
+  $('renameProfileBtn').onclick=()=>{
+    const cur=storeData.profiles[storeData.activeId];
+    if(!cur)return;
+    const name=prompt('เปลี่ยนชื่อโปรไฟล์:',cur.name);
+    if(!name||!name.trim())return;
+    cur.name=name.trim();
+    save();
+  };
+  $('delProfileBtn').onclick=()=>{
+    const keys=Object.keys(storeData.profiles);
+    if(keys.length<=1)return;
+    const cur=storeData.profiles[storeData.activeId];
+    if(!confirm(`ลบโปรไฟล์ "${cur.name}" และข้อมูลการติ๊กทั้งหมดในโปรไฟล์นี้ใช่หรือไม่?`))return;
+    delete storeData.profiles[storeData.activeId];
+    storeData.activeId=Object.keys(storeData.profiles)[0];
+    loadActiveProfileToSets();
+    save();
+    handleFilterChange();
+    handleShinyFilterChange();
+    renderBreeders();
+  };
+}
+
+function imageUrl(sprite,isShiny=false){
+  if(!sprite)return '';
+  const s=String(sprite);
+  if(s.startsWith('http'))return s;
+  if(isShiny){
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${s}.png`;
+  }
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${s}.png`;
+}
+function fallbackImageUrl(sprite,isShiny=false){
+  const s=String(sprite);
+  if(isShiny){
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${s}.png`;
+  }
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${s}.png`;
+}
+function attachImgFallback(img,sprite,isShiny=false){
+  img.onerror=()=>{
+    if(!img.dataset.step){
+      img.dataset.step='1';
+      img.src=fallbackImageUrl(sprite,isShiny);
+    }else if(isShiny&&img.dataset.step==='1'){
+      img.dataset.step='2';
+      img.src=imageUrl(sprite,false);
+    }else{
+      img.style.visibility='hidden';
+    }
+  };
+}
+
+function getTypesForPokemonId(idOrSprite){
+  const numId=parseInt(String(idOrSprite).split('-')[0],10);
+  return typesById.get(numId)||['normal'];
+}
+
+function gender(s){if(s.gender_rate===-1)return 'Genderless';if(s.gender_rate===0)return '100% ♂';if(s.gender_rate===8)return '100% ♀';let f=s.gender_rate/8*100;return `♀ ${f}% · ♂ ${100-f}%`}
+
+const EGG_MAP={
+  monster:'Monster',water1:'Water 1',water2:'Water 2',water3:'Water 3',
+  bug:'Bug',flying:'Flying',ground:'Field',field:'Field',fairy:'Fairy',
+  plant:'Grass',grass:'Grass',humanshape:'Human-Like','human-like':'Human-Like',
+  mineral:'Mineral',indeterminate:'Amorphous',amorphous:'Amorphous',
+  dragon:'Dragon',ditto:'Ditto','no-eggs':'Undiscovered',undiscovered:'Undiscovered'
+};
+function egg(s){
+  return (s.egg_groups||[]).map(x=>{
+    const key=(x.name||'').toLowerCase().trim();
+    return EGG_MAP[key]||nice(key);
+  });
+}
+
+function findSpeciesByInput(val){
+  let q=val.trim().toLowerCase();
+  if(!q)return null;
+  return species.find(x=>x.name===q||nice(x.name).toLowerCase()===q||String(x.id)===q);
+}
+
+function card(s,mode='dex'){
+  const isShiny=(mode==='shiny');
+  const pTypes=s.types||getTypesForPokemonId(s.id);
+  let div=document.createElement('article');div.className='poke'+(isShiny?' shiny-card':'');
+  let im=document.createElement('img');im.loading='lazy';im.src=imageUrl(s.id,isShiny);im.alt='';
+  attachImgFallback(im,s.id,isShiny);
+  let info=document.createElement('div');info.className='poke-info';
+  let no=document.createElement('div');no.className='dexno';no.textContent=(isShiny?'✨ ':'')+'#'+String(s.id).padStart(4,'0');
+  let nm=document.createElement('div');nm.className='poke-name';nm.textContent=nice(s.name);
+  let tRow=document.createElement('div');tRow.className='type-badges';tRow.innerHTML=typeBadgesRow(pTypes,false);
+  info.append(no,nm,tRow);
+
+  if(mode!=='dex'&&mode!=='shiny'){
+    let chips=document.createElement('div');chips.className='chips';
+    egg(s).forEach(g=>{let c=document.createElement('span');c.className='chip';c.textContent=g;chips.append(c)});
+    if(mode==='bridge'){let c=document.createElement('span');c.className='chip a';c.textContent=gender(s);chips.append(c)}
+    info.append(chips);
+  }
+  div.append(im,info);
+  div.style.cursor='pointer';div.title='กดเพื่อดูข้อมูล Pokémon';
+  div.onclick=(ev)=>{if(ev.target.closest('button,input'))return;openDetail(s,isShiny)};
+  if(mode==='dex'){let cb=document.createElement('input');cb.type='checkbox';cb.className='check';cb.checked=caught.has(s.name);cb.title='เก็บแล้ว';cb.onchange=()=>{cb.checked?caught.add(s.name):caught.delete(s.name);save()};div.append(cb)}
+  if(mode==='shiny'){let cb=document.createElement('input');cb.type='checkbox';cb.className='check shiny-chk';cb.checked=shinyCaught.has(s.name);cb.title='เก็บ Shiny แล้ว';cb.onchange=()=>{cb.checked?shinyCaught.add(s.name):shinyCaught.delete(s.name);save()};div.append(cb)}
+  if(mode==='breeder'){
+    let note=document.createElement('input');
+    note.className='breeder-note-input';
+    note.placeholder='โน้ต: เช่น ♂ Adamant 5IV…';
+    note.value=breederNotes[s.name]||'';
+    note.onchange=()=>{breederNotes[s.name]=note.value;save()};
+    info.append(note);
+    let del=document.createElement('button');del.className='btn small';del.textContent='ลบ';del.onclick=()=>{breeders.delete(s.name);delete breederNotes[s.name];save();renderBreeders()};div.append(del);
+  }
+  if(mode==='compat'){let extra=document.createElement('div');extra.className='tiny';extra.style.marginTop='3px';extra.textContent=gender(s);info.append(extra)}
+  return div;
+}
+function renderCards(target,items,mode){let el=$(target);el.replaceChildren();if(!items.length){el.innerHTML='<div class="empty">ไม่พบ Pokémon ตามเงื่อนไขนี้</div>';return}items.forEach(s=>el.append(card(s,mode)))}
+function updateStats(){
+  $('totalCount').textContent=species.length||'—';
+  $('caughtCount').textContent=caught.size;
+  $('caughtPct').textContent=species.length?Math.round(caught.size/species.length*100)+'%':'0%';
+  $('dexProgress').style.width=(species.length?Math.min(100,caught.size/species.length*100):0)+'%';
+
+  $('shinyTotalCount').textContent=species.length||'—';
+  $('shinyCaughtCount').textContent=shinyCaught.size;
+  $('shinyCaughtPct').textContent=species.length?Math.round(shinyCaught.size/species.length*100)+'%':'0%';
+  $('shinyProgress').style.width=(species.length?Math.min(100,shinyCaught.size/species.length*100):0)+'%';
+}
+  
+function fillGroupSelect(id){let sel=$(id);sel.replaceChildren();GROUPS.forEach(g=>{let o=document.createElement('option');o.value=g;o.textContent=g;sel.append(o)})}
+function setupGroups(){['pairA','pairB'].forEach(fillGroupSelect);$('pairB').value='Field';let box=$('groupButtons');GROUPS.forEach(g=>{let b=document.createElement('button');b.className='btn group-btn';b.innerHTML=`<span>${g}</span><span>›</span>`;b.onclick=()=>showGroup(g);box.append(b)})}
+function showGroup(g){let arr=species.filter(s=>egg(s).includes(g));$('groupSummary').textContent=`${g} · ${arr.length} species`;renderCards('groupResults',arr)}
+function findPair(){let a=$('pairA').value,b=$('pairB').value;let arr=species.filter(s=>{let e=egg(s);return a===b?(e.length===1&&e[0]===a):(e.includes(a)&&e.includes(b))});$('pairSummary').textContent=`${a} + ${b} · พบ ${arr.length} species`;renderCards('pairResults',arr)}
+
+function findCompat(){
+  let s=findSpeciesByInput($('compatSearch').value);
+  if(!s){$('compatSummary').textContent='ไม่พบชื่อ Pokémon นี้ในฐานข้อมูล';$('compatResults').replaceChildren();return}
+  let gs=egg(s);
+  if(gs.includes('Undiscovered')){
+    $('compatSummary').textContent=`${nice(s.name)} อยู่ในกลุ่ม Undiscovered ไม่สามารถบรีดได้ (หากเป็นร่าง Baby ให้พัฒนาร่างก่อน)`;
+    $('compatResults').replaceChildren();return;
+  }
+  if(gs.includes('Ditto')){
+    let arr=species.filter(x=>!egg(x).includes('Undiscovered')&&!egg(x).includes('Ditto'));
+    $('compatSummary').textContent=`Ditto สามารถบรีดได้กับทุกสายพันธุ์ที่ออกไข่ได้ (${arr.length} species)`;
+    renderCards('compatResults',arr,'compat');return;
+  }
+  if(s.gender_rate===0||s.gender_rate===-1){
+    let ditto=species.filter(x=>egg(x).includes('Ditto'));
+    $('compatSummary').textContent=`${nice(s.name)} (${gender(s)}) ไม่สามารถออกไข่เป็นสายพันธุ์ตัวเองกับตัวอื่นได้ บรีดได้เฉพาะกับ Ditto เท่านั้น (แต่ใช้เป็นพ่อพันธุ์ส่งต่อให้ตัวเมียในกลุ่ม ${gs.join(' / ')} ได้)`;
+    renderCards('compatResults',ditto,'compat');return;
+  }
+  let arr=species.filter(x=>{
+    let ex=egg(x);
+    if(x.name===s.name||ex.includes('Undiscovered'))return false;
+    if(ex.includes('Ditto'))return true;
+    if(s.gender_rate===8&&(x.gender_rate===8||x.gender_rate===-1))return false;
+    return gs.some(g=>ex.includes(g));
+  });
+  $('compatSummary').textContent=`${nice(s.name)} · ${gs.join(' / ')} · ${gender(s)} · พบคู่บรีด ${arr.length} species`;
+  renderCards('compatResults',arr,'compat');
+}
+
+function findChain(){
+  let fromS=findSpeciesByInput($('chainFrom').value);
+  let toS=findSpeciesByInput($('chainTo').value);
+  let res=$('chainResults');res.replaceChildren();
+  if(!fromS||!toS){$('chainSummary').textContent='กรุณาระบุชื่อ Pokémon ทั้งช่องต้นทางและเป้าหมายให้ถูกต้อง';return}
+  
+  let gFrom=egg(fromS),gTo=egg(toS);
+  if(gFrom.includes('Undiscovered')||gTo.includes('Undiscovered')){
+    $('chainSummary').textContent='ไม่สามารถเชื่อมสายพันธุ์ได้ เนื่องจากมีตัวใดตัวหนึ่งอยู่ในกลุ่ม Undiscovered (ลองใช้ร่างพัฒนาแล้วแทน)';return;
+  }
+  if(fromS.gender_rate===8||fromS.gender_rate===-1){
+    $('chainSummary').textContent=`⚠️ ${nice(fromS.name)} เป็น ${gender(fromS)} จึงไม่สามารถเป็นพ่อพันธุ์ส่งต่อให้ตัวอื่นได้`;return;
+  }
+  if(toS.gender_rate===0||toS.gender_rate===-1){
+    $('chainSummary').textContent=`⚠️ ${nice(toS.name)} เป็น ${gender(toS)} ไม่สามารถเป็นแม่พันธุ์รับสายพันธุ์ลูกได้ (บรีดได้กับ Ditto เท่านั้น)`;return;
+  }
+
+  let shared=gFrom.filter(g=>gTo.includes(g));
+  if(shared.length){
+    $('chainSummary').innerHTML=`✅ <b>บรีดตรงกันได้ทันที!</b> ทั้งคู่มีกลุ่ม <b>${shared.join(' / ')}</b> ร่วมกัน ไม่ต้องใช้ตัวกลาง (ใช้ ${nice(fromS.name)} ♂ + ${nice(toS.name)} ♀)`;
+    res.innerHTML=`<div class="chain-path">
+      <div class="chain-step" onclick="openDetail(byName.get('${fromS.name}'))"><img src="${imageUrl(fromS.id)}"><div><b>${nice(fromS.name)} (♂)</b><div class="tiny">${gFrom.join(' / ')}</div></div></div>
+      <span class="chain-arrow">➔ บรีดตรงได้ทันที ➔</span>
+      <div class="chain-step" onclick="openDetail(byName.get('${toS.name}'))"><img src="${imageUrl(toS.id)}"><div><b>${nice(toS.name)} (♀)</b><div class="tiny">${gTo.join(' / ')}</div></div></div>
+    </div>`;
+    return;
+  }
+
+  let bridges=species.filter(b=>{
+    if(b.name===fromS.name||b.name===toS.name)return false;
+    if(b.gender_rate===8||b.gender_rate===-1)return false;
+    let gb=egg(b);
+    if(gb.length<2||gb.includes('Undiscovered'))return false;
+    return gb.some(g=>gFrom.includes(g))&&gb.some(g=>gTo.includes(g));
+  });
+
+  if(bridges.length){
+    $('chainSummary').innerHTML=`🔗 พบ <b>ตัวกลางเชื่อมกลุ่ม (1-Step Bridge) จำนวน ${bridges.length} ตัว</b> สำหรับเชื่อม <b>${gFrom.join('/')}</b> ➔ <b>${gTo.join('/')}</b>`;
+    let sample=bridges[0];
+    res.innerHTML=`<div class="chain-path">
+      <div class="chain-step" onclick="openDetail(byName.get('${fromS.name}'))"><img src="${imageUrl(fromS.id)}"><div><b>1. ${nice(fromS.name)} (♂)</b><div class="tiny">${gFrom.join(' / ')}</div></div></div>
+      <span class="chain-arrow">➔ ฟักได้ลูกตัวผู้ ➔</span>
+      <div class="chain-step" onclick="openDetail(byName.get('${sample.name}'))"><img src="${imageUrl(sample.id)}"><div><b>2. ตัวกลาง (♀ → ลูก ♂)</b><div class="tiny">${egg(sample).join(' / ')}</div></div></div>
+      <span class="chain-arrow">➔ ส่งต่อให้แม่ ➔</span>
+      <div class="chain-step" onclick="openDetail(byName.get('${toS.name}'))"><img src="${imageUrl(toS.id)}"><div><b>3. ${nice(toS.name)} (♀)</b><div class="tiny">${gTo.join(' / ')}</div></div></div>
+    </div>
+    <div class="tiny" style="margin:6px 0 2px">รายชื่อตัวกลางทั้งหมดที่เลือกใช้ได้ (กดที่การ์ดเพื่อเช็กท่าที่เรียนได้):</div>
+    <div id="bridgeGrid" class="grid"></div>`;
+    renderCards('bridgeGrid',bridges,'bridge');
+    return;
+  }
+
+  let b1List=species.filter(b=>b.gender_rate!==8&&b.gender_rate!==-1&&egg(b).length===2&&egg(b).some(g=>gFrom.includes(g)));
+  let b2List=species.filter(b=>b.gender_rate!==8&&b.gender_rate!==-1&&egg(b).length===2&&egg(b).some(g=>gTo.includes(g)));
+  let twoStepPairs=[];
+  for(let b1 of b1List){
+    let gb1=egg(b1);
+    for(let b2 of b2List){
+      if(b1.name===b2.name)continue;
+      if(gb1.some(g=>egg(b2).includes(g))){
+        twoStepPairs.push([b1,b2]);
+        if(twoStepPairs.length>=8)break;
+      }
+    }
+    if(twoStepPairs.length>=8)break;
+  }
+
+  if(twoStepPairs.length){
+    $('chainSummary').innerHTML=`⛓️ ไม่พบตัวเชื่อมชั้นเดียว แต่พบเส้นทางเชื่อม <b>2 ต่อ (2-Step Bridge)</b> จาก <b>${gFrom.join('/')}</b> ไป <b>${gTo.join('/')}</b>:`;
+    twoStepPairs.forEach(([b1,b2])=>{
+      let row=document.createElement('div');row.className='chain-path';
+      row.innerHTML=`
+        <div class="chain-step" onclick="openDetail(byName.get('${fromS.name}'))"><img src="${imageUrl(fromS.id)}"><div><b>${nice(fromS.name)} (♂)</b><div class="tiny">${gFrom.join('/')}</div></div></div>
+        <span class="chain-arrow">➔</span>
+        <div class="chain-step" onclick="openDetail(byName.get('${b1.name}'))"><img src="${imageUrl(b1.id)}"><div><b>${nice(b1.name)}</b><div class="tiny">${egg(b1).join('/')}</div></div></div>
+        <span class="chain-arrow">➔</span>
+        <div class="chain-step" onclick="openDetail(byName.get('${b2.name}'))"><img src="${imageUrl(b2.id)}"><div><b>${nice(b2.name)}</b><div class="tiny">${egg(b2).join('/')}</div></div></div>
+        <span class="chain-arrow">➔</span>
+        <div class="chain-step" onclick="openDetail(byName.get('${toS.name}'))"><img src="${imageUrl(toS.id)}"><div><b>${nice(toS.name)} (♀)</b><div class="tiny">${gTo.join('/')}</div></div></div>`;
+      res.append(row);
+    });
+  }else{
+    $('chainSummary').textContent=`ไม่พบเส้นทางเชื่อมระหว่าง ${nice(fromS.name)} และ ${nice(toS.name)}`;
+  }
+}
+
+async function findEggMoves(){
+  let s=findSpeciesByInput($('eggMoveSearch').value);
+  let ver=$('eggMoveVer').value;
+  let res=$('eggMoveResults');res.replaceChildren();
+  if(!s){$('eggMoveSummary').textContent='ไม่พบชื่อ Pokémon นี้ในฐานข้อมูล';return}
+  
+  let gs=egg(s);
+  if(gs.includes('Undiscovered')||gs.includes('Ditto')){
+    $('eggMoveSummary').textContent=`${nice(s.name)} อยู่ในกลุ่ม ${gs.join(' / ')} ไม่มี Egg Moves (หากเป็นร่างพัฒนา ลองค้นหาด้วยชื่อร่างแรกเกิด เช่น Azurill / Marill)`;return;
+  }
+
+  $('eggMoveSummary').textContent=`กำลังดึงรายการ Egg Moves ของ ${nice(s.name)}…`;
+  try{
+    let p=await getJSON('https://pokeapi.co/api/v2/pokemon/'+s.name);
+    let eggMoves=p.moves.filter(m=>(m.version_group_details||[]).some(d=>d.version_group.name===ver&&d.move_learn_method.name==='egg'));
+    if(!eggMoves.length){
+      let allEgg=p.moves.filter(m=>(m.version_group_details||[]).some(d=>d.move_learn_method.name==='egg'));
+      if(!allEgg.length){
+        $('eggMoveSummary').textContent=`${nice(s.name)} ไม่มีท่า Egg Move ในฐานข้อมูล (ลองค้นหาด้วยร่างแรกเกิดของสายพันธุ์นี้)`;return;
+      }
+      let altVer=allEgg[0].version_group_details.find(d=>d.move_learn_method.name==='egg').version_group.name;
+      $('eggMoveVer').value=altVer;ver=altVer;
+      eggMoves=p.moves.filter(m=>(m.version_group_details||[]).some(d=>d.version_group.name===ver&&d.move_learn_method.name==='egg'));
+    }
+
+    $('eggMoveSummary').innerHTML=`พบ <b>${eggMoves.length} ท่า Egg Moves</b> ของ <b>${nice(s.name)}</b> (กลุ่มไข่: <b>${gs.join(' / ')}</b>) · กำลังค้นหาพ่อพันธุ์ที่สอนท่าได้…`;
+    let validFathers=new Set(species.filter(x=>x.name!==s.name&&x.gender_rate!==8&&x.gender_rate!==-1&&!egg(x).includes('Undiscovered')&&egg(x).some(g=>gs.includes(g))).map(x=>x.name));
+
+    for(let m of eggMoves){
+      let moveName=m.move.name;
+      let moveData=await getJSON(m.move.url);
+      let eff=(moveData.effect_entries||[]).find(x=>x.language.name==='en');
+      let desc=(eff?.short_effect||eff?.effect||'').replace(/\$effect_chance/g,moveData.effect_chance??'');
+      let learners=(moveData.learned_by_pokemon||[]).map(x=>byName.get(x.name)).filter(x=>x&&validFathers.has(x.name));
+
+      let cardEl=document.createElement('div');cardEl.className='egg-move-card';
+      let parentsHTML=learners.length
+        ? learners.slice(0,18).map(f=>{
+            let isBridge=egg(f).length>1;
+            return `<span class="parent-pill ${isBridge?'bridge':''}" onclick="openDetail(byName.get('${f.name}'))" title="กดเพื่อดูเลเวลที่เรียนท่านี้">
+              <img src="${imageUrl(f.id)}" loading="lazy">
+              <b>${nice(f.name)}</b>
+              <span class="tiny">(${egg(f).join('/')})</span>
+            </span>`;
+          }).join('') + (learners.length>18?`<span class="tiny" style="align-self:center">+อีก ${learners.length-18} ตัว</span>`:'')
+        : `<span class="tiny">ไม่มีพ่อพันธุ์เรียนท่านี้โดยตรงในกลุ่มเดียวกัน (ต้องส่งต่อผ่าน Chain Breeding หรือ Mirror Herb)</span>`;
+
+      cardEl.innerHTML=`
+        <div class="egg-move-head">
+          <span class="move-name">${esc(nice(moveName))}</span>
+          ${typeBadgeHTML(moveData.type?.name||'normal')}
+          ${categoryIcon(moveData.damage_class?.name)}
+          <span class="tiny">Pow: <b>${moveData.power??'—'}</b> · Acc: <b>${moveData.accuracy===null?'—':moveData.accuracy+'%'}</b></span>
+        </div>
+        ${desc?`<div class="move-desc" style="margin-bottom:6px">${esc(desc)}</div>`:''}
+        <div class="tiny">พ่อพันธุ์ในกลุ่ม <b>${gs.join(' / ')}</b> ที่เรียนท่านี้ได้ (${learners.length} ตัว):</div>
+        <div class="parent-list">${parentsHTML}</div>
+      `;
+      res.append(cardEl);
+    }
+    $('eggMoveSummary').innerHTML=`✅ <b>${nice(s.name)}</b> (กลุ่ม <b>${gs.join(' / ')}</b>) มีท่า Egg Move ทั้งหมด <b>${eggMoves.length} ท่า</b> (กดที่ชื่อพ่อพันธุ์เพื่อเช็กเลเวลที่เรียนท่าได้เลย)`;
+  }catch(e){
+    $('eggMoveSummary').textContent='โหลดข้อมูล Egg Moves ไม่สำเร็จ: '+e.message;
+  }
+}
+
+// =========================================================================
+// ALTERNATIVE FORMS DATASETS (REGIONAL, MEGA, GMAX, SPECIAL, COSMETIC)
+// =========================================================================
+const REGIONAL_FORMS=[
+['Alolan','Rattata',10091,'rattata-alola'],['Alolan','Raticate',10092,'raticate-alola'],['Alolan','Raichu',10100,'raichu-alola'],['Alolan','Sandshrew',10101,'sandshrew-alola'],['Alolan','Sandslash',10102,'sandslash-alola'],['Alolan','Vulpix',10103,'vulpix-alola'],['Alolan','Ninetales',10104,'ninetales-alola'],['Alolan','Diglett',10105,'diglett-alola'],['Alolan','Dugtrio',10106,'dugtrio-alola'],['Alolan','Meowth',10107,'meowth-alola'],['Alolan','Persian',10108,'persian-alola'],['Alolan','Geodude',10109,'geodude-alola'],['Alolan','Graveler',10110,'graveler-alola'],['Alolan','Golem',10111,'golem-alola'],['Alolan','Grimer',10112,'grimer-alola'],['Alolan','Muk',10113,'muk-alola'],['Alolan','Exeggutor',10114,'exeggutor-alola'],['Alolan','Marowak',10115,'marowak-alola'],
+['Galarian','Meowth',10161,'meowth-galar'],['Galarian','Ponyta',10162,'ponyta-galar'],['Galarian','Rapidash',10163,'rapidash-galar'],['Galarian','Slowpoke',10164,'slowpoke-galar'],['Galarian','Slowbro',10165,'slowbro-galar'],['Galarian','Slowking',10172,'slowking-galar'],['Galarian',"Farfetch'd",10166,'farfetchd-galar'],['Galarian','Weezing',10167,'weezing-galar'],['Galarian','Mr. Mime',10168,'mr-mime-galar'],['Galarian','Articuno',10169,'articuno-galar'],['Galarian','Zapdos',10170,'zapdos-galar'],['Galarian','Moltres',10171,'moltres-galar'],['Galarian','Corsola',10173,'corsola-galar'],['Galarian','Zigzagoon',10174,'zigzagoon-galar'],['Galarian','Linoone',10175,'linoone-galar'],['Galarian','Darumaka',10176,'darumaka-galar'],['Galarian','Darmanitan',10177,'darmanitan-galar-standard'],['Galarian','Yamask',10179,'yamask-galar'],['Galarian','Stunfisk',10180,'stunfisk-galar'],
+['Hisuian','Growlithe',10229,'growlithe-hisui'],['Hisuian','Arcanine',10230,'arcanine-hisui'],['Hisuian','Voltorb',10231,'voltorb-hisui'],['Hisuian','Electrode',10232,'electrode-hisui'],['Hisuian','Typhlosion',10233,'typhlosion-hisui'],['Hisuian','Qwilfish',10234,'qwilfish-hisui'],['Hisuian','Sneasel',10235,'sneasel-hisui'],['Hisuian','Samurott',10236,'samurott-hisui'],['Hisuian','Lilligant',10237,'lilligant-hisui'],['Hisuian','Zorua',10238,'zorua-hisui'],['Hisuian','Zoroark',10239,'zoroark-hisui'],['Hisuian','Braviary',10240,'braviary-hisui'],['Hisuian','Sliggoo',10241,'sliggoo-hisui'],['Hisuian','Goodra',10242,'goodra-hisui'],['Hisuian','Avalugg',10243,'avalugg-hisui'],['Hisuian','Decidueye',10244,'decidueye-hisui'],['Hisuian','Basculin (White-Striped)',10247,'basculin-white-striped'],
+['Paldean','Tauros (Combat Breed)',10250,'tauros-paldea-combat-breed'],['Paldean','Tauros (Blaze Breed)',10251,'tauros-paldea-blaze-breed'],['Paldean','Tauros (Aqua Breed)',10252,'tauros-paldea-aqua-breed'],['Paldean','Wooper',10253,'wooper-paldea']
+];
+
+const MEGA_FORMS=[
+['Kanto Mega','Mega Venusaur',10033,'venusaur-mega'],['Kanto Mega','Mega Charizard X',10034,'charizard-mega-x'],['Kanto Mega','Mega Charizard Y',10035,'charizard-mega-y'],['Kanto Mega','Mega Blastoise',10036,'blastoise-mega'],['Kanto Mega','Mega Beedrill',10090,'beedrill-mega'],['Kanto Mega','Mega Pidgeot',10073,'pidgeot-mega'],['Kanto Mega','Mega Alakazam',10037,'alakazam-mega'],['Kanto Mega','Mega Slowbro',10071,'slowbro-mega'],['Kanto Mega','Mega Gengar',10038,'gengar-mega'],['Kanto Mega','Mega Kangaskhan',10039,'kangaskhan-mega'],['Kanto Mega','Mega Pinsir',10040,'pinsir-mega'],['Kanto Mega','Mega Gyarados',10041,'gyarados-mega'],['Kanto Mega','Mega Aerodactyl',10042,'aerodactyl-mega'],['Kanto Mega','Mega Mewtwo X',10043,'mewtwo-mega-x'],['Kanto Mega','Mega Mewtwo Y',10044,'mewtwo-mega-y'],
+['Johto Mega','Mega Ampharos',10045,'ampharos-mega'],['Johto Mega','Mega Steelix',10072,'steelix-mega'],['Johto Mega','Mega Scizor',10046,'scizor-mega'],['Johto Mega','Mega Heracross',10047,'heracross-mega'],['Johto Mega','Mega Houndoom',10048,'houndoom-mega'],['Johto Mega','Mega Tyranitar',10049,'tyranitar-mega'],
+['Hoenn Mega','Mega Sceptile',10065,'sceptile-mega'],['Hoenn Mega','Mega Blaziken',10050,'blaziken-mega'],['Hoenn Mega','Mega Swampert',10064,'swampert-mega'],['Hoenn Mega','Mega Gardevoir',10051,'gardevoir-mega'],['Hoenn Mega','Mega Sableye',10066,'sableye-mega'],['Hoenn Mega','Mega Mawile',10052,'mawile-mega'],['Hoenn Mega','Mega Aggron',10053,'aggron-mega'],['Hoenn Mega','Mega Medicham',10054,'medicham-mega'],['Hoenn Mega','Mega Manectric',10055,'manectric-mega'],['Hoenn Mega','Mega Sharpedo',10070,'sharpedo-mega'],['Hoenn Mega','Mega Camerupt',10087,'camerupt-mega'],['Hoenn Mega','Mega Altaria',10067,'altaria-mega'],['Hoenn Mega','Mega Banette',10056,'banette-mega'],['Hoenn Mega','Mega Absol',10057,'absol-mega'],['Hoenn Mega','Mega Glalie',10074,'glalie-mega'],['Hoenn Mega','Mega Salamence',10089,'salamence-mega'],['Hoenn Mega','Mega Metagross',10076,'metagross-mega'],['Hoenn Mega','Mega Latias',10062,'latias-mega'],['Hoenn Mega','Mega Latios',10063,'latios-mega'],['Hoenn Mega','Mega Rayquaza',10079,'rayquaza-mega'],
+['Sinnoh & Unova Mega','Mega Lopunny',10088,'lopunny-mega'],['Sinnoh & Unova Mega','Mega Garchomp',10058,'garchomp-mega'],['Sinnoh & Unova Mega','Mega Lucario',10059,'lucario-mega'],['Sinnoh & Unova Mega','Mega Abomasnow',10060,'abomasnow-mega'],['Sinnoh & Unova Mega','Mega Gallade',10068,'gallade-mega'],['Sinnoh & Unova Mega','Mega Audino',10069,'audino-mega'],
+['Kalos Mega','Mega Diancie',10075,'diancie-mega'],
+['Primal Reversion','Primal Kyogre',10077,'kyogre-primal'],['Primal Reversion','Primal Groudon',10078,'groudon-primal']
+];
+
+const GMAX_FORMS=[
+['Kanto Gigantamax','Gigantamax Venusaur',10195,'venusaur-gmax'],['Kanto Gigantamax','Gigantamax Charizard',10196,'charizard-gmax'],['Kanto Gigantamax','Gigantamax Blastoise',10197,'blastoise-gmax'],['Kanto Gigantamax','Gigantamax Butterfree',10198,'butterfree-gmax'],['Kanto Gigantamax','Gigantamax Pikachu',10199,'pikachu-gmax'],['Kanto Gigantamax','Gigantamax Meowth',10200,'meowth-gmax'],['Kanto Gigantamax','Gigantamax Machamp',10201,'machamp-gmax'],['Kanto Gigantamax','Gigantamax Gengar',10202,'gengar-gmax'],['Kanto Gigantamax','Gigantamax Kingler',10203,'kingler-gmax'],['Kanto Gigantamax','Gigantamax Lapras',10204,'lapras-gmax'],['Kanto Gigantamax','Gigantamax Eevee',10205,'eevee-gmax'],['Kanto Gigantamax','Gigantamax Snorlax',10206,'snorlax-gmax'],
+['Unova & Alola Gigantamax','Gigantamax Garbodor',10207,'garbodor-gmax'],['Unova & Alola Gigantamax','Gigantamax Melmetal',10208,'melmetal-gmax'],
+['Galar Gigantamax','Gigantamax Rillaboom',10209,'rillaboom-gmax'],['Galar Gigantamax','Gigantamax Cinderace',10210,'cinderace-gmax'],['Galar Gigantamax','Gigantamax Inteleon',10211,'inteleon-gmax'],['Galar Gigantamax','Gigantamax Corviknight',10212,'corviknight-gmax'],['Galar Gigantamax','Gigantamax Orbeetle',10213,'orbeetle-gmax'],['Galar Gigantamax','Gigantamax Drednaw',10214,'drednaw-gmax'],['Galar Gigantamax','Gigantamax Coalossal',10215,'coalossal-gmax'],['Galar Gigantamax','Gigantamax Flapple',10216,'flapple-gmax'],['Galar Gigantamax','Gigantamax Appletun',10217,'appletun-gmax'],['Galar Gigantamax','Gigantamax Sandaconda',10218,'sandaconda-gmax'],['Galar Gigantamax','Gigantamax Toxtricity',10219,'toxtricity-amped-gmax'],['Galar Gigantamax','Gigantamax Centiskorch',10220,'centiskorch-gmax'],['Galar Gigantamax','Gigantamax Hatterene',10221,'hatterene-gmax'],['Galar Gigantamax','Gigantamax Grimmsnarl',10222,'grimmsnarl-gmax'],['Galar Gigantamax','Gigantamax Alcremie',10223,'alcremie-gmax'],['Galar Gigantamax','Gigantamax Copperajah',10224,'copperajah-gmax'],['Galar Gigantamax','Gigantamax Duraludon',10225,'duraludon-gmax'],['Galar Gigantamax','Gigantamax Urshifu (Single Strike)',10226,'urshifu-single-strike-gmax'],['Galar Gigantamax','Gigantamax Urshifu (Rapid Strike)',10227,'urshifu-rapid-strike-gmax'],
+['Eternamax','Eternamax Eternatus',10190,'eternatus-eternamax']
+];
+
+const SPECIAL_FORMS=[
+['Legendary & Mythical','Deoxys (Attack Forme)',10001,'deoxys-attack'],['Legendary & Mythical','Deoxys (Defense Forme)',10002,'deoxys-defense'],['Legendary & Mythical','Deoxys (Speed Forme)',10003,'deoxys-speed'],
+['Legendary & Mythical','Giratina (Origin Forme)',10007,'giratina-origin'],['Legendary & Mythical','Shaymin (Sky Forme)',10006,'shaymin-sky'],
+['Legendary & Mythical','Tornadus (Therian Forme)',10019,'tornadus-therian'],['Legendary & Mythical','Thundurus (Therian Forme)',10020,'thundurus-therian'],['Legendary & Mythical','Landorus (Therian Forme)',10021,'landorus-therian'],['Legendary & Mythical','Enamorus (Therian Forme)',10249,'enamorus-therian'],
+['Legendary & Mythical','Kyurem (White Kyurem)',10023,'kyurem-white'],['Legendary & Mythical','Kyurem (Black Kyurem)',10022,'kyurem-black'],
+['Legendary & Mythical','Keldeo (Resolute Form)',10024,'keldeo-resolute'],['Legendary & Mythical','Meloetta (Pirouette Forme)',10018,'meloetta-pirouette'],
+['Legendary & Mythical','Hoopa (Unbound)',10086,'hoopa-unbound'],
+['Legendary & Mythical','Zygarde (10% Forme)',10118,'zygarde-10-power-construct'],['Legendary & Mythical','Zygarde (Complete Forme)',10120,'zygarde-complete'],
+['Legendary & Mythical','Necrozma (Dusk Mane)',10155,'necrozma-dusk'],['Legendary & Mythical','Necrozma (Dawn Wings)',10156,'necrozma-dawn'],['Legendary & Mythical','Necrozma (Ultra Necrozma)',10157,'necrozma-ultra'],
+['Legendary & Mythical','Zacian (Crowned Sword)',10188,'zacian-crowned'],['Legendary & Mythical','Zamazenta (Crowned Shield)',10189,'zamazenta-crowned'],
+['Legendary & Mythical','Calyrex (Ice Rider)',10193,'calyrex-ice'],['Legendary & Mythical','Calyrex (Shadow Rider)',10194,'calyrex-shadow'],
+['Legendary & Mythical','Dialga (Origin Forme)',10245,'dialga-origin'],['Legendary & Mythical','Palkia (Origin Forme)',10246,'palkia-origin'],
+['Legendary & Mythical','Ursaluna (Bloodmoon)',10272,'ursaluna-bloodmoon'],
+['Legendary & Mythical','Ogerpon (Wellspring Mask)',10273,'ogerpon-wellspring-mask'],['Legendary & Mythical','Ogerpon (Hearthflame Mask)',10274,'ogerpon-hearthflame-mask'],['Legendary & Mythical','Ogerpon (Cornerstone Mask)',10275,'ogerpon-cornerstone-mask'],
+['Legendary & Mythical','Terapagos (Terastal Form)',10276,'terapagos-terastal'],['Legendary & Mythical','Terapagos (Stellar Form)',10277,'terapagos-stellar'],
+['Rotom Appliances','Rotom (Heat)',10008,'rotom-heat'],['Rotom Appliances','Rotom (Wash)',10009,'rotom-wash'],['Rotom Appliances','Rotom (Frost)',10010,'rotom-frost'],['Rotom Appliances','Rotom (Fan)',10011,'rotom-fan'],['Rotom Appliances','Rotom (Mow)',10012,'rotom-mow'],
+['Battle & Ability Forms','Greninja (Ash-Greninja)',10117,'greninja-ash'],['Battle & Ability Forms','Aegislash (Blade Forme)',10026,'aegislash-blade'],['Battle & Ability Forms','Darmanitan (Zen Mode)',10017,'darmanitan-zen'],['Battle & Ability Forms','Galarian Darmanitan (Zen Mode)',10178,'darmanitan-galar-zen'],
+['Battle & Ability Forms','Wishiwashi (School Form)',10127,'wishiwashi-school'],['Battle & Ability Forms','Mimikyu (Busted Form)',10143,'mimikyu-busted'],['Battle & Ability Forms','Eiscue (Noice Face)',10185,'eiscue-noice'],['Battle & Ability Forms','Morpeko (Hangry Mode)',10187,'morpeko-hangry'],['Battle & Ability Forms','Palafin (Hero Form)',10256,'palafin-hero'],
+['Castform & Cherrim','Castform (Sunny Form)',10013,'castform-sunny'],['Castform & Cherrim','Castform (Rainy Form)',10014,'castform-rainy'],['Castform & Cherrim','Castform (Snowy Form)',10015,'castform-snowy'],['Castform & Cherrim','Cherrim (Sunshine Form)',421,'cherrim'],
+['Special Species Forms','Lycanroc (Midnight Form)',10126,'lycanroc-midnight'],['Special Species Forms','Lycanroc (Dusk Form)',10152,'lycanroc-dusk'],
+['Special Species Forms','Toxtricity (Low Key Form)',10184,'toxtricity-low-key'],['Special Species Forms','Urshifu (Rapid Strike Style)',10191,'urshifu-rapid-strike'],
+['Special Species Forms','Floette (Eternal Flower)',10061,'floette-eternal'],['Special Species Forms','Gimmighoul (Roaming Form)',10263,'gimmighoul-roaming']
+];
+
+const VIVILLON_LIST=[
+  ['Archipelago','666-archipelago'],['Continental','666-continental'],['Elegant','666-elegant'],['Garden','666-garden'],
+  ['High Plains','666-high-plains'],['Icy Snow','666-icy-snow'],['Jungle','666-jungle'],['Marine','666-marine'],
+  ['Meadow','666'],['Modern','666-modern'],['Monsoon','666-monsoon'],['Ocean','666-ocean'],
+  ['Polar','666-polar'],['River','666-river'],['Sandstorm','666-sandstorm'],['Savanna','666-savanna'],
+  ['Sun','666-sun'],['Tundra','666-tundra'],['Fancy','666-fancy'],['Poké Ball','666-poke-ball']
+];
+const FURFROU_LIST=[
+  ['Natural','676'],['Heart','676-heart'],['Star','676-star'],['Diamond','676-diamond'],['Debutante','676-debutante'],
+  ['Matron','676-matron'],['Dandy','676-dandy'],['La Reine','676-la-reine'],['Kabuki','676-kabuki'],['Pharaoh','676-pharaoh']
+];
+const ALCREMIE_LIST=[
+  ['Vanilla Cream','869'],['Ruby Cream','869-ruby-cream'],['Matcha Cream','869-matcha-cream'],
+  ['Mint Cream','869-mint-cream'],['Lemon Cream','869-lemon-cream'],['Salted Cream','869-salted-cream'],
+  ['Ruby Swirl','869-ruby-swirl'],['Caramel Swirl','869-caramel-swirl'],['Rainbow Swirl','869-rainbow-swirl']
+];
+
+const COSMETIC_FORMS=[
+['Oricorio','Baile Style',741,'oricorio-baile'],['Oricorio','Pom-Pom Style',10123,'oricorio-pom-pom'],['Oricorio',"Pa'u Style",10124,'oricorio-pau'],['Oricorio','Sensu Style',10125,'oricorio-sensu'],
+...VIVILLON_LIST.map(([name,slug])=>['Vivillon',name+' Pattern',slug,'vivillon']),
+...Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map(ch=>['Unown',ch,ch==='F'?'201':`201-${ch.toLowerCase()}`,'unown']),
+['Unown','!','201-exclamation','unown'],['Unown','?','201-question','unown'],
+...FURFROU_LIST.map(([name,slug])=>['Furfrou',name+' Trim',slug,'furfrou']),
+...['Red','Orange','Yellow','Green','Blue','Indigo','Violet'].map((x,i)=>['Minior',x+' Core',i===0?10136:10136+i,`minior-${x.toLowerCase()}`]),
+['Flabébé / Floette / Florges','Red Flower',669,'flabebe'],['Flabébé / Floette / Florges','Yellow Flower','669-yellow','flabebe'],['Flabébé / Floette / Florges','Orange Flower','669-orange','flabebe'],['Flabébé / Floette / Florges','Blue Flower','669-blue','flabebe'],['Flabébé / Floette / Florges','White Flower','669-white','flabebe'],
+['Shellos & Gastrodon','West Sea',422,'shellos'],['Shellos & Gastrodon','East Sea','422-east','shellos'],
+['Basculin','Red-Striped',550,'basculin-red-striped'],['Basculin','Blue-Striped',10016,'basculin-blue-striped'],
+['Deerling & Sawsbuck','Spring Form',585,'deerling'],['Deerling & Sawsbuck','Summer Form','585-summer','deerling'],['Deerling & Sawsbuck','Autumn Form','585-autumn','deerling'],['Deerling & Sawsbuck','Winter Form','585-winter','deerling'],
+['Pumpkaboo & Gourgeist','Small Size',10027,'pumpkaboo-small'],['Pumpkaboo & Gourgeist','Average Size',710,'pumpkaboo-average'],['Pumpkaboo & Gourgeist','Large Size',10028,'pumpkaboo-large'],['Pumpkaboo & Gourgeist','Super Size',10029,'pumpkaboo-super'],
+['Sinistea & Polteageist','Phony Form',854,'sinistea'],['Sinistea & Polteageist','Antique Form',854,'sinistea'],
+['Poltchageist & Sinistcha','Counterfeit / Unremarkable',1012,'poltchageist'],['Poltchageist & Sinistcha','Artisan / Masterpiece',1012,'poltchageist'],
+['Maushold','Family of Four',925,'maushold-family-of-four'],['Maushold','Family of Three',10257,'maushold-family-of-three'],
+['Squawkabilly','Green Plumage',931,'squawkabilly-green-plumage'],['Squawkabilly','Blue Plumage',10260,'squawkabilly-blue-plumage'],['Squawkabilly','Yellow Plumage',10261,'squawkabilly-yellow-plumage'],['Squawkabilly','White Plumage',10262,'squawkabilly-white-plumage'],
+['Tatsugiri','Curly Form',978,'tatsugiri-curly'],['Tatsugiri','Droopy Form',10258,'tatsugiri-droopy'],['Tatsugiri','Stretchy Form',10259,'tatsugiri-stretchy'],
+['Dudunsparce','Two-Segment Form',982,'dudunsparce-two-segment'],['Dudunsparce','Three-Segment Form',10255,'dudunsparce-three-segment'],
+...ALCREMIE_LIST.map(([name,slug])=>['Alcremie',name,slug,'alcremie'])
+];
+
+const FORM_VIEWS={
+  regional:{items:REGIONAL_FORMS,title:'Regional Forms'},
+  mega:{items:MEGA_FORMS,title:'Mega Evolution & Primal Reversion'},
+  gmax:{items:GMAX_FORMS,title:'Gigantamax & Eternamax'},
+  special:{items:SPECIAL_FORMS,title:'Special & Battle Forms'},
+  cosmetic:{items:COSMETIC_FORMS,title:'Cosmetic, Patterns & Colors'}
+};
+
+function formKey(x){return x[0]+'|'+x[1]}
+
+function renderFormSet(rootId,items,title,isShiny=false){
+  let root=$(rootId);
+  let q=$(isShiny?'shinySearch':'dexSearch').value.toLowerCase().trim();
+  let st=$(isShiny?'shinyCaught':'dexCaught').value;
+  let tf=$(isShiny?'shinyTypeFilter':'dexTypeFilter').value;
+  let targetSet=isShiny?shinyCaughtForms:caughtForms;
+  
+  let filtered=items.filter(x=>{
+    let key=formKey(x);
+    let fTypes=getTypesForPokemonId(x[2]);
+    let matchText=!q||x[0].toLowerCase().includes(q)||x[1].toLowerCase().includes(q);
+    let matchType=tf==='all'||fTypes.includes(tf);
+    let isC=targetSet.has(key);
+    let matchStatus=st==='all'||(st==='yes'?isC:!isC);
+    return matchText&&matchType&&matchStatus;
+  });
+
+  let grouped={};filtered.forEach(x=>(grouped[x[0]]??=[]).push(x));
+  root.innerHTML='';
+  let totalCaught=items.filter(x=>targetSet.has(formKey(x))).length;
+  let head=document.createElement('div');head.className='result-note';
+  head.textContent=`${isShiny?'✨ Shiny ':''}${title} · เก็บแล้ว ${totalCaught}/${items.length} (${Math.round(totalCaught/items.length*100)}%) · กดที่รูปหรือชื่อเพื่อดู Stat/ท่า/ธาตุของร่างนั้นได้`;
+  root.append(head);
+
+  if(!filtered.length){
+    let empty=document.createElement('div');empty.className='empty';empty.textContent='ไม่พบฟอร์มตามเงื่อนไขที่ค้นหา';
+    root.append(empty);return;
+  }
+
+  Object.entries(grouped).forEach(([groupName,forms])=>{
+    let box=document.createElement('div');box.className='form-group';
+    let allGroupItems=items.filter(x=>x[0]===groupName);
+    let groupCaughtCount=allGroupItems.filter(x=>targetSet.has(formKey(x))).length;
+    
+    let h3=document.createElement('h3');
+    h3.innerHTML=`${groupName} <span>${groupCaughtCount}/${allGroupItems.length}</span>`;
+    
+    let grid=document.createElement('div');grid.className='form-grid';
+    forms.forEach(item=>{
+      let f=item[1],spriteId=item[2],apiSlug=item[3],key=formKey(item);
+      let fTypes=getTypesForPokemonId(spriteId);
+      let lab=document.createElement('div');lab.className='form-card';
+      if(spriteId){
+        let img=document.createElement('img');img.loading='lazy';img.src=imageUrl(spriteId,isShiny);img.alt='';
+        attachImgFallback(img,spriteId,isShiny);
+        lab.append(img);
+      }
+      let infoWrap=document.createElement('div');infoWrap.className='form-card-info';
+      let text=document.createElement('span');text.className='form-card-title';text.textContent=f;text.title=f;
+      let badges=document.createElement('div');badges.className='type-badges';badges.innerHTML=typeBadgesRow(fTypes,false);
+      infoWrap.append(text,badges);
+
+      let cb=document.createElement('input');cb.type='checkbox';
+      if(isShiny)cb.className='shiny-chk';
+      cb.checked=targetSet.has(key);
+      cb.onchange=()=>{cb.checked?targetSet.add(key):targetSet.delete(key);save();renderFormSet(rootId,items,title,isShiny)};
+      lab.onclick=(ev)=>{
+        if(ev.target===cb)return;
+        if(apiSlug){
+          openDetail({name:apiSlug,displayName:f,spriteOverride:spriteId},isShiny);
+        }
+      };
+      lab.append(infoWrap,cb);grid.append(lab);
+    });
+    box.append(h3,grid);root.append(box);
+  });
+  }
+
+function setDexView(which){
+  currentView=which;
+  const isSpecies=(which==='species');
+  $('dexList').classList.toggle('hidden',!isSpecies);
+  $('formContainer').classList.toggle('hidden',isSpecies);
+  const btnMap=[
+    ['dexViewSpecies','species'],['dexViewRegional','regional'],['dexViewMega','mega'],
+    ['dexViewGmax','gmax'],['dexViewSpecial','special'],['dexViewCosmetic','cosmetic']
+  ];
+  btnMap.forEach(([id,k])=>$(id).classList.toggle('primary',which===k));
+  if(isSpecies)renderDex();
+  else if(FORM_VIEWS[which])renderFormSet('formContainer',FORM_VIEWS[which].items,FORM_VIEWS[which].title,false);
+}
+
+function setShinyView(which){
+  currentShinyView=which;
+  const isSpecies=(which==='species');
+  $('shinyList').classList.toggle('hidden',!isSpecies);
+  $('shinyFormContainer').classList.toggle('hidden',isSpecies);
+  const btnMap=[
+    ['shinyViewSpecies','species'],['shinyViewRegional','regional'],['shinyViewMega','mega'],
+    ['shinyViewGmax','gmax'],['shinyViewSpecial','special'],['shinyViewCosmetic','cosmetic']
+  ];
+  btnMap.forEach(([id,k])=>$(id).classList.toggle('shiny-btn',which===k));
+  if(isSpecies)renderShinyDex();
+  else if(FORM_VIEWS[which])renderFormSet('shinyFormContainer',FORM_VIEWS[which].items,FORM_VIEWS[which].title,true);
+}
+
+$('dexViewSpecies').onclick=()=>setDexView('species');
+$('dexViewRegional').onclick=()=>setDexView('regional');
+$('dexViewMega').onclick=()=>setDexView('mega');
+$('dexViewGmax').onclick=()=>setDexView('gmax');
+$('dexViewSpecial').onclick=()=>setDexView('special');
+$('dexViewCosmetic').onclick=()=>setDexView('cosmetic');
+
+$('shinyViewSpecies').onclick=()=>setShinyView('species');
+$('shinyViewRegional').onclick=()=>setShinyView('regional');
+$('shinyViewMega').onclick=()=>setShinyView('mega');
+$('shinyViewGmax').onclick=()=>setShinyView('gmax');
+$('shinyViewSpecial').onclick=()=>setShinyView('special');
+$('shinyViewCosmetic').onclick=()=>setShinyView('cosmetic');
+
+function handleFilterChange(){
+  if(currentView==='species')renderDex();
+  else if(FORM_VIEWS[currentView])renderFormSet('formContainer',FORM_VIEWS[currentView].items,FORM_VIEWS[currentView].title,false);
+}
+function handleShinyFilterChange(){
+  if(currentShinyView==='species')renderShinyDex();
+  else if(FORM_VIEWS[currentShinyView])renderFormSet('shinyFormContainer',FORM_VIEWS[currentShinyView].items,FORM_VIEWS[currentShinyView].title,true);
+}
+
+function renderDex(){
+  let q=$('dexSearch').value.toLowerCase().trim(),st=$('dexCaught').value,tf=$('dexTypeFilter').value;
+  let arr=species.filter(s=>{
+    let pTypes=s.types||getTypesForPokemonId(s.id);
+    return (!q||s.name.includes(q)||String(s.id)===q||String(s.id).padStart(4,'0')===q)
+      &&(tf==='all'||pTypes.includes(tf))
+      &&(st==='all'||(st==='yes'?caught.has(s.name):!caught.has(s.name)));
+  });
+  renderCards('dexList',arr,'dex');
+}
+function renderShinyDex(){
+  let q=$('shinySearch').value.toLowerCase().trim(),st=$('shinyCaught').value,tf=$('shinyTypeFilter').value;
+  let arr=species.filter(s=>{
+    let pTypes=s.types||getTypesForPokemonId(s.id);
+    return (!q||s.name.includes(q)||String(s.id)===q||String(s.id).padStart(4,'0')===q)
+      &&(tf==='all'||pTypes.includes(tf))
+      &&(st==='all'||(st==='yes'?shinyCaught.has(s.name):!shinyCaught.has(s.name)));
+  });
+  renderCards('shinyList',arr,'shiny');
+}
+function renderBreeders(){let arr=species.filter(s=>breeders.has(s.name));$('breederCount').textContent=arr.length+' ตัว';renderCards('breederList',arr,'breeder')}
+function addBreeder(){let s=findSpeciesByInput($('breederSearch').value);if(!s){$('backupStatus').textContent='ไม่พบ Pokémon ที่ต้องการเพิ่ม';return}breeders.add(s.name);$('breederSearch').value='';save();renderBreeders()}
+
+// ==================== STAT CALCULATOR & TYPE CALCULATOR ====================
+const NATURES=[
+  ['Adamant','Attack','Sp. Atk','attack','special-attack','สายตี physical'],
+  ['Bashful','—','—',null,null,'สมดุล (Neutral)'],
+  ['Bold','Defense','Attack','defense','attack','สายแทงก์ physical'],
+  ['Brave','Attack','Speed','attack','speed','สาย Trick Room physical'],
+  ['Calm','Sp. Def','Attack','special-defense','attack','สายแทงก์ special'],
+  ['Careful','Sp. Def','Sp. Atk','special-defense','special-attack','สายถึกกันเวท'],
+  ['Docile','—','—',null,null,'สมดุล (Neutral)'],
+  ['Gentle','Sp. Def','Defense','special-defense','defense','ไม่นิยม'],
+  ['Hardy','—','—',null,null,'สมดุล (Neutral)'],
+  ['Hasty','Speed','Defense','speed','defense','สายผสมเร็ว'],
+  ['Impish','Defense','Sp. Atk','defense','special-attack','สายแทงก์ physical'],
+  ['Jolly','Speed','Sp. Atk','speed','special-attack','สายตี physical เน้นเร็ว'],
+  ['Lax','Defense','Sp. Def','defense','special-defense','ไม่นิยม'],
+  ['Lonely','Attack','Defense','attack','defense','สายผสม physical'],
+  ['Mild','Sp. Atk','Defense','special-attack','defense','สายผสม special'],
+  ['Modest','Sp. Atk','Attack','special-attack','attack','สายตี special'],
+  ['Naive','Speed','Sp. Def','speed','special-defense','สายผสมเร็ว'],
+  ['Naughty','Attack','Sp. Def','attack','special-defense','สายผสม physical'],
+  ['Quiet','Sp. Atk','Speed','special-attack','speed','สาย Trick Room special'],
+  ['Quirky','—','—',null,null,'สมดุล (Neutral)'],
+  ['Rash','Sp. Atk','Sp. Def','special-attack','special-defense','สายผสม special'],
+  ['Relaxed','Defense','Speed','defense','speed','สายแทงก์ Trick Room'],
+  ['Sassy','Sp. Def','Speed','special-defense','speed','สายกันเวท Trick Room'],
+  ['Serious','—','—',null,null,'สมดุล (Neutral)'],
+  ['Timid','Speed','Attack','speed','attack','สายตี special เน้นเร็ว']
+];
+
+let calcCurrentPoke=null;
+let calcIVs={hp:31,attack:31,defense:31,'special-attack':31,'special-defense':31,speed:31};
+let calcEVs={hp:0,attack:0,defense:0,'special-attack':0,'special-defense':0,speed:0};
+  
+function setupStatCalc(){
+  let sel=$('calcNature');
+  sel.innerHTML=NATURES.map(n=>`<option value="${n[0]}">${n[0]} (${n[1]==='—'?'Neutral':'+'+n[1]+' / -'+n[2]})</option>`).join('');
+  sel.value='Adamant';
+  sel.onchange=recalcStats;
+  $('calcLevel').oninput=recalcStats;
+  $('btnLv50').onclick=()=>{$('calcLevel').value=50;recalcStats()};
+  $('btnLv100').onclick=()=>{$('calcLevel').value=100;recalcStats()};
+  $('btnAll31IV').onclick=()=>{Object.keys(calcIVs).forEach(k=>calcIVs[k]=31);recalcStats()};
+  $('btnResetEV').onclick=()=>{Object.keys(calcEVs).forEach(k=>calcEVs[k]=0);recalcStats()};
+  $('loadCalcPoke').onclick=()=>loadCalcPokemon();
+  $('calcPokeInput').addEventListener('keydown',e=>{if(e.key==='Enter')loadCalcPokemon()});
+  $('calcFormSelect').onchange=()=>{if($('calcFormSelect').value)loadCalcPokemon($('calcFormSelect').value)};
+}
+
+async function loadCalcPokemon(overrideSlug=null){
+  let slug=overrideSlug;
+  if(!slug){
+    let s=findSpeciesByInput($('calcPokeInput').value);
+    if(!s){$('calcSummary').textContent='ไม่พบชื่อ Pokémon นี้ กรุณาเลือกจากรายการ';return}
+    slug=s.name;
+  }
+  $('calcSummary').textContent=`กำลังโหลดค่า Base Stat ของ ${nice(slug)}…`;
+  try{
+    let p=await getJSON('https://pokeapi.co/api/v2/pokemon/'+slug);
+    let sp=await getJSON(p.species.url);
+    calcCurrentPoke=p;
+    if(!overrideSlug){
+      let fs=$('calcFormSelect');
+      fs.innerHTML=(sp.varieties||[]).map(v=>`<option value="${v.pokemon.name}">${nice(v.pokemon.name)}</option>`).join('');
+      fs.value=p.name;
+    }
+    $('calcTableWrap').classList.remove('hidden');
+    recalcStats();
+  }catch(e){
+    $('calcSummary').textContent='โหลดข้อมูลไม่สำเร็จ: '+e.message;
+  }
+}
+
+function calcOneStat(key,base,lv,iv,ev,natMult,isShedinja){
+  if(key==='hp'){
+    if(isShedinja)return 1;
+    return Math.floor(((2*base+iv+Math.floor(ev/4))*lv)/100)+lv+10;
+  }
+  let raw=Math.floor(((2*base+iv+Math.floor(ev/4))*lv)/100)+5;
+  return Math.floor(raw*natMult);
+}
+
+function recalcStats(){
+  if(!calcCurrentPoke)return;
+  let lv=Math.max(1,Math.min(100,parseInt($('calcLevel').value)||50));
+  let natName=$('calcNature').value;
+  let natObj=NATURES.find(n=>n[0]===natName)||NATURES[0];
+  let isShedinja=(calcCurrentPoke.name==='shedinja');
+  let tbody=$('calcStatBody');
+  let totalBase=0,totalEV=0;
+
+  tbody.innerHTML=calcCurrentPoke.stats.map(st=>{
+    let key=st.stat.name;
+    let base=st.base_stat;
+    totalBase+=base;
+    let iv=Math.max(0,Math.min(31,parseInt(calcIVs[key])||0));
+    let ev=Math.max(0,Math.min(252,parseInt(calcEVs[key])||0));
+    totalEV+=ev;
+    let mult=1.0;
+    if(natObj[3]===key)mult=1.1;
+    if(natObj[4]===key)mult=0.9;
+
+    let actual=calcOneStat(key,base,lv,iv,ev,mult,isShedinja);
+    let minVal=calcOneStat(key,base,lv,0,0,key==='hp'?1.0:0.9,isShedinja);
+    let maxVal=calcOneStat(key,base,lv,31,252,key==='hp'?1.0:1.1,isShedinja);
+    let natTag=mult>1?' <span class="stat-up">▲</span>':(mult<1?' <span class="stat-down">▼</span>':'');
+
+    return `<tr>
+      <td><b>${STAT_TH[key]||nice(key)}</b>${natTag}</td>
+      <td>${base}</td>
+      <td><input type="number" class="calc-num iv-inp" data-stat="${key}" min="0" max="31" value="${iv}"></td>
+      <td><input type="number" class="calc-num ev-inp" data-stat="${key}" min="0" max="252" step="4" value="${ev}"></td>
+      <td><span class="stat-highlight">${actual}</span></td>
+      <td class="muted">${minVal}</td>
+      <td><b>${maxVal}</b></td>
+    </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('.iv-inp').forEach(inp=>{
+    inp.onchange=()=>{calcIVs[inp.dataset.stat]=Math.max(0,Math.min(31,parseInt(inp.value)||0));recalcStats()};
+  });
+  tbody.querySelectorAll('.ev-inp').forEach(inp=>{
+    inp.onchange=()=>{calcEVs[inp.dataset.stat]=Math.max(0,Math.min(252,parseInt(inp.value)||0));recalcStats()};
+  });
+
+  $('calcSummary').innerHTML=`<b>${nice(calcCurrentPoke.name)}</b> · Lv.${lv} · Nature: <b>${natName}</b> · Base Stat Total: <b>${totalBase}</b>`;
+  $('calcEvTotal').innerHTML=`EV รวม: <b style="color:${totalEV>510?'var(--danger)':'var(--accent)'}">${totalEV} / 510</b>`;
+}
+
+// Type Chart Matrix (Gen 6–9)
+const TYPE_CHART={
+  normal:{rock:.5,ghost:0,steel:.5},
+  fire:{fire:.5,water:.5,grass:2,ice:2,bug:2,rock:.5,dragon:.5,steel:2},
+  water:{fire:2,water:.5,grass:.5,ground:2,rock:2,dragon:.5},
+  electric:{water:2,electric:.5,grass:.5,ground:0,flying:2,dragon:.5},
+  grass:{fire:.5,water:2,grass:.5,poison:.5,ground:2,flying:.5,bug:.5,rock:2,dragon:.5,steel:.5},
+  ice:{fire:.5,water:.5,grass:2,ice:.5,ground:2,flying:2,dragon:2,steel:.5},
+  fighting:{normal:2,ice:2,poison:.5,flying:.5,psychic:.5,bug:.5,rock:2,ghost:0,dark:2,steel:2,fairy:.5},
+  poison:{grass:2,poison:.5,ground:.5,rock:.5,ghost:.5,steel:0,fairy:2},
+  ground:{fire:2,electric:2,grass:.5,poison:2,flying:0,bug:.5,rock:2,steel:2},
+  flying:{electric:.5,grass:2,fighting:2,bug:2,rock:.5,steel:.5},
+  psychic:{fighting:2,poison:2,psychic:.5,dark:0,steel:.5},
+  bug:{fire:.5,grass:2,fighting:.5,poison:.5,flying:.5,psychic:2,ghost:.5,dark:2,steel:.5,fairy:.5},
+  rock:{fire:2,ice:2,fighting:.5,ground:.5,flying:2,bug:2,steel:.5},
+  ghost:{normal:0,psychic:2,ghost:2,dark:.5},
+  dragon:{dragon:2,steel:.5,fairy:0},
+  dark:{fighting:.5,psychic:2,ghost:2,dark:.5,fairy:.5},
+  steel:{fire:.5,water:.5,electric:.5,ice:2,rock:2,steel:.5,fairy:2},
+  fairy:{fire:.5,fighting:2,poison:.5,dragon:2,dark:2,steel:.5}
+};
+
+function setupTypeCalc(){
+  let t1=$('typeCalc1'),t2=$('typeCalc2');
+  t1.innerHTML=TYPE_LIST.map(t=>`<option value="${t}">${TYPE_TH[t]}</option>`).join('');
+  t2.innerHTML=`<option value="">— ไม่มีธาตุรอง (Single Type) —</option>`+TYPE_LIST.map(t=>`<option value="${t}">${TYPE_TH[t]}</option>`).join('');
+  t1.value='fairy';t2.value='steel';
+  t1.onchange=renderTypeCalc;t2.onchange=renderTypeCalc;
+
+  // Populate Dex & Shiny Type Filter Dropdowns
+  const typeOpts=`<option value="all">ทุกธาตุ (All Types)</option>`+TYPE_LIST.map(t=>`<option value="${t}">${TYPE_TH[t]}</option>`).join('');
+  $('dexTypeFilter').innerHTML=typeOpts;
+  $('shinyTypeFilter').innerHTML=typeOpts;
+
+  renderTypeCalc();
+}
+
+function renderTypeCalc(){
+  let a=$('typeCalc1').value,b=$('typeCalc2').value;
+  if(a===b)b='';
+  let results=TYPE_LIST.map(atk=>{
+    let m1=TYPE_CHART[atk]?.[a]??1;
+    let m2=b?(TYPE_CHART[atk]?.[b]??1):1;
+    return {type:atk,mult:m1*m2};
+  });
+  let weak4=results.filter(x=>x.mult===4);
+  let weak2=results.filter(x=>x.mult===2);
+  let res05=results.filter(x=>x.mult===0.5);
+  let res025=results.filter(x=>x.mult===0.25);
+  let imm0=results.filter(x=>x.mult===0);
+
+  const pill=(x,cls)=>`<span class="type-mult-pill ${cls}">${typeBadgeHTML(x.type)} <span>${x.mult}×</span></span>`;
+  $('typeCalcResult').innerHTML=`
+    <div class="move-list">
+      ${weak4.length?`<div class="move-row"><div class="tiny">แพ้ทางรุนแรง (4× Damage)</div><div class="type-badge-grid">${weak4.map(x=>pill(x,'m-4')).join('')}</div></div>`:''}
+      <div class="move-row"><div class="tiny">แพ้ทาง (2× Damage)</div><div class="type-badge-grid">${weak2.length?weak2.map(x=>pill(x,'m-2')).join(''):'<span class="tiny">ไม่มี</span>'}</div></div>
+      <div class="move-row"><div class="tiny">ต้านทาน (0.5× Damage)</div><div class="type-badge-grid">${res05.length?res05.map(x=>pill(x,'m-05')).join(''):'<span class="tiny">ไม่มี</span>'}</div></div>
+      ${res025.length?`<div class="move-row"><div class="tiny">ต้านทานสูงมาก (0.25× Damage)</div><div class="type-badge-grid">${res025.map(x=>pill(x,'m-025')).join('')}</div></div>`:''}
+      <div class="move-row"><div class="tiny">ไร้ผล / ภูมิคุ้มกัน (0× Damage)</div><div class="type-badge-grid">${imm0.length?imm0.map(x=>pill(x,'m-0')).join(''):'<span class="tiny">ไม่มี</span>'}</div></div>
+    </div>
+  `;
+}
+
+// ==================== ITEMS & BERRIES DATABASE ====================
+const ITEM_SPRITE=slug=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${slug}.png`;
+
+const EVO_ITEMS=[
+  ['Fire Stone','fire-stone','หินวิวัฒนาการ','พัฒนาร่าง Vulpix, Growlithe, Eevee (เป็น Flareon), Pansear, Capsakid'],
+  ['Water Stone','water-stone','หินวิวัฒนาการ','พัฒนาร่าง Poliwhirl (เป็น Poliwrath), Shellder, Staryu, Eevee (เป็น Vaporeon), Lombre, Panpour'],
+  ['Thunder Stone','thunder-stone','หินวิวัฒนาการ','พัฒนาร่าง Pikachu, Eevee (เป็น Jolteon), Eelektrik, Charjabug, Tadbulb'],
+  ['Leaf Stone','leaf-stone','หินวิวัฒนาการ','พัฒนาร่าง Gloom (เป็น Vileplume), Weepinbell, Exeggcute, Eevee (เป็น Leafeon), Nuzleaf, Pansage, Hisuian Voltorb'],
+  ['Moon Stone','moon-stone','หินวิวัฒนาการ','พัฒนาร่าง Nidorina, Nidorino, Clefairy, Jigglypuff, Skitty, Munna'],
+  ['Sun Stone','sun-stone','หินวิวัฒนาการ','พัฒนาร่าง Gloom (เป็น Bellossom), Sunkern, Cottonee, Petilil, Helioptile'],
+  ['Shiny Stone','shiny-stone','หินวิวัฒนาการ','พัฒนาร่าง Togetic, Roselia, Minccino, Floette'],
+  ['Dusk Stone','dusk-stone','หินวิวัฒนาการ','พัฒนาร่าง Murkrow, Misdreavus, Lampent, Doublade'],
+  ['Dawn Stone','dawn-stone','หินวิวัฒนาการ','พัฒนาร่าง Kirlia (ตัวผู้ ♂ เป็น Gallade), Snorunt (ตัวเมีย ♀ เป็น Froslass)'],
+  ['Ice Stone','ice-stone','หินวิวัฒนาการ','พัฒนาร่าง Alolan Sandshrew, Alolan Vulpix, Eevee (เป็น Glaceon), Galarian Darumaka, Crabrawler, Cetoddle'],
+  ['Linking Cord','linking-cord','ไอเท็มทดแทนการเทรด','ใช้พัฒนาร่าง Pokémon ที่ปกติต้องแลกเปลี่ยน เช่น Haunter, Kadabra, Machoke, Graveler (ใน Legends: Arceus / PokéBedrock)'],
+  ['Metal Coat','metal-coat','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Onix (เป็น Steelix) และ Scyther (เป็น Scizor) (เพิ่มพลังท่าธาตุ Steel 20%)'],
+  ["King's Rock",'kings-rock','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Poliwhirl (เป็น Politoed) และ Slowpoke (เป็น Slowking) (มีโอกาส 10% ทำให้ศัตรูชะงัก)'],
+  ['Dragon Scale','dragon-scale','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Seadra เป็น Kingdra'],
+  ['Up-Grade','up-grade','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Porygon เป็น Porygon2'],
+  ['Dubious Disc','dubious-disc','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Porygon2 เป็น Porygon-Z'],
+  ['Protector','protector','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Rhydon เป็น Rhyperior'],
+  ['Electirizer','electirizer','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Electabuzz เป็น Electivire'],
+  ['Magmarizer','magmarizer','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Magmar เป็น Magmortar'],
+  ['Reaper Cloth','reaper-cloth','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Dusclops เป็น Dusknoir'],
+  ['Prism Scale','prism-scale','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Feebas เป็น Milotic (แทนการอัปค่า Beauty)'],
+  ['Deep Sea Tooth','deep-sea-tooth','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Clamperl เป็น Huntail (เพิ่ม Sp. Atk 2× เฉพาะ Clamperl)'],
+  ['Deep Sea Scale','deep-sea-scale','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Clamperl เป็น Gorebyss (เพิ่ม Sp. Def 2× เฉพาะ Clamperl)'],
+  ['Razor Claw','razor-claw','ถืออัปเวลกลางคืน','พัฒนาร่าง Sneasel (ปกติ) เป็น Weavile เมื่อเลเวลอัปตอนกลางคืน (เพิ่มอัตราคริติคอล +1 ขั้น)'],
+  ['Razor Fang','razor-fang','ถืออัปเวลกลางคืน','พัฒนาร่าง Gligar เป็น Gliscor เมื่อเลเวลอัปตอนกลางคืน (มีโอกาสทำให้ชะงัก 10%)'],
+  ['Oval Stone','oval-stone','ถืออัปเวลกลางวัน','พัฒนาร่าง Happiny เป็น Chansey เมื่อเลเวลอัปตอนกลางวัน'],
+  ['Sachet','sachet','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Spritzee เป็น Aromatisse'],
+  ['Whipped Dream','whipped-dream','เทรด / ใช้พัฒนาร่าง','พัฒนาร่าง Swirlix เป็น Slurpuff'],
+  ['Tart Apple','tart-apple','ใช้ไอเท็ม','พัฒนาร่าง Applin เป็น Flapple'],
+  ['Sweet Apple','sweet-apple','ใช้ไอเท็ม','พัฒนาร่าง Applin เป็น Appletun'],
+  ['Syrupy Apple','syrupy-apple','ใช้ไอเท็ม','พัฒนาร่าง Applin เป็น Dipplin'],
+  ['Cracked Pot','cracked-pot','ใช้ไอเท็ม','พัฒนาร่าง Sinistea (Phony Form) เป็น Polteageist'],
+  ['Chipped Pot','chipped-pot','ใช้ไอเท็ม','พัฒนาร่าง Sinistea (Antique Form) เป็น Polteageist'],
+  ['Unremarkable Teacup','unremarkable-teacup','ใช้ไอเท็ม','พัฒนาร่าง Poltchageist (Counterfeit Form) เป็น Sinistcha'],
+  ['Masterpiece Teacup','masterpiece-teacup','ใช้ไอเท็ม','พัฒนาร่าง Poltchageist (Artisan Form) เป็น Sinistcha'],
+  ['Galarica Cuff','galarica-cuff','ใช้ไอเท็ม','พัฒนาร่าง Galarian Slowpoke เป็น Galarian Slowbro'],
+  ['Galarica Wreath','galarica-wreath','ใช้ไอเท็ม','พัฒนาร่าง Galarian Slowpoke เป็น Galarian Slowking'],
+  ['Black Augurite','black-augurite','ใช้ไอเท็ม','พัฒนาร่าง Scyther เป็น Kleavor'],
+  ['Peat Block','peat-block','ใช้ไอเท็ม (พระจันทร์เต็มดวง)','พัฒนาร่าง Ursaring เป็น Ursaluna'],
+  ['Auspicious Armor','auspicious-armor','ใช้ไอเท็ม','พัฒนาร่าง Charcadet เป็น Armarouge'],
+  ['Malicious Armor','malicious-armor','ใช้ไอเท็ม','พัฒนาร่าง Charcadet เป็น Ceruledge'],
+  ['Metal Alloy','metal-alloy','ใช้ไอเท็ม','พัฒนาร่าง Duraludon เป็น Archaludon'],
+  ["Leader's Crest",'leaders-crest','เงื่อนไขพิเศษ','ใช้พัฒนาร่าง Bisharp เป็น Kingambit (หลังชนะ Bisharp ที่ถือไอเท็มนี้ 3 ตัว)'],
+  ['Scroll of Darkness','scroll-of-darkness','ใช้ไอเท็ม','พัฒนาร่าง Kubfu เป็น Urshifu (Single Strike Style)'],
+  ['Scroll of Waters','scroll-of-waters','ใช้ไอเท็ม','พัฒนาร่าง Kubfu เป็น Urshifu (Rapid Strike Style)'],
+  ['Gimmighoul Coin','gimmighoul-coin','สะสมครบ 999 เหรียญ','เมื่อสะสมครบ 999 เหรียญในกระเป๋า แล้วอัปเลเวล Gimmighoul จะพัฒนาร่างเป็น Gholdengo'],
+  ['Strawberry / Berry / Love / Star / Clover / Flower / Ribbon Sweet','strawberry-sweet','ถือหมุนตัว (Milcery)','ให้ Milcery ถือขนมหวานชนิดใดก็ได้แล้วหมุนตัวละคร เพื่อพัฒนาร่างเป็น Alcremie ลายต่างๆ']
+];
+
+const HELD_META_ITEMS=[
+  ['Leftovers','leftovers','ฟื้นฟูเลือด','ฟื้นฟู HP 1/16 (6.25%) ของ HP สูงสุดทุกจบเทิร์น'],
+  ['Life Orb','life-orb','เพิ่มดาเมจ 1.3×','เพิ่มพลังโจมตีทุกท่า 1.3× (30%) แต่ผู้ถือจะเสีย HP 10% ทุกครั้งที่โจมตีโดน'],
+  ['Choice Band','choice-band','ล็อกท่า / Atk 1.5×','เพิ่มค่า Attack 1.5× (50%) แต่ใช้ได้เฉพาะท่าแรกที่กดเลือกจนกว่าจะเปลี่ยนตัว'],
+  ['Choice Specs','choice-specs','ล็อกท่า / SpA 1.5×','เพิ่มค่า Sp. Atk 1.5× (50%) แต่ใช้ได้เฉพาะท่าแรกที่กดเลือกจนกว่าจะเปลี่ยนตัว'],
+  ['Choice Scarf','choice-scarf','ล็อกท่า / Spe 1.5×','เพิ่มค่า Speed 1.5× (50%) แต่ใช้ได้เฉพาะท่าแรกที่กดเลือกจนกว่าจะเปลี่ยนตัว'],
+  ['Focus Sash','focus-sash','กันตาย 1 นัด','หากผู้ถือมี HP เต็ม 100% และโดนโจมตีทีเดียวตาย จะรอดชีวิตเหลือ HP 1 (ใช้แล้วหมดไป)'],
+  ['Assault Vest','assault-vest','Sp. Def 1.5×','เพิ่มค่า Sp. Def 1.5× (50%) แต่ผู้ถือจะไม่สามารถกดใช้ท่าหมวด Status ได้'],
+  ['Heavy-Duty Boots','heavy-duty-boots','กันกับดักสนาม','ป้องกันความเสียหายและเอฟเฟกต์จากกับดักบนพื้นทั้งหมด (Stealth Rock, Spikes, Toxic Spikes, Sticky Web)'],
+  ['Eviolite','eviolite','ร่างยังไม่สุด Def/SpD 1.5×','เพิ่มค่า Defense และ Sp. Def อย่างละ 1.5× (50%) ให้กับ Pokémon ที่ยังสามารถพัฒนาร่างต่อได้'],
+  ['Rocky Helmet','rocky-helmet','สะท้อนดาเมจ 1/6','เมื่อศัตรูโจมตีด้วยท่าสัมผัสตัว (Contact) ศัตรูจะเสีย HP 1/6 (16.6%)'],
+  ['Weakness Policy','weakness-policy','สวนกลับ +2 Atk/SpA','เมื่อโดนท่าโจมตีที่แพ้ทาง (Super Effective) จะเพิ่ม Attack และ Sp. Atk อย่างละ +2 ระดับ (ใช้แล้วหมดไป)'],
+  ['Booster Energy','booster-energy','สำหรับ Paradox','กระตุ้น Ability Protosynthesis หรือ Quark Drive ทันทีที่ลงสนาม (เพิ่มสเตตัสสูงสุด 1.3× หรือ Speed 1.5×)'],
+  ['Clear Amulet','clear-amulet','กันลดสเตตัส','ป้องกันไม่ให้คู่ต่อสู้ลดค่าสเตตัสของผู้ถือได้ (กัน Intimidate, Parting Shot, Icy Wind)'],
+  ['Covert Cloak','covert-cloak','กันเอฟเฟกต์รอง','ป้องกันเอฟเฟกต์แฝงของท่าโจมตีศัตรู (กันชะงักจาก Fake Out, กันลดสเตตัสจาก Shadow Ball / Scald)'],
+  ['Loaded Dice','loaded-dice','ท่าหลายฮิตออก 4–5 ครั้ง','ทำให้ท่าที่โจมตี 2–5 ครั้ง (Bullet Seed, Icicle Spear, Scale Shot) ออกอย่างน้อย 4–5 ครั้งเสมอ'],
+  ['Toxic Orb','toxic-orb','ติดพิษร้ายแรงเอง','ทำให้ผู้ถือติดสถานะ Badly Poisoned เมื่อจบเทิร์น (ใช้คู่กับ Ability Poison Heal, Guts, Marvel Scale)'],
+  ['Flame Orb','flame-orb','ติดไฟไหม้เอง','ทำให้ผู้ถือติดสถานะ Burn เมื่อจบเทิร์น (ใช้คู่กับ Ability Guts, Flare Boost หรือท่า Facade)'],
+  ['Light Clay','light-clay','ยืดเวลาบาเรีย 8 เทิร์น','ยืดระยะเวลาของท่า Reflect, Light Screen และ Aurora Veil จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Terrain Extender','terrain-extender','ยืดเวลาสนาม 8 เทิร์น','ยืดระยะเวลาของ Electric / Grassy / Psychic / Misty Terrain จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Damp Rock','damp-rock','ยืดเวลาฝน 8 เทิร์น','ยืดระยะเวลาสภาพอากาศฝนตก (Rain Dance / Drizzle) จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Heat Rock','heat-rock','ยืดเวลาแดด 8 เทิร์น','ยืดระยะเวลาสภาพอากาศแดดจ้า (Sunny Day / Drought) จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Smooth Rock','smooth-rock','ยืดเวลาพายุทราย 8 เทิร์น','ยืดระยะเวลาสภาพอากาศพายุทราย (Sandstorm / Sand Stream) จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Icy Rock','icy-rock','ยืดเวลาหิมะ 8 เทิร์น','ยืดระยะเวลาสภาพอากาศหิมะ/ลูกเห็บ (Hail / Snowscape) จาก 5 เทิร์น เป็น 8 เทิร์น'],
+  ['Mental Herb','mental-herb','แก้สถานะป่วน','รักษาสถานะ Taunt, Encore, Torment, Disable และ Cursed Body ทันที 1 ครั้ง'],
+  ['White Herb','white-herb','ล้างค่าสเตตัสที่ลด','ฟื้นฟูค่าสเตตัสที่ถูกลดลงให้กลับมาเป็น 0 ทันที 1 ครั้ง (นิยมใช้คู่กับ Shell Smash หรือ Draco Meteor)'],
+  ['Air Balloon','air-balloon','ลอยตัวกัน Ground','ทำให้ผู้ถือไม่โดนท่าธาตุ Ground จนกว่าจะโดนโจมตีด้วยท่าสร้างความเสียหาย 1 ครั้ง'],
+  ['Safety Goggles','safety-goggles','กันฝุ่น/สปอร์/พายุ','ป้องกันความเสียหายจากพายุทราย/ลูกเห็บ และป้องกันท่ากลุ่มผง/สปอร์ทั้งหมด (Spore, Sleep Powder, Rage Powder)'],
+  ['Shed Shell','shed-shell','หนีการล็อกขา','ทำให้ผู้ถือสามารถสลับตัวออกได้เสมอ แม้จะโดน Ability Shadow Tag, Arena Trap หรือท่า Mean Look'],
+  ['Throat Spray','throat-spray','สายท่าเสียง +1 SpA','เพิ่ม Sp. Atk +1 ระดับทันทีหลังจากผู้ถือกดใช้ท่าประเภทเสียง (Hyper Voice, Torch Song, Boomburst)'],
+  ['Mirror Herb','mirror-herb','ก๊อปปี้บัฟศัตรู','ก๊อปปี้การเพิ่มค่าสเตตัสของศัตรูในเทิร์นนั้นมาให้ตัวเอง +1 ระดับ (ใช้แล้วหมดไป)'],
+  ['Ability Shield','ability-shield','ป้องกันการเปลี่ยน Ability','ป้องกันไม่ให้ Ability ของผู้ถือถูกเปลี่ยน ลบล้าง หรือเพิกเฉยโดยผู้อื่น (กัน Mold Breaker, Neutralizing Gas, Skill Swap)']
+];
+
+const HELD_EXTRA_ITEMS=[
+  ['Black Sludge','black-sludge','ฟื้นฟูเลือดธาตุ Poison','ฟื้นฟู HP 1/16 ทุกจบเทิร์นหากผู้ถือเป็นธาตุ Poison (แต่ถ้าธาตุอื่นถือจะเสีย HP 1/8 แทน)'],
+  ['Expert Belt','expert-belt','เพิ่มดาเมจแพ้ทาง 1.2×','เพิ่มพลังโจมตี 1.2× (20%) เฉพาะเมื่อโจมตีด้วยท่าที่ศัตรูแพ้ทาง (Super Effective)'],
+  ['Metronome','metronome','ตีท่าเดิมซ้ำแรงขึ้น','เพิ่มพลังโจมตีขึ้นทีละ 20% (สูงสุด 100% / 2×) เมื่อกดใช้ท่าเดิมติดต่อกันทุกเทิร์น'],
+  ['Muscle Band','muscle-band','เพิ่มท่า Physical 1.1×','เพิ่มพลังโจมตีของท่าหมวด Physical ขึ้น 10% (1.1×)'],
+  ['Wise Glasses','wise-glasses','เพิ่มท่า Special 1.1×','เพิ่มพลังโจมตีของท่าหมวด Special ขึ้น 10% (1.1×)'],
+  ['Scope Lens','scope-lens','เพิ่มคริติคอล +1 ขั้น','เพิ่มโอกาสติด Critical Hit ของผู้ถือขึ้น +1 ขั้น'],
+  ['Quick Claw','quick-claw','ชิงออกก่อน 20%','มีโอกาส 20% ที่ผู้ถือจะได้ลงมือก่อนในหมวด Priority เดียวกัน'],
+  ['Focus Band','focus-band','โอกาสรอดตาย 10%','มีโอกาส 10% ที่ผู้ถือจะรอดชีวิตเหลือ HP 1 เมื่อโดนโจมตีที่ทำให้หมดสติ'],
+  ['Shell Bell','shell-bell','ดูดเลือด 1/8 ของดาเมจ','ฟื้นฟู HP 1/8 (12.5%) ของความเสียหายที่ทำได้ในเทิร์นนั้น'],
+  ['Big Root','big-root','เพิ่มการดูดเลือด 30%','เพิ่มปริมาณ HP ที่ฟื้นฟูจากท่าดูดเลือด (Giga Drain, Leech Seed, Drain Punch, Aqua Ring) ขึ้น 30%'],
+  ['Binding Band','binding-band','ยืดดาเมจท่าขัง 1/6','เพิ่มความเสียหายต่อเทิร์นของท่าขังต่อเนื่อง (Whirlpool, Fire Spin, Magma Storm, Wrap) จาก 1/8 เป็น 1/6'],
+  ['Grip Claw','grip-claw','ยืดเทิร์นท่าขัง 7 เทิร์น','ทำให้ท่าขังต่อเนื่องคงอยู่ครบ 7 เทิร์นเสมอ'],
+  ['Bright Powder','bright-powder','เพิ่มหลบหลีก 10%','ลดความแม่นยำของท่าศัตรูที่ยิงมาหาผู้ถือลง 10% (หลบง่ายขึ้น)'],
+  ['Wide Lens','wide-lens','เพิ่มแม่นยำ 1.1×','เพิ่มค่า Accuracy ของท่าที่ผู้ถือใช้ขึ้น 10% (1.1×)'],
+  ['Zoom Lens','zoom-lens','แม่นยำ 1.2× เมื่อตีทีหลัง','เพิ่มค่า Accuracy ขึ้น 20% หากผู้ถือโจมตีช้ากว่าศัตรูในเทิร์นนั้น'],
+  ['Punching Glove','punching-glove','สายท่าหมัด 1.1×','เพิ่มพลังโจมตีท่าหมัด (Punch) 10% และป้องกันการสัมผัสตัว (Contact) กับศัตรู'],
+  ['Protective Pads','protective-pads','กันสัมผัสตัว (No Contact)','ป้องกันไม่ให้ผู้ถือรับเอฟเฟกต์จากการสัมผัสตัวกับศัตรู (Rough Skin, Rocky Helmet, Static, Flame Body)'],
+  ['Utility Umbrella','utility-umbrella','กันผลฝน/แดด','ป้องกันผลของสภาพอากาศฝน/แดด และสนามพลังบางส่วนต่อผู้ถือ'],
+  ['Room Service','room-service','ลด Speed เมื่อเปิด Trick Room','ลดค่า Speed ของผู้ถือลง -1 ระดับทันทีเมื่อเปิดใช้งาน Trick Room (ใช้แล้วหมดไป)'],
+  ['Blunder Policy','blunder-policy','เพิ่ม Speed +2 เมื่อตีวืด','เพิ่มค่า Speed +2 ระดับทันทีหากท่าที่ผู้ถือใช้โจมตีพลาด (Miss) (ใช้แล้วหมดไป)'],
+  ['Adrenaline Orb','adrenaline-orb','เพิ่ม Speed +1 เมื่อโดนขู่','เพิ่มค่า Speed +1 ระดับทันทีหากค่าสเตตัสของผู้ถือถูกลดจาก Intimidate (ใช้แล้วหมดไป)'],
+  ['Eject Button','eject-button','สลับตัวหนีเมื่อโดนตี','เมื่อโดนท่าโจมตีที่สร้างความเสียหาย จะสลับตัวกลับเข้าบอลทันที (ใช้แล้วหมดไป)'],
+  ['Eject Pack','eject-pack','สลับตัวเมื่อสเตตัสลด','เมื่อค่าสเตตัสของผู้ถือถูกลดลง จะสลับตัวกลับเข้าบอลทันที (ใช้แล้วหมดไป)'],
+  ['Red Card','red-card','บังคับศัตรูสลับตัว','เมื่อโดนโจมตีสร้างความเสียหาย จะบังคับให้ฝ่ายตรงข้ามสลับตัวออกทันที (ใช้แล้วหมดไป)'],
+  ['Cell Battery','cell-battery','เพิ่ม Atk +1 เมื่อโดนไฟฟ้า','เพิ่ม Attack +1 ระดับเมื่อโดนท่าโจมตีธาตุ Electric (ใช้แล้วหมดไป)'],
+  ['Absorption Bulb','absorption-bulb','เพิ่ม SpA +1 เมื่อโดนน้ำ','เพิ่ม Sp. Atk +1 ระดับเมื่อโดนท่าโจมตีธาตุ Water (ใช้แล้วหมดไป)'],
+  ['Luminous Moss','luminous-moss','เพิ่ม SpD +1 เมื่อโดนน้ำ','เพิ่ม Sp. Def +1 ระดับเมื่อโดนท่าโจมตีธาตุ Water (ใช้แล้วหมดไป)'],
+  ['Snowball','snowball','เพิ่ม Atk +1 เมื่อโดนน้ำแข็ง','เพิ่ม Attack +1 ระดับเมื่อโดนท่าโจมตีธาตุ Ice (ใช้แล้วหมดไป)'],
+  ['Iron Ball','iron-ball','ลด Speed 50% & ติดพื้น','ลด Speed ของผู้ถือลงครึ่งหนึ่ง และทำให้ตัวที่ลอยหรือธาตุ Flying โดนท่าธาตุ Ground ได้'],
+  ['Lagging Tail','lagging-tail','โจมตีช้าสุดในกลุ่ม','ทำให้ผู้ถือโจมตีเป็นลำดับสุดท้ายในหมวด Priority เดียวกันเสมอ'],
+  ['Float Stone','float-stone','ลดน้ำหนักตัว 50%','ลดน้ำหนักตัวของผู้ถือลงครึ่งหนึ่ง (ลดดาเมจจาก Low Kick และ Grass Knot)'],
+  ['Ring Target','ring-target','ยกเลิกภูมิคุ้มกันธาตุ','ทำให้ผู้ถือสามารถโดนท่าโจมตีที่ปกติไร้ผล (0×) ตามธาตุของตัวเองได้'],
+  ['Sticky Barb','sticky-barb','ทำดาเมจ & เกาะศัตรู','ผู้ถือเสีย HP 1/8 ทุกจบเทิร์น และหากโดนท่าสัมผัสตัวไอเท็มนี้จะย้ายไปติดศัตรูแทน'],
+  ['Destiny Knot','destiny-knot','ไอเท็มบรีด (ส่งต่อ 5 IVs)','ตอนบรีดจะส่งต่อค่า IVs 5 ค่าจาก 12 ค่าของพ่อแม่ให้ลูก · ในสนามแข่งจะสะท้อนสถานะหลงใหล Infatuation'],
+  ['Everstone','everstone','ไอเท็มบรีด (ล็อก Nature/ร่าง)','ป้องกันการพัฒนาร่าง · ตอนบรีดจะส่งต่อ Nature 100% และล็อกร่าง Regional Form ของตัวที่ถือ'],
+  ['Lucky Egg','lucky-egg','เพิ่ม EXP 1.5×','เพิ่มค่าประสบการณ์ (EXP) ที่ได้รับจากการต่อสู้ขึ้น 1.5× (50%)'],
+  ['Exp. Share','exp-share','แชร์ EXP ทั้งทีม','แบ่งค่าประสบการณ์จากการต่อสู้ให้สมาชิกในทีมแม้ไม่ได้ลงสนาม'],
+  ['Amulet Coin','amulet-coin','เงินรางวัล 2×','เพิ่มเงินรางวัลหลังชนะการต่อสู้เป็น 2 เท่า หากผู้ถือได้ลงสนามอย่างน้อย 1 เทิร์น'],
+  ['Soothe Bell','soothe-bell','เพิ่ม Friendship 1.5×','เพิ่มค่าความสุข (Friendship) ที่ผู้ถือได้รับขึ้น 1.5× (50%)'],
+  ['Smoke Ball','smoke-ball','หนีสำเร็จ 100%','ทำให้สามารถกดหนี (Run) จากการต่อสู้กับ Pokémon ป่าได้สำเร็จ 100% เสมอ'],
+  ['Cleanse Tag','cleanse-tag','ลดโอกาสเจอตัวป่า','ลดอัตราการพบเจอ Pokémon ป่าเมื่อตัวที่ถืออยู่หัวแถวของทีม'],
+  ['Macho Brace','macho-brace','เพิ่ม EVs 2× แต่ลด Speed','เพิ่มค่า EV ที่ได้รับจากการต่อสู้เป็น 2 เท่า แต่ลดค่า Speed ลงครึ่งหนึ่งระหว่างถือ'],
+  ['Power Weight','power-weight','เพิ่ม HP EV +8 & ส่ง IV','เพิ่มค่า HP EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า HP IV 100% ตอนบรีด'],
+  ['Power Bracer','power-bracer','เพิ่ม Attack EV +8 & ส่ง IV','เพิ่มค่า Attack EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า Attack IV 100% ตอนบรีด'],
+  ['Power Belt','power-belt','เพิ่ม Defense EV +8 & ส่ง IV','เพิ่มค่า Defense EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า Defense IV 100% ตอนบรีด'],
+  ['Power Lens','power-lens','เพิ่ม Sp. Atk EV +8 & ส่ง IV','เพิ่มค่า Sp. Atk EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า Sp. Atk IV 100% ตอนบรีด'],
+  ['Power Band','power-band','เพิ่ม Sp. Def EV +8 & ส่ง IV','เพิ่มค่า Sp. Def EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า Sp. Def IV 100% ตอนบรีด'],
+  ['Power Anklet','power-anklet','เพิ่ม Speed EV +8 & ส่ง IV','เพิ่มค่า Speed EV +8 ทุกครั้งที่ชนะการต่อสู้ และส่งต่อค่า Speed IV 100% ตอนบรีด'],
+  ['Sea Incense','sea-incense','เพิ่มท่าน้ำ 20% & บรีด Azurill','เพิ่มพลังท่าธาตุ Water 20% · ให้ Marill/Azumarill ถือเพื่อฟักไข่ได้ Azurill'],
+  ['Lax Incense','lax-incense','หลบหลีก 10% & บรีด Wynaut','ลดความแม่นยำศัตรู 10% · ให้ Wobbuffet ถือเพื่อฟักไข่ได้ Wynaut'],
+  ['Rose Incense','rose-incense','เพิ่มท่าพืช 20% & บรีด Budew','เพิ่มพลังท่าธาตุ Grass 20% · ให้ Roselia/Roserade ถือเพื่อฟักไข่ได้ Budew'],
+  ['Pure Incense','pure-incense','ลดโอกาสเจอป่า & บรีด Chingling','ลดอัตราเจอตัวป่า · ให้ Chimecho ถือเพื่อฟักไข่ได้ Chingling'],
+  ['Rock Incense','rock-incense','เพิ่มท่าหิน 20% & บรีด Bonsly','เพิ่มพลังท่าธาตุ Rock 20% · ให้ Sudowoodo ถือเพื่อฟักไข่ได้ Bonsly'],
+  ['Odd Incense','odd-incense','เพิ่มท่าพลังจิต 20% & บรีด Mime Jr.','เพิ่มพลังท่าธาตุ Psychic 20% · ให้ Mr. Mime ถือเพื่อฟักไข่ได้ Mime Jr.'],
+  ['Luck Incense','luck-incense','เงินรางวัล 2× & บรีด Happiny','เพิ่มเงินรางวัล 2× · ให้ Chansey/Blissey ถือเพื่อฟักไข่ได้ Happiny'],
+  ['Full Incense','full-incense','ตีช้าสุด & บรีด Munchlax','โจมตีช้าสุดใน Priority · ให้ Snorlax ถือเพื่อฟักไข่ได้ Munchlax'],
+  ['Wave Incense','wave-incense','เพิ่มท่าน้ำ 20% & บรีด Mantyke','เพิ่มพลังท่าธาตุ Water 20% · ให้ Mantine ถือเพื่อฟักไข่ได้ Mantyke'],
+  ['Silk Scarf','silk-scarf','เพิ่มท่า Normal 20%','เพิ่มพลังโจมตีของท่าธาตุ Normal ขึ้น 20% (1.2×)'],
+  ['Charcoal','charcoal','เพิ่มท่า Fire 20%','เพิ่มพลังโจมตีของท่าธาตุ Fire ขึ้น 20% (1.2×)'],
+  ['Mystic Water','mystic-water','เพิ่มท่า Water 20%','เพิ่มพลังโจมตีของท่าธาตุ Water ขึ้น 20% (1.2×)'],
+  ['Magnet','magnet','เพิ่มท่า Electric 20%','เพิ่มพลังโจมตีของท่าธาตุ Electric ขึ้น 20% (1.2×)'],
+  ['Miracle Seed','miracle-seed','เพิ่มท่า Grass 20%','เพิ่มพลังโจมตีของท่าธาตุ Grass ขึ้น 20% (1.2×)'],
+  ['Never-Melt Ice','never-melt-ice','เพิ่มท่า Ice 20%','เพิ่มพลังโจมตีของท่าธาตุ Ice ขึ้น 20% (1.2×)'],
+  ['Black Belt','black-belt','เพิ่มท่า Fighting 20%','เพิ่มพลังโจมตีของท่าธาตุ Fighting ขึ้น 20% (1.2×)'],
+  ['Poison Barb','poison-barb','เพิ่มท่า Poison 20%','เพิ่มพลังโจมตีของท่าธาตุ Poison ขึ้น 20% (1.2×)'],
+  ['Soft Sand','soft-sand','เพิ่มท่า Ground 20%','เพิ่มพลังโจมตีของท่าธาตุ Ground ขึ้น 20% (1.2×)'],
+  ['Sharp Beak','sharp-beak','เพิ่มท่า Flying 20%','เพิ่มพลังโจมตีของท่าธาตุ Flying ขึ้น 20% (1.2×)'],
+  ['Twisted Spoon','twisted-spoon','เพิ่มท่า Psychic 20%','เพิ่มพลังโจมตีของท่าธาตุ Psychic ขึ้น 20% (1.2×)'],
+  ['Silver Powder','silver-powder','เพิ่มท่า Bug 20%','เพิ่มพลังโจมตีของท่าธาตุ Bug ขึ้น 20% (1.2×)'],
+  ['Hard Stone','hard-stone','เพิ่มท่า Rock 20%','เพิ่มพลังโจมตีของท่าธาตุ Rock ขึ้น 20% (1.2×)'],
+  ['Spell Tag','spell-tag','เพิ่มท่า Ghost 20%','เพิ่มพลังโจมตีของท่าธาตุ Ghost ขึ้น 20% (1.2×)'],
+  ['Dragon Fang','dragon-fang','เพิ่มท่า Dragon 20%','เพิ่มพลังโจมตีของท่าธาตุ Dragon ขึ้น 20% (1.2×)'],
+  ['Black Glasses','black-glasses','เพิ่มท่า Dark 20%','เพิ่มพลังโจมตีของท่าธาตุ Dark ขึ้น 20% (1.2×)'],
+  ['Fairy Feather','fairy-feather','เพิ่มท่า Fairy 20%','เพิ่มพลังโจมตีของท่าธาตุ Fairy ขึ้น 20% (1.2×)'],
+  ['Light Ball','light-ball','เฉพาะ Pikachu (Atk/SpA 2×)','เพิ่ม Attack และ Sp. Atk เป็น 2 เท่า เฉพาะเมื่อถือโดย Pikachu'],
+  ['Thick Club','thick-club','เฉพาะ Cubone / Marowak (Atk 2×)','เพิ่ม Attack เป็น 2 เท่า เฉพาะเมื่อถือโดย Cubone หรือ Marowak'],
+  ['Leek (Stick)','leek','เฉพาะ Farfetch’d / Sirfetch’d (+2 Crit)','เพิ่มอัตราคริติคอล +2 ขั้น เฉพาะเมื่อถือโดย Farfetch’d หรือ Sirfetch’d'],
+  ['Lucky Punch','lucky-punch','เฉพาะ Chansey (+2 Crit)','เพิ่มอัตราคริติคอล +2 ขั้น เฉพาะเมื่อถือโดย Chansey'],
+  ['Metal Powder','metal-powder','เฉพาะ Ditto (Def 2×)','เพิ่มค่า Defense เป็น 2 เท่า เฉพาะเมื่อถือโดย Ditto (ก่อนใช้ท่า Transform)'],
+  ['Quick Powder','quick-powder','เฉพาะ Ditto (Speed 2×)','เพิ่มค่า Speed เป็น 2 เท่า เฉพาะเมื่อถือโดย Ditto (ก่อนใช้ท่า Transform)'],
+  ['Soul Dew','soul-dew','เฉพาะ Latias / Latios','เพิ่มพลังท่าธาตุ Psychic และ Dragon 20% เฉพาะ Latias และ Latios (Gen 7+ ตัวคูณ 1.2×)'],
+  ['Adamant Orb','adamant-orb','เฉพาะ Dialga','เพิ่มพลังท่าธาตุ Steel และ Dragon 20% เฉพาะ Dialga'],
+  ['Adamant Crystal','adamant-crystal','เฉพาะ Dialga (Origin Forme)','เปลี่ยน Dialga เป็น Origin Forme และเพิ่มพลังท่า Steel และ Dragon 20%'],
+  ['Lustrous Orb','lustrous-orb','เฉพาะ Palkia','เพิ่มพลังท่าธาตุ Water และ Dragon 20% เฉพาะ Palkia'],
+  ['Lustrous Globe','lustrous-globe','เฉพาะ Palkia (Origin Forme)','เปลี่ยน Palkia เป็น Origin Forme และเพิ่มพลังท่า Water และ Dragon 20%'],
+  ['Griseous Orb','griseous-orb','เฉพาะ Giratina (Origin Forme)','เปลี่ยน Giratina เป็น Origin Forme และเพิ่มพลังท่า Ghost และ Dragon 20%'],
+  ['Griseous Core','griseous-core','เฉพาะ Giratina (Origin Forme)','เปลี่ยน Giratina เป็น Origin Forme และเพิ่มพลังท่า Ghost และ Dragon 20% (ภาค Gen 9)'],
+  ['Red Orb','red-orb','เฉพาะ Groudon (Primal)','เปลี่ยน Groudon เป็น Primal Groudon ทันทีที่เข้าสู่การต่อสู้'],
+  ['Blue Orb','blue-orb','เฉพาะ Kyogre (Primal)','เปลี่ยน Kyogre เป็น Primal Kyogre ทันทีที่เข้าสู่การต่อสู้'],
+  ['Rusted Sword','rusted-sword','เฉพาะ Zacian (Crowned)','แปลงร่าง Zacian เป็น Crowned Sword และเปลี่ยนท่า Iron Head เป็น Behemoth Blade'],
+  ['Rusted Shield','rusted-shield','เฉพาะ Zamazenta (Crowned)','แปลงร่าง Zamazenta เป็น Crowned Shield และเปลี่ยนท่า Iron Head เป็น Behemoth Bash'],
+  ['Wellspring Mask','wellspring-mask','เฉพาะ Ogerpon (Water)','แปลงร่าง Ogerpon เป็นธาตุ Grass / Water และเพิ่มดาเมจท่าทั้งหมด 20%'],
+  ['Hearthflame Mask','hearthflame-mask','เฉพาะ Ogerpon (Fire)','แปลงร่าง Ogerpon เป็นธาตุ Grass / Fire และเพิ่มดาเมจท่าทั้งหมด 20%'],
+  ['Cornerstone Mask','cornerstone-mask','เฉพาะ Ogerpon (Rock)','แปลงร่าง Ogerpon เป็นธาตุ Grass / Rock และเพิ่มดาเมจท่าทั้งหมด 20%'],
+  ['Burn Drive','burn-drive','เฉพาะ Genesect (Fire)','เปลี่ยนท่า Techno Blast เป็นธาตุ Fire และเปลี่ยนสีตลับหลังของ Genesect'],
+  ['Douse Drive','douse-drive','เฉพาะ Genesect (Water)','เปลี่ยนท่า Techno Blast เป็นธาตุ Water และเปลี่ยนสีตลับหลังของ Genesect'],
+  ['Shock Drive','shock-drive','เฉพาะ Genesect (Electric)','เปลี่ยนท่า Techno Blast เป็นธาตุ Electric และเปลี่ยนสีตลับหลังของ Genesect'],
+  ['Chill Drive','chill-drive','เฉพาะ Genesect (Ice)','เปลี่ยนท่า Techno Blast เป็นธาตุ Ice และเปลี่ยนสีตลับหลังของ Genesect'],
+  ['Flame Plate','flame-plate','Arceus / ท่า Fire 20%','เพิ่มพลังท่าธาตุ Fire 20% และเปลี่ยน Arceus เป็นธาตุ Fire'],
+  ['Splash Plate','splash-plate','Arceus / ท่า Water 20%','เพิ่มพลังท่าธาตุ Water 20% และเปลี่ยน Arceus เป็นธาตุ Water'],
+  ['Zap Plate','zap-plate','Arceus / ท่า Electric 20%','เพิ่มพลังท่าธาตุ Electric 20% และเปลี่ยน Arceus เป็นธาตุ Electric'],
+  ['Meadow Plate','meadow-plate','Arceus / ท่า Grass 20%','เพิ่มพลังท่าธาตุ Grass 20% และเปลี่ยน Arceus เป็นธาตุ Grass'],
+  ['Icicle Plate','icicle-plate','Arceus / ท่า Ice 20%','เพิ่มพลังท่าธาตุ Ice 20% และเปลี่ยน Arceus เป็นธาตุ Ice'],
+  ['Fist Plate','fist-plate','Arceus / ท่า Fighting 20%','เพิ่มพลังท่าธาตุ Fighting 20% และเปลี่ยน Arceus เป็นธาตุ Fighting'],
+  ['Toxic Plate','toxic-plate','Arceus / ท่า Poison 20%','เพิ่มพลังท่าธาตุ Poison 20% และเปลี่ยน Arceus เป็นธาตุ Poison'],
+  ['Earth Plate','earth-plate','Arceus / ท่า Ground 20%','เพิ่มพลังท่าธาตุ Ground 20% และเปลี่ยน Arceus เป็นธาตุ Ground'],
+  ['Sky Plate','sky-plate','Arceus / ท่า Flying 20%','เพิ่มพลังท่าธาตุ Flying 20% และเปลี่ยน Arceus เป็นธาตุ Flying'],
+  ['Mind Plate','mind-plate','Arceus / ท่า Psychic 20%','เพิ่มพลังท่าธาตุ Psychic 20% และเปลี่ยน Arceus เป็นธาตุ Psychic'],
+  ['Insect Plate','insect-plate','Arceus / ท่า Bug 20%','เพิ่มพลังท่าธาตุ Bug 20% และเปลี่ยน Arceus เป็นธาตุ Bug'],
+  ['Stone Plate','stone-plate','Arceus / ท่า Rock 20%','เพิ่มพลังท่าธาตุ Rock 20% และเปลี่ยน Arceus เป็นธาตุ Rock'],
+  ['Spooky Plate','spooky-plate','Arceus / ท่า Ghost 20%','เพิ่มพลังท่าธาตุ Ghost 20% และเปลี่ยน Arceus เป็นธาตุ Ghost'],
+  ['Draco Plate','draco-plate','Arceus / ท่า Dragon 20%','เพิ่มพลังท่าธาตุ Dragon 20% และเปลี่ยน Arceus เป็นธาตุ Dragon'],
+  ['Dread Plate','dread-plate','Arceus / ท่า Dark 20%','เพิ่มพลังท่าธาตุ Dark 20% และเปลี่ยน Arceus เป็นธาตุ Dark'],
+  ['Iron Plate','iron-plate','Arceus / ท่า Steel 20%','เพิ่มพลังท่าธาตุ Steel 20% และเปลี่ยน Arceus เป็นธาตุ Steel'],
+  ['Pixie Plate','pixie-plate','Arceus / ท่า Fairy 20%','เพิ่มพลังท่าธาตุ Fairy 20% และเปลี่ยน Arceus เป็นธาตุ Fairy'],
+  ['Fire Memory','fire-memory','เฉพาะ Silvally (Fire)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Fire'],
+  ['Water Memory','water-memory','เฉพาะ Silvally (Water)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Water'],
+  ['Electric Memory','electric-memory','เฉพาะ Silvally (Electric)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Electric'],
+  ['Grass Memory','grass-memory','เฉพาะ Silvally (Grass)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Grass'],
+  ['Ice Memory','ice-memory','เฉพาะ Silvally (Ice)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Ice'],
+  ['Fighting Memory','fighting-memory','เฉพาะ Silvally (Fighting)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Fighting'],
+  ['Poison Memory','poison-memory','เฉพาะ Silvally (Poison)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Poison'],
+  ['Ground Memory','ground-memory','เฉพาะ Silvally (Ground)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Ground'],
+  ['Flying Memory','flying-memory','เฉพาะ Silvally (Flying)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Flying'],
+  ['Psychic Memory','psychic-memory','เฉพาะ Silvally (Psychic)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Psychic'],
+  ['Bug Memory','bug-memory','เฉพาะ Silvally (Bug)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Bug'],
+  ['Rock Memory','rock-memory','เฉพาะ Silvally (Rock)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Rock'],
+  ['Ghost Memory','ghost-memory','เฉพาะ Silvally (Ghost)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Ghost'],
+  ['Dragon Memory','dragon-memory','เฉพาะ Silvally (Dragon)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Dragon'],
+  ['Dark Memory','dark-memory','เฉพาะ Silvally (Dark)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Dark'],
+  ['Steel Memory','steel-memory','เฉพาะ Silvally (Steel)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Steel'],
+  ['Fairy Memory','fairy-memory','เฉพาะ Silvally (Fairy)','เปลี่ยน Silvally และท่า Multi-Attack เป็นธาตุ Fairy'],
+  ['Normal Gem','normal-gem','เพิ่มท่า Normal 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Normal ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Fire Gem','fire-gem','เพิ่มท่า Fire 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Fire ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Water Gem','water-gem','เพิ่มท่า Water 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Water ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Electric Gem','electric-gem','เพิ่มท่า Electric 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Electric ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Grass Gem','grass-gem','เพิ่มท่า Grass 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Grass ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Ice Gem','ice-gem','เพิ่มท่า Ice 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Ice ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Fighting Gem','fighting-gem','เพิ่มท่า Fighting 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Fighting ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Poison Gem','poison-gem','เพิ่มท่า Poison 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Poison ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Ground Gem','ground-gem','เพิ่มท่า Ground 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Ground ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Flying Gem','flying-gem','เพิ่มท่า Flying 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Flying ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Psychic Gem','psychic-gem','เพิ่มท่า Psychic 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Psychic ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Bug Gem','bug-gem','เพิ่มท่า Bug 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Bug ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Rock Gem','rock-gem','เพิ่มท่า Rock 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Rock ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Ghost Gem','ghost-gem','เพิ่มท่า Ghost 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Ghost ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Dragon Gem','dragon-gem','เพิ่มท่า Dragon 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Dragon ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Dark Gem','dark-gem','เพิ่มท่า Dark 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Dark ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Steel Gem','steel-gem','เพิ่มท่า Steel 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Steel ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)'],
+  ['Fairy Gem','fairy-gem','เพิ่มท่า Fairy 1.3× (1 ครั้ง)','เพิ่มพลังโจมตีของท่าธาตุ Fairy ขึ้น 30% (1.3×) ในเทิร์นที่ใช้ (ใช้แล้วหมดไป)']
+];
+
+const POKE_BALLS=[
+  ['Poké Ball','poke-ball','ตัวคูณ: 1×','เงื่อนไข: ใช้ได้ทุกสถานการณ์ · อัตราจับมาตรฐานพื้นฐาน 1×'],
+  ['Great Ball','great-ball','ตัวคูณ: 1.5×','เงื่อนไข: ใช้ได้ทุกสถานการณ์ · อัตราจับสูงกว่า Poké Ball 1.5 เท่า'],
+  ['Ultra Ball','ultra-ball','ตัวคูณ: 2×','เงื่อนไข: ใช้ได้ทุกสถานการณ์ · อัตราจับสูงกว่า Poké Ball 2 เท่า'],
+  ['Master Ball','master-ball','ตัวคูณ: 255× (จับชัวร์ 100%)','เงื่อนไข: ใช้ได้ทุกสถานการณ์ · จับ Pokémon สำเร็จ 100% แบบไม่มีวันพลาด'],
+  ['Quick Ball','quick-ball','ตัวคูณ: 5× (เทิร์นแรก) / 1×','เงื่อนไข: ต้องปาใน "เทิร์นที่ 1" ของการต่อสู้ทันที (หากเลยเทิร์นแรกจะลดเหลือ 1×)'],
+  ['Dusk Ball','dusk-ball','ตัวคูณ: 3× (ถ้ำ/กลางคืน) / 1×','เงื่อนไข: ใช้จับใน "ถ้ำ (Cave)" หรือช่วง "เวลากลางคืน (Night)" (Gen 7+ คูณ 3×, ถ้ากลางวันนอกถ้ำ = 1×)'],
+  ['Net Ball','net-ball','ตัวคูณ: 3.5× (Water/Bug) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่มีธาตุ Water หรือ Bug อย่างน้อย 1 ธาตุ (Gen 7+ คูณ 3.5×, ธาตุอื่น = 1×)'],
+  ['Dive Ball','dive-ball','ตัวคูณ: 3.5× (ในน้ำ/ตกปลา) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่พบขณะว่ายน้ำ (Surf), ดำน้ำ (Dive) หรือจากการตกปลา (Fishing)'],
+  ['Nest Ball','nest-ball','ตัวคูณ: 1× – 4× (ตามเลเวล)','เงื่อนไข: สูตร (41 - Level) ÷ 10 · เป้าหมาย Lv.1–17 ได้สูงสุด 4×, Lv.20 ได้ 2.1×, Lv.30 ขึ้นไปเหลือ 1×'],
+  ['Repeat Ball','repeat-ball','ตัวคูณ: 3.5× (เคยจับแล้ว) / 1×','เงื่อนไข: ใช้จับสายพันธุ์ Pokémon ที่เคยลงทะเบียนจับได้แล้วใน Pokédex (Gen 7+ คูณ 3.5×, ตัวใหม่ = 1×)'],
+  ['Timer Ball','timer-ball','ตัวคูณ: 1× – 4× (ตามเทิร์น)','เงื่อนไข: สูตร 1 + (จำนวนเทิร์น × 0.3) · ยิ่งสู้ยาวนานยิ่งจับง่าย สูงสุด 4× เมื่อครบ 10 เทิร์นขึ้นไป'],
+  ['Fast Ball','fast-ball','ตัวคูณ: 4× (Speed ≥ 100) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่มีค่า Base Speed ตั้งแต่ 100 ขึ้นไป (ภาคเก่าใช้กับตัวที่ชอบหนี)'],
+  ['Level Ball','level-ball','ตัวคูณ: 1× / 2× / 4× / 8×','เงื่อนไข: เทียบเลเวลเรา vs ศัตรู · สูงกว่า = 2×, สูงกว่า 2 เท่า = 4×, สูงกว่า 4 เท่าขึ้นไป = 8× (ต่ำกว่า/เท่ากัน = 1×)'],
+  ['Lure Ball','lure-ball','ตัวคูณ: 4× – 5× (ตกปลา) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่ได้จากการตกปลา (Fishing) (Gen 7 คูณ 5×, Gen 8–9 คูณ 4×)'],
+  ['Heavy Ball','heavy-ball','ตัวคูณ: 1× (บวกค่าจับ -20 ถึง +30)','เงื่อนไข: ไม่ใช่ตัวคูณแต่บวก/ลบ Catch Rate ตามน้ำหนักตัว · หนัก <100kg = -20, 100–199kg = 0, 200–299kg = +20, ≥300kg = +30'],
+  ['Love Ball','love-ball','ตัวคูณ: 8× (ตัวเดียวกัน+ต่างเพศ) / 1×','เงื่อนไข: Pokémon ในสนามของเราต้องเป็น "สายพันธุ์เดียวกัน" และ "คนละเพศ (♂ vs ♀)" เท่านั้น (ไร้เพศ/เพศเดียวกัน = 1×)'],
+  ['Friend Ball','friend-ball','ตัวคูณ: 1× (Friendship = 150)','เงื่อนไข: อัตราจับ 1× · ความสามารถ: ทำให้ Pokémon ที่จับได้เริ่มต้นด้วยค่า Friendship 150 ทันที (พัฒนาร่างมิตรภาพไว)'],
+  ['Moon Ball','moon-ball','ตัวคูณ: 4× (สาย Moon Stone) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่อยู่ในสายวิวัฒนาการที่ใช้ Moon Stone พัฒนาร่าง (เช่น Clefairy, Nidoran, Jigglypuff, Munna)'],
+  ['Dream Ball','dream-ball','ตัวคูณ: 4× (กำลังหลับ) / 1×','เงื่อนไข: ใช้จับ Pokémon ที่กำลังติดสถานะหลับ (Sleep) (Gen 8–9 คูณ 4×; ใน Entree Forest ภาค 5 จับชัวร์ 100%)'],
+  ['Beast Ball','beast-ball','ตัวคูณ: 5× (Ultra Beast) / 0.1×','เงื่อนไข: จับ Ultra Beasts คูณ 5× · แต่ถ้าปาใส่ Pokémon ทั่วไปอัตราจับจะลดเหลือ 0.1× (ยากกว่า Poké Ball 10 เท่า)'],
+  ['Luxury Ball','luxury-ball','ตัวคูณ: 1× (Friendship ×2)','เงื่อนไข: อัตราจับ 1× · ความสามารถ: ทำให้ Pokémon ที่จับได้เพิ่มค่าความสุข (Friendship) เร็วขึ้นเป็น 2 เท่า'],
+  ['Heal Ball','heal-ball','ตัวคูณ: 1× (ฟื้นฟูเต็ม 100%)','เงื่อนไข: อัตราจับ 1× · ความสามารถ: ฟื้นฟู HP, PP และรักษาสถานะผิดปกติทั้งหมดให้ Pokémon ที่จับได้ทันที'],
+  ['Premier Ball','premier-ball','ตัวคูณ: 1× (บอลที่ระลึก)','เงื่อนไข: อัตราจับ 1× เทียบเท่า Poké Ball · ได้รับแถมฟรีเมื่อซื้อ Poké Ball ครบทุก 10 ลูก'],
+  ['Safari Ball','safari-ball','ตัวคูณ: 1.5× (โซน Safari)','เงื่อนไข: บอลพิเศษสำหรับพื้นที่ Safari Zone (อัตราจับ 1.5× เทียบเท่า Great Ball)'],
+  ['Sport Ball','sport-ball','ตัวคูณ: 1.5× (Bug-Catching)','เงื่อนไข: บอลจากการแข่งขันจับแมลง Bug-Catching Contest (อัตราจับ 1.5× เทียบเท่า Great Ball)'],
+  ['Cherish Ball','cherish-ball','ตัวคูณ: 1× (บอลอีเวนต์)','เงื่อนไข: อัตราจับ 1× · บอลสีแดงขอบทองสำหรับ Pokémon แจกพิเศษจากกิจกรรม/อีเวนต์'],
+  ['Park Ball','park-ball','ตัวคูณ: 255× (จับชัวร์ 100%)','เงื่อนไข: บอลเฉพาะใน Pal Park / Catching Show สำหรับจับ Pokémon ที่โอนย้ายมา (จับสำเร็จ 100%)'],
+  ['Strange Ball','strange-ball','ตัวคูณ: 1× (บอลจาก Hisui)','เงื่อนไข: อัตราจับ 1× · บอลสีเขียวมิ้นต์ที่ปรากฏแทนบอลยุคโบราณเมื่อโอนย้าย Pokémon จาก Legends: Arceus'],
+  ['Feather / Wing / Jet Ball','jet-ball','ตัวคูณ: 1× – 2× (ระยะไกล/ตัวบิน)','เงื่อนไข: บอลน้ำหนักเบาจาก Legends: Arceus ปาได้ไกลและตรงมาก เหมาะกับตัวที่บินอยู่สูงหรืออยู่ระยะไกล'],
+  ['Leaden / Gigaton Ball','gigaton-ball','ตัวคูณ: 1.5× – 2.5× (ทีเผลอ)','เงื่อนไข: บอลน้ำหนักมากจาก Legends: Arceus ปาได้ระยะใกล้ แต่จับติดง่ายมากเมื่อปาใส่ด้านหลังตอนไม่ทันรู้ตัว'],
+  ['Origin Ball','origin-ball','ตัวคูณ: จับชัวร์ 100%','เงื่อนไข: บอลในตำนานจาก Legends: Arceus สร้างจาก Red Chain เพื่อจับ Dialga / Palkia ร่าง Origin Forme โดยเฉพาะ']
+];
+
+const MEDICINE_ITEMS=[
+  ['Rare Candy','rare-candy','เพิ่มเลเวล +1 Lv','เพิ่มเลเวลให้ Pokémon ทันที +1 เลเวล (ใช้กับตัว Lv.100 ที่ยังไม่พัฒนาร่างเพื่อกระตุ้นการพัฒนาร่างได้)'],
+  ['Exp. Candy XS / S / M / L / XL','exp-candy-xl','เพิ่มค่าประสบการณ์ EXP','เพิ่ม EXP ทันที: XS (+100), S (+800), M (+3,000), L (+10,000), XL (+30,000)'],
+  ['HP Up','hp-up','วิตามินเพิ่ม HP EV +10','เพิ่มค่า HP EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Protein','protein','วิตามินเพิ่ม Attack EV +10','เพิ่มค่า Attack EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Iron','iron','วิตามินเพิ่ม Defense EV +10','เพิ่มค่า Defense EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Calcium','calcium','วิตามินเพิ่ม Sp. Atk EV +10','เพิ่มค่า Sp. Atk EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Zinc','zinc','วิตามินเพิ่ม Sp. Def EV +10','เพิ่มค่า Sp. Def EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Carbos','carbos','วิตามินเพิ่ม Speed EV +10','เพิ่มค่า Speed EV +10 หน่วย (ใช้ได้สูงสุดจนถึง 252 EV)'],
+  ['Health / Muscle / Resist / Genius / Clever / Swift Feather','health-feather','ขนนกเพิ่ม EV +1','เพิ่มค่า EV อย่างละเอียดทีละ +1 หน่วย ตามแต่ละค่าพลัง (HP, Atk, Def, SpA, SpD, Spe)'],
+  ['Ability Capsule','ability-capsule','สลับ Ability ธรรมดา 1 ↔ 2','เปลี่ยน Ability ของ Pokémon ระหว่างความสามารถปกติช่องที่ 1 และช่องที่ 2 (ใช้เปลี่ยนเป็น Hidden Ability ไม่ได้)'],
+  ['Ability Patch','ability-patch','ปลดล็อก Hidden Ability','เปลี่ยน Ability ธรรมดาให้กลายเป็น Hidden Ability (ความสามารถลับ) หรือใช้สลับกลับเป็น Ability ธรรมดาได้'],
+  ['Bottle Cap','bottle-cap','Hyper Training 1 ค่า (31 IV)','ใช้ฝึก Hyper Training เพื่ออัปค่าพลัง 1 ค่าให้เทียบเท่า 31 IVs (ต้องเลเวล 50+ ใน Gen 9 / Lv.100 ใน Gen 7–8; ไม่ส่งต่อตอนบรีด)'],
+  ['Gold Bottle Cap','gold-bottle-cap','Hyper Training ครบ 6 ค่า (31 IV)','ใช้ฝึก Hyper Training เพื่ออัปค่าพลังทั้ง 6 ค่าให้เทียบเท่า 31 IVs พร้อมกันทันที'],
+  ['PP Up / PP Max','pp-max','เพิ่มค่า PP สูงสุดของท่า','PP Up เพิ่ม Max PP ของท่า 20% (สูงสุด 3 ครั้ง) · PP Max เพิ่ม Max PP ของท่านั้นจนเต็มเพดานทันที'],
+  ['Potion / Super / Hyper / Max Potion','max-potion','ยาฟื้นฟู HP','Potion (+20 HP), Super (+60 HP), Hyper (+120 HP), Max Potion (ฟื้นฟู HP เต็ม 100%)'],
+  ['Full Restore','full-restore','ฟื้นฟู HP เต็ม + แก้ทุกสถานะ','ฟื้นฟู HP เต็ม 100% และรักษาสถานะผิดปกติทั้งหมดพร้อมกัน'],
+  ['Revive / Max Revive','max-revive','ชุบชีวิต Pokémon หมดสติ','Revive ชุบชีวิตพร้อม HP 50% · Max Revive ชุบชีวิตพร้อม HP เต็ม 100%'],
+  ['Sacred Ash','sacred-ash','ชุบชีวิต + ฟื้นเต็มทั้งทีม','ชุบชีวิตและฟื้นฟู HP เต็ม 100% ให้ Pokémon ทุกตัวในทีมที่หมดสติ (ใช้ได้นอกการต่อสู้)'],
+  ['Full Heal','full-heal','รักษาทุกสถานะผิดปกติ','รักษาสถานะผิดปกติทั้งหมด (พิษ, ไหม้, หลับ, ชา, แข็ง, สับสน)'],
+  ['Ether / Max Ether / Elixir / Max Elixir','max-elixir','ฟื้นฟูค่า PP ของท่า','Ether (+10 PP 1 ท่า), Max Ether (เต็ม 1 ท่า), Elixir (+10 PP ทุกท่า), Max Elixir (เต็มทุกท่า)'],
+  ['X Attack / X Defense / X Sp. Atk / X Sp. Def / X Speed','x-attack','ยาบัฟสเตตัส +2 ในแบทเทิล','ใช้ระหว่างต่อสู้เพื่อเพิ่มค่าพลังนั้นๆ ขึ้น +2 ระดับทันที'],
+  ['Dire Hit / Guard Spec. / X Accuracy','dire-hit','ยาบัฟคริ / กันลดค่าพลัง / แม่นยำ','Dire Hit (+2 อัตราคริ), Guard Spec. (ป้องกันทีมถูกลดค่าพลัง 5 เทิร์น), X Accuracy (+2 ความแม่นยำ)'],
+  ['Adamant Mint','adamant-mint','Mint (+Attack / -Sp. Atk)','เปลี่ยนการคำนวณสเตตัสเป็น +Attack / -Sp. Atk ทันที (ไม่เปลี่ยนชื่อ Nature ตอนบรีด)'],
+  ['Jolly Mint','jolly-mint','Mint (+Speed / -Sp. Atk)','เปลี่ยนการคำนวณสเตตัสเป็น +Speed / -Sp. Atk ทันที (ไม่เปลี่ยนชื่อ Nature ตอนบรีด)'],
+  ['Modest Mint','modest-mint','Mint (+Sp. Atk / -Attack)','เปลี่ยนการคำนวณสเตตัสเป็น +Sp. Atk / -Attack ทันที (ไม่เปลี่ยนชื่อ Nature ตอนบรีด)'],
+  ['Timid Mint','timid-mint','Mint (+Speed / -Attack)','เปลี่ยนการคำนวณสเตตัสเป็น +Speed / -Attack ทันที (ไม่เปลี่ยนชื่อ Nature ตอนบรีด)'],
+  ['Bold Mint','bold-mint','Mint (+Defense / -Attack)','เปลี่ยนการคำนวณสเตตัสเป็น +Defense / -Attack ทันที'],
+  ['Impish Mint','impish-mint','Mint (+Defense / -Sp. Atk)','เปลี่ยนการคำนวณสเตตัสเป็น +Defense / -Sp. Atk ทันที'],
+  ['Calm Mint','calm-mint','Mint (+Sp. Def / -Attack)','เปลี่ยนการคำนวณสเตตัสเป็น +Sp. Def / -Attack ทันที'],
+  ['Careful Mint','careful-mint','Mint (+Sp. Def / -Sp. Atk)','เปลี่ยนการคำนวณสเตตัสเป็น +Sp. Def / -Sp. Atk ทันที'],
+  ['Brave Mint','brave-mint','Mint (+Attack / -Speed)','เปลี่ยนการคำนวณสเตตัสเป็น +Attack / -Speed ทันที (สาย Trick Room)'],
+  ['Quiet Mint','quiet-mint','Mint (+Sp. Atk / -Speed)','เปลี่ยนการคำนวณสเตตัสเป็น +Sp. Atk / -Speed ทันที (สาย Trick Room)'],
+  ['Relaxed Mint','relaxed-mint','Mint (+Defense / -Speed)','เปลี่ยนการคำนวณสเตตัสเป็น +Defense / -Speed ทันที (สาย Trick Room)'],
+  ['Sassy Mint','sassy-mint','Mint (+Sp. Def / -Speed)','เปลี่ยนการคำนวณสเตตัสเป็น +Sp. Def / -Speed ทันที (สาย Trick Room)'],
+  ['Lonely / Naughty Mint','lonely-mint','Mint (+Attack / -Def หรือ -SpD)','Lonely (+Atk / -Def) · Naughty (+Atk / -SpD) สำหรับสายตีผสม'],
+  ['Mild / Rash Mint','mild-mint','Mint (+Sp. Atk / -Def หรือ -SpD)','Mild (+SpA / -Def) · Rash (+SpA / -SpD) สำหรับสายเวทผสม'],
+  ['Hasty / Naive Mint','hasty-mint','Mint (+Speed / -Def หรือ -SpD)','Hasty (+Spe / -Def) · Naive (+Spe / -SpD) สำหรับสายเร็วผสม'],
+  ['Gentle / Lax Mint','gentle-mint','Mint (+SpD/-Def หรือ +Def/-SpD)','Gentle (+SpD / -Def) · Lax (+Def / -SpD)'],
+  ['Serious Mint','serious-mint','Mint (Neutral สมดุล)','รีเซ็ตการเพิ่ม/ลดสเตตัสจาก Mint ให้กลับมาเป็นกลาง (ไม่เพิ่มไม่ลด)']
+];
+  
+const ALL_HELD_ITEMS=[...HELD_META_ITEMS,...HELD_EXTRA_ITEMS];
+
+const BERRY_ITEMS=[
+  ['Sitrus Berry','sitrus-berry','ฟื้นฟู HP 25%','ฟื้นฟู HP 25% ของ HP สูงสุดทันที เมื่อ HP ลดต่ำกว่า 50%'],
+  ['Oran Berry','oran-berry','ฟื้นฟู HP +10 (ต้นเกม)','ฟื้นฟู HP 10 หน่วยทันที เมื่อ HP ลดต่ำกว่า 50%'],
+  ['Lum Berry','lum-berry','รักษาทุกสถานะ','รักษาสถานะผิดปกติทั้งหมด (หลับ, พิษ, ไหม้, ชา, แข็ง, สับสน) ทันที 1 ครั้ง'],
+  ['Chesto Berry','chesto-berry','แก้หลับ (ใช้คู่กับ Rest)','รักษาสถานะหลับ (Sleep) ทันที นิยมใช้คู่กับท่า Rest เพื่อตื่นมาเลือดเต็มทันที'],
+  ['Pecha Berry','pecha-berry','แก้สถานะพิษ','รักษาสถานะติดพิษ (Poison / Badly Poisoned) ทันที 1 ครั้ง'],
+  ['Cheri Berry','cheri-berry','แก้สถานะอัมพาต (ชา)','รักษาสถานะอัมพาต (Paralysis) ทันที 1 ครั้ง'],
+  ['Rawst Berry','rawst-berry','แก้สถานะไฟไหม้','รักษาสถานะไฟไหม้ (Burn) ทันที 1 ครั้ง'],
+  ['Aspear Berry','aspear-berry','แก้สถานะแช่แข็ง','รักษาสถานะแช่แข็ง (Freeze) ทันที 1 ครั้ง'],
+  ['Persim Berry','persim-berry','แก้สถานะสับสน','รักษาสถานะสับสน (Confusion) ทันที 1 ครั้ง (นิยมใช้คู่กับ Outrage / Petal Dance)'],
+  ['Figy Berry','figy-berry','ฟื้น HP 33% (รสเผ็ด)','ฟื้นฟู HP 33% เมื่อ HP ต่ำกว่า 25% (ถ้ากินโดยตัวที่นิสัย -Attack เช่น Modest/Timid จะติดสับสน)'],
+  ['Wiki Berry','wiki-berry','ฟื้น HP 33% (รสฝาด)','ฟื้นฟู HP 33% เมื่อ HP ต่ำกว่า 25% (ถ้ากินโดยตัวที่นิสัย -Sp. Atk เช่น Adamant/Jolly จะติดสับสน)'],
+  ['Mago Berry','mago-berry','ฟื้น HP 33% (รสหวาน)','ฟื้นฟู HP 33% เมื่อ HP ต่ำกว่า 25% (ถ้ากินโดยตัวที่นิสัย -Speed เช่น Brave/Quiet จะติดสับสน)'],
+  ['Aguav Berry','aguav-berry','ฟื้น HP 33% (รสขม)','ฟื้นฟู HP 33% เมื่อ HP ต่ำกว่า 25% (ถ้ากินโดยตัวที่นิสัย -Sp. Def เช่น Naive/Rash จะติดสับสน)'],
+  ['Iapapa Berry','iapapa-berry','ฟื้น HP 33% (รสเปรี้ยว)','ฟื้นฟู HP 33% เมื่อ HP ต่ำกว่า 25% (ถ้ากินโดยตัวที่นิสัย -Defense เช่น Lonely/Hasty จะติดสับสน)'],
+  ['Liechi Berry','liechi-berry','เพิ่ม Attack +1 ฉุกเฉิน','เพิ่ม Attack +1 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Petaya Berry','petaya-berry','เพิ่ม Sp. Atk +1 ฉุกเฉิน','เพิ่ม Sp. Atk +1 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Salac Berry','salac-berry','เพิ่ม Speed +1 ฉุกเฉิน','เพิ่ม Speed +1 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Ganlon Berry','ganlon-berry','เพิ่ม Defense +1 ฉุกเฉิน','เพิ่ม Defense +1 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Apicot Berry','apicot-berry','เพิ่ม Sp. Def +1 ฉุกเฉิน','เพิ่ม Sp. Def +1 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Lansat Berry','lansat-berry','เพิ่มอัตราคริ +2 ขั้น','เพิ่มโอกาสติด Critical Hit +2 ขั้น เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Starf Berry','starf-berry','สุ่มเพิ่มสเตตัส +2 ระดับ','สุ่มเพิ่มค่าพลัง 1 ค่า (Atk, Def, SpA, SpD, Spe) ขึ้น +2 ระดับ เมื่อ HP ลดต่ำกว่า 25%'],
+  ['Custap Berry','custap-berry','ชิงลงมือก่อน 1 เทิร์น','เมื่อ HP ลดต่ำกว่า 25% จะทำให้ผู้ถือได้ลงมือก่อนในหมวด Priority เดียวกันในเทิร์นถัดไป'],
+  ['Enigma Berry','enigma-berry','ฟื้น HP 25% เมื่อโดนแพ้ทาง','ฟื้นฟู HP 25% ทันทีเมื่อโดนโจมตีด้วยท่าที่แพ้ทาง (Super Effective)'],
+  ['Micle Berry','micle-berry','เพิ่มความแม่นยำ 1.2×','เมื่อ HP ลดต่ำกว่า 25% จะเพิ่มความแม่นยำของท่าถัดไปขึ้น 20% (1.2×)'],
+  ['Jaboca Berry','jaboca-berry','สะท้อนดาเมจ Physical 1/8','เมื่อโดนท่าหมวด Physical ศัตรูจะเสีย HP 1/8 ของ HP สูงสุด (ใช้แล้วหมดไป)'],
+  ['Rowap Berry','rowap-berry','สะท้อนดาเมจ Special 1/8','เมื่อโดนท่าหมวด Special ศัตรูจะเสีย HP 1/8 ของ HP สูงสุด (ใช้แล้วหมดไป)'],
+  ['Kee Berry','kee-berry','เพิ่ม Defense +1 เมื่อโดนตี','เพิ่ม Defense +1 ระดับทันทีเมื่อโดนโจมตีด้วยท่าหมวด Physical'],
+  ['Maranga Berry','maranga-berry','เพิ่ม Sp. Def +1 เมื่อโดนตี','เพิ่ม Sp. Def +1 ระดับทันทีเมื่อโดนโจมตีด้วยท่าหมวด Special'],
+  ['Yache Berry','yache-berry','ลดดาเมจ Ice 50%','ลดความเสียหายจากท่าธาตุ Ice ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Occa Berry','occa-berry','ลดดาเมจ Fire 50%','ลดความเสียหายจากท่าธาตุ Fire ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Passho Berry','passho-berry','ลดดาเมจ Water 50%','ลดความเสียหายจากท่าธาตุ Water ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Wacan Berry','wacan-berry','ลดดาเมจ Electric 50%','ลดความเสียหายจากท่าธาตุ Electric ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Rindo Berry','rindo-berry','ลดดาเมจ Grass 50%','ลดความเสียหายจากท่าธาตุ Grass ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Chople Berry','chople-berry','ลดดาเมจ Fighting 50%','ลดความเสียหายจากท่าธาตุ Fighting ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Kebia Berry','kebia-berry','ลดดาเมจ Poison 50%','ลดความเสียหายจากท่าธาตุ Poison ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Shuca Berry','shuca-berry','ลดดาเมจ Ground 50%','ลดความเสียหายจากท่าธาตุ Ground ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Coba Berry','coba-berry','ลดดาเมจ Flying 50%','ลดความเสียหายจากท่าธาตุ Flying ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Payapa Berry','payapa-berry','ลดดาเมจ Psychic 50%','ลดความเสียหายจากท่าธาตุ Psychic ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Tanga Berry','tanga-berry','ลดดาเมจ Bug 50%','ลดความเสียหายจากท่าธาตุ Bug ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Charti Berry','charti-berry','ลดดาเมจ Rock 50%','ลดความเสียหายจากท่าธาตุ Rock ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Kasib Berry','kasib-berry','ลดดาเมจ Ghost 50%','ลดความเสียหายจากท่าธาตุ Ghost ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Haban Berry','haban-berry','ลดดาเมจ Dragon 50%','ลดความเสียหายจากท่าธาตุ Dragon ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Colbur Berry','colbur-berry','ลดดาเมจ Dark 50%','ลดความเสียหายจากท่าธาตุ Dark ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Babiri Berry','babiri-berry','ลดดาเมจ Steel 50%','ลดความเสียหายจากท่าธาตุ Steel ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Roseli Berry','roseli-berry','ลดดาเมจ Fairy 50%','ลดความเสียหายจากท่าธาตุ Fairy ที่แพ้ทางลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Chilan Berry','chilan-berry','ลดดาเมจ Normal 50%','ลดความเสียหายจากท่าธาตุ Normal ลงครึ่งหนึ่ง (1 ครั้ง)'],
+  ['Pomeg Berry','pomeg-berry','ลด HP EV -10 & เพิ่มมิตรภาพ','ลดค่า HP EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)'],
+  ['Kelpsy Berry','kelpsy-berry','ลด Attack EV -10 & เพิ่มมิตรภาพ','ลดค่า Attack EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)'],
+  ['Qualot Berry','qualot-berry','ลด Defense EV -10 & เพิ่มมิตรภาพ','ลดค่า Defense EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)'],
+  ['Hondew Berry','hondew-berry','ลด Sp. Atk EV -10 & เพิ่มมิตรภาพ','ลดค่า Sp. Atk EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)'],
+  ['Grepa Berry','grepa-berry','ลด Sp. Def EV -10 & เพิ่มมิตรภาพ','ลดค่า Sp. Def EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)'],
+  ['Tamato Berry','tamato-berry','ลด Speed EV -10 & เพิ่มมิตรภาพ','ลดค่า Speed EV ลง 10 หน่วย และเพิ่มค่าความสุข (Friendship)']
+];
+
+const ALL_ITEMS_COMBINED=[
+  ...EVO_ITEMS,
+  ...ALL_HELD_ITEMS,
+  ...POKE_BALLS,
+  ...MEDICINE_ITEMS,
+  ...BERRY_ITEMS
+];
+
+function setItemTab(tab){
+  currentItemTab=tab;
+  const map=[
+    ['itemTabAll','all'],
+    ['itemTabEvo','evo'],
+    ['itemTabHeldMeta','held_meta'],
+    ['itemTabHeldAll','held_all'],
+    ['itemTabBalls','balls'],
+    ['itemTabMedicine','medicine'],
+    ['itemTabBerry','berry'],
+    ['itemTabNature','nature']
+  ];
+  map.forEach(([id,k])=>{const el=$(id);if(el)el.classList.toggle('primary',tab===k)});
+  $('itemGrid').classList.toggle('hidden',tab==='nature');
+  $('natureWrap').classList.toggle('hidden',tab!=='nature');
+  renderItemsView();
+}
+
+function renderItemsView(){
+  let q=($('itemSearch')?.value||'').toLowerCase().trim();
+  if(currentItemTab==='nature'){
+    $('itemResultNote').textContent='ตาราง Nature ทั้ง 25 แบบ · แสดงค่าพลังที่เพิ่มขึ้น (+10%) และลดลง (-10%)';
+    $('natureTableBody').innerHTML=NATURES.filter(n=>!q||n.some(x=>x&&x.toLowerCase().includes(q))).map(([name,up,down,,,role])=>`
+      <tr>
+        <td><b>${name}</b></td>
+        <td class="${up!=='—'?'stat-up':'muted'}">${up}</td>
+        <td class="${down!=='—'?'stat-down':'muted'}">${down}</td>
+        <td class="muted">${role}</td>
+      </tr>
+    `).join('');
+    return;
+  }
+  
+  let list=ALL_ITEMS_COMBINED, label='ไอเท็มทั้งหมดในฐานข้อมูล (All Items)';
+  if(currentItemTab==='evo'){list=EVO_ITEMS;label='ไอเท็มพัฒนาร่าง (Evolution Items)';}
+  else if(currentItemTab==='held_meta'){list=HELD_META_ITEMS;label='Hold ไอเท็มแบทเทิลยอดนิยม (Competitive Meta)';}
+  else if(currentItemTab==='held_all'){list=ALL_HELD_ITEMS;label='Hold ไอเท็มทั้งหมด (All Held Items)';}
+  else if(currentItemTab==='balls'){list=POKE_BALLS;label='Poké Balls ทั้งหมด · ความสามารถ & เงื่อนไขตัวคูณจับ';}
+  else if(currentItemTab==='medicine'){list=MEDICINE_ITEMS;label='ยาฟื้นฟู, วิตามิน EVs, Bottle Caps & Nature Mints';}
+  else if(currentItemTab==='berry'){list=BERRY_ITEMS;label='เบอรี่ทั้งหมด (All Berries)';}
+
+  let filtered=list.filter(x=>!q||x[0].toLowerCase().includes(q)||x[2].toLowerCase().includes(q)||x[3].toLowerCase().includes(q));
+  $('itemResultNote').textContent=`${label} · แสดง ${filtered.length} รายการ`;
+  let grid=$('itemGrid');
+  if(!filtered.length){grid.innerHTML='<div class="empty">ไม่พบไอเท็มตามคำค้นหา</div>';return}
+  grid.innerHTML=filtered.map(([name,slug,tag,desc])=>{
+    const isBall=tag.startsWith('ตัวคูณ:');
+    return `
+    <div class="item-card">
+      <img src="${ITEM_SPRITE(slug)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
+      <div class="item-body">
+        <div class="item-title"><span>${esc(name)}</span><span class="chip ${isBall?'p':'a'}">${esc(tag)}</span></div>
+        <div class="item-desc">${esc(desc)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+$('itemTabAll').onclick=()=>setItemTab('all');
+$('itemTabEvo').onclick=()=>setItemTab('evo');
+$('itemTabHeldMeta').onclick=()=>setItemTab('held_meta');
+$('itemTabHeldAll').onclick=()=>setItemTab('held_all');
+$('itemTabBalls').onclick=()=>setItemTab('balls');
+$('itemTabMedicine').onclick=()=>setItemTab('medicine');
+$('itemTabBerry').onclick=()=>setItemTab('berry');
+$('itemTabNature').onclick=()=>setItemTab('nature');
+$('itemSearch').oninput=renderItemsView;
+
+// ==================== TABS, FETCH (SPECIES + ALL 18 TYPES IN PARALLEL) & BACKUP ====================
+function setupTabs(){
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+    document.querySelectorAll('.view').forEach(x=>x.classList.toggle('hidden',x.id!==b.dataset.tab));
+    if(b.dataset.tab==='shiny')handleShinyFilterChange();
+    if(b.dataset.tab==='breed')renderBreeders();
+    if(b.dataset.tab==='items')renderItemsView();
+  });
+}
+
+async function fetchTypesMap(){
+  try{
+    const cachedTypes=JSON.parse(localStorage.getItem(typesCacheKey)||'null');
+    if(cachedTypes&&typeof cachedTypes==='object'&&Object.keys(cachedTypes).length>900){
+      typesById=new Map(Object.entries(cachedTypes).map(([k,v])=>[Number(k),v]));
+      return;
+    }
+  }catch{}
+  try{
+    const reqs=Array.from({length:18},(_,i)=>fetch(`https://pokeapi.co/api/v2/type/${i+1}`).then(r=>{if(!r.ok)throw Error('Type '+r.status);return r.json()}));
+    const results=await Promise.all(reqs);
+    const map=new Map();
+    for(const tData of results){
+      const tName=tData.name;
+      if(!TYPE_META[tName])continue;
+      for(const entry of (tData.pokemon||[])){
+        const parts=entry.pokemon.url.replace(/\/+$/,'').split('/');
+        const pid=parseInt(parts[parts.length-1],10);
+        if(pid>0){
+          if(!map.has(pid))map.set(pid,[]);
+          map.get(pid)[entry.slot-1]=tName;
+        }
+      }
+    }
+    const cleanObj={};
+    for(const [k,v] of map.entries()){
+      const clean=v.filter(Boolean);
+      if(clean.length){typesById.set(k,clean);cleanObj[k]=clean;}
+    }
+    try{localStorage.setItem(typesCacheKey,JSON.stringify(cleanObj))}catch{}
+  }catch(e){
+    console.warn('Could not preload type map:',e);
+  }
+}
+
+async function fetchAll(){
+  let cached;try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null')}catch{}
+  await fetchTypesMap();
+  if(cached&&Array.isArray(cached)&&cached.length>500&&cached[0].types){
+    species=cached;
+    $('loadStatus').textContent='โหลดจากแคชแล้ว ('+species.length+' ตัว)';
+    finish();
+    return;
+  }
+  $('loadStatus').textContent='กำลังดึงรายชื่อและธาตุ…';
+  try{
+    let r=await fetch(API);if(!r.ok)throw Error('API '+r.status);let list=(await r.json()).results;
+    $('loadStatus').textContent=`กำลังโหลดข้อมูล 0/${list.length}…`;let out=[];
+    for(let i=0;i<list.length;i+=35){
+      let batch=list.slice(i,i+35);
+      let vals=await Promise.all(batch.map(async item=>{
+        let x=await fetch(item.url);
+        if(!x.ok)throw Error('species '+item.name);
+        let d=await x.json();
+        return {id:d.id,name:d.name,types:typesById.get(d.id)||['normal'],egg_groups:d.egg_groups||[],gender_rate:d.gender_rate};
+      }));
+      out.push(...vals);$('loadStatus').textContent=`กำลังโหลดข้อมูล ${out.length}/${list.length}…`;
+    }
+    species=out.sort((a,b)=>a.id-b.id);
+    try{localStorage.setItem(cacheKey,JSON.stringify(species))}catch{}
+    $('loadStatus').textContent='อัปเดตฐานข้อมูลแล้ว ('+species.length+' ตัว)';
+    finish();
+  }catch(e){
+    console.error('fetchAll error:',e);
+    $('loadStatus').textContent='โหลดข้อมูลไม่สำเร็จ';
+    $('dexList').innerHTML='<div class="empty">เชื่อมต่อ PokéAPI ไม่ได้ในตอนนี้ กรุณาตรวจอินเทอร์เน็ตแล้วกด <button class="btn small primary" onclick="fetchAll()">ลองใหม่อีกครั้ง</button></div>';
+  }
+}
+
+function finish(){
+  byName=new Map(species.map(s=>[s.name,s]));
+  $('totalCount').textContent=species.length;
+  $('shinyTotalCount').textContent=species.length;
+  let dl=$('pokeOptions');dl.replaceChildren();
+  species.forEach(s=>{let o=document.createElement('option');o.value=nice(s.name);dl.append(o)});
+  updateStats();handleFilterChange();handleShinyFilterChange();renderBreeders();renderItemsView();
+  if($('pairA').options.length)findPair();
+}
+
+$('refresh').onclick=()=>{localStorage.removeItem(cacheKey);localStorage.removeItem(typesCacheKey);fetchAll()};
+$('dexSearch').oninput=handleFilterChange;
+$('dexTypeFilter').onchange=handleFilterChange;
+$('dexCaught').onchange=handleFilterChange;
+$('shinySearch').oninput=handleShinyFilterChange;
+$('shinyTypeFilter').onchange=handleShinyFilterChange;
+$('shinyCaught').onchange=handleShinyFilterChange;
+
+$('findChain').onclick=findChain;$('swapChain').onclick=()=>{let a=$('chainFrom').value;$('chainFrom').value=$('chainTo').value;$('chainTo').value=a;findChain()};
+$('chainFrom').addEventListener('keydown',e=>{if(e.key==='Enter')findChain()});$('chainTo').addEventListener('keydown',e=>{if(e.key==='Enter')findChain()});
+$('findEggMoves').onclick=findEggMoves;$('eggMoveSearch').addEventListener('keydown',e=>{if(e.key==='Enter')findEggMoves()});
+$('findPair').onclick=findPair;$('swapPair').onclick=()=>{let a=$('pairA').value;$('pairA').value=$('pairB').value;$('pairB').value=a;findPair()};$('findCompat').onclick=findCompat;$('compatSearch').addEventListener('keydown',e=>{if(e.key==='Enter')findCompat()});$('addBreeder').onclick=addBreeder;$('breederSearch').addEventListener('keydown',e=>{if(e.key==='Enter')addBreeder()});
+
+$('exportBtn').onclick=()=>{
+  save();
+  let blob=new Blob([JSON.stringify({
+    app:'OMNidex',
+    version:5,
+    storeData
+  },null,2)],{type:'application/json'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='omnidex-backup.json';a.click();URL.revokeObjectURL(a.href);
+  $('backupStatus').textContent=`Export สำเร็จ (รวมทั้งหมด ${Object.keys(storeData.profiles).length} โปรไฟล์)`;
+};
+$('importFile').onchange=async e=>{
+  let f=e.target.files[0];if(!f)return;
+  try{
+    let d=JSON.parse(await f.text());
+    if(d.storeData&&d.storeData.profiles&&Object.keys(d.storeData.profiles).length){
+      storeData=d.storeData;
+      if(!storeData.profiles[storeData.activeId])storeData.activeId=Object.keys(storeData.profiles)[0];
+      applyTheme(storeData.theme||'navy');
+      loadActiveProfileToSets();
+      save();renderBreeders();handleFilterChange();handleShinyFilterChange();
+      $('backupStatus').textContent=`Import สำเร็จ (${Object.keys(storeData.profiles).length} โปรไฟล์)`;
+    }else if(Array.isArray(d.caught)&&Array.isArray(d.breeders)){
+      caught=new Set(d.caught);
+      breeders=new Set(d.breeders);
+      breederNotes=d.breederNotes||{};
+      caughtForms=new Set(d.caughtForms||[]);
+      shinyCaught=new Set(d.shinyCaught||[]);
+      shinyCaughtForms=new Set(d.shinyCaughtForms||[]);
+      save();renderBreeders();handleFilterChange();handleShinyFilterChange();
+      $('backupStatus').textContent='Import ข้อมูลเข้าโปรไฟล์ปัจจุบันสำเร็จ';
+    }else throw Error();
+  }catch{$('backupStatus').textContent='ไฟล์ไม่ถูกต้องหรือไม่ใช่ไฟล์สำรองของ OMNidex'}
+  e.target.value='';
+};
+$('clearBtn').onclick=()=>{
+  const curName=storeData.profiles[storeData.activeId]?.name||'โปรไฟล์นี้';
+  if(confirm(`ล้างสถานะ Living Dex, Shiny Dex, Forms และ Breeder Box ทั้งหมดของ "${curName}"?`)){
+    caught.clear();breeders.clear();breederNotes={};caughtForms.clear();shinyCaught.clear();shinyCaughtForms.clear();
+    save();renderBreeders();handleFilterChange();handleShinyFilterChange();
+    $('backupStatus').textContent=`ล้างข้อมูลของ "${curName}" แล้ว`;
+  }
+};
+ 
+// ==================== DETAIL MODAL ====================
+const TYPE_TH={normal:'Normal',fire:'Fire',water:'Water',electric:'Electric',grass:'Grass',ice:'Ice',fighting:'Fighting',poison:'Poison',ground:'Ground',flying:'Flying',psychic:'Psychic',bug:'Bug',rock:'Rock',ghost:'Ghost',dragon:'Dragon',dark:'Dark',steel:'Steel',fairy:'Fairy'};
+const STAT_TH={hp:'HP',attack:'Attack',defense:'Defense','special-attack':'Sp. Atk','special-defense':'Sp. Def',speed:'Speed'};
+const LEARN_TH={'level-up':'เลเวลอัป',machine:'TM / HM',egg:'Egg Move',tutor:'Move Tutor'};
+let detailCache={};try{detailCache=JSON.parse(localStorage.getItem('pbdex_detail_cache_v2')||'{}')}catch{}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function getJSON(url){let r=await fetch(url);if(!r.ok)throw Error('โหลดข้อมูลไม่สำเร็จ');return r.json()}
+function calcMatch(types,td){let w={},r={},z={};types.forEach(t=>{let x=td[t.type.name]?.damage_relations;if(!x)return;(x.double_damage_from||[]).forEach(a=>w[a.name]=(w[a.name]||1)*2);(x.half_damage_from||[]).forEach(a=>r[a.name]=(r[a.name]||1)*.5);(x.no_damage_from||[]).forEach(a=>z[a.name]=true)});let all=new Set([...Object.keys(w),...Object.keys(r),...Object.keys(z)]);return [...all].map(t=>({type:t,mult:z[t]?0:(w[t]||1)*(r[t]||1)})).filter(x=>x.mult!==1).sort((a,b)=>a.mult-b.mult)}
+function matchup(label,arr){return `<div style="margin-top:9px"><div class="tiny">${label}</div><div class="type-row" style="margin-top:5px">${arr.length?arr.map(x=>`<span class="type-mult-pill">${typeBadgeHTML(x.type)} <span>${x.mult===0?'0×':x.mult+'×'}</span></span>`).join(''):'<span class="tiny">ไม่มี</span>'}</div></div>`}
+function evoText(d){if(!d)return 'เงื่อนไขไม่ระบุ';let a=[];if(d.trigger?.name==='level-up')a.push(d.min_level?'เลเวล '+d.min_level:'เลเวลอัป');else if(d.trigger?.name==='use-item')a.push('ใช้ '+nice(d.item?.name||'ไอเท็ม'));else if(d.trigger?.name==='trade')a.push('แลกเปลี่ยน'+(d.trade_species?' กับ '+nice(d.trade_species.name):''));else a.push(nice(d.trigger?.name||'เงื่อนไขพิเศษ'));if(d.min_happiness)a.push('ความสุข ≥ '+d.min_happiness);if(d.time_of_day)a.push(d.time_of_day==='day'?'กลางวัน':'กลางคืน');if(d.known_move)a.push('รู้ท่า '+nice(d.known_move.name));if(d.known_move_type)a.push('มีท่าธาตุ '+nice(d.known_move_type.name));if(d.location)a.push('สถานที่ '+nice(d.location.name));if(d.held_item)a.push('ถือ '+nice(d.held_item.name));if(d.needs_overworld_rain)a.push('ขณะฝนตก');if(d.turn_upside_down)a.push('พลิกเครื่อง');if(d.gender===1)a.push('เพศ♀เท่านั้น');if(d.gender===2)a.push('เพศ♂เท่านั้น');if(d.party_species)a.push('มี '+nice(d.party_species.name)+' ในทีม');if(d.party_type)a.push('มีธาตุ '+nice(d.party_type.name)+' ในทีม');return a.join(' · ')}
+function evoNode(link){let n=link.species.name,id=species.find(x=>x.name===n)?.id;let out=`<div class="evo-node">${id?`<img src="${imageUrl(id)}">`:''}<b>${esc(nice(n))}</b><div class="tiny">#${id||'—'}</div></div>`;if(link.evolves_to?.length)out+=link.evolves_to.map(x=>`<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span class="tiny">→ ${esc((x.evolution_details||[]).map(evoText).join(' / ')||'วิวัฒนาการ')}</span>${evoNode(x)}</div>`).join('');return out}
+
+function categoryIcon(c){
+  if(c==='physical'){
+    return `<span class="cat-badge cat-physical" title="Physical (กายภาพ)"><svg width="16" height="12" viewBox="0 0 24 18"><polygon points="12,1 15,6 22,4 18,9 23,14 16,13 12,17 8,13 1,14 6,9 2,4 9,6" fill="#ff7a45" stroke="#ffd166" stroke-width="1.2"/></svg></span>`;
+  }
+  if(c==='special'){
+    return `<span class="cat-badge cat-special" title="Special (เวท)"><svg width="16" height="12" viewBox="0 0 24 18"><ellipse cx="12" cy="9" rx="10" ry="6.5" fill="none" stroke="#63b3ed" stroke-width="1.8"/><ellipse cx="12" cy="9" rx="6" ry="3.8" fill="none" stroke="#90cdf4" stroke-width="1.5"/><circle cx="12" cy="9" r="1.8" fill="#ebf8ff"/></svg></span>`;
+  }
+  return `<span class="cat-badge cat-status" title="Status (สเตตัส)"><svg width="16" height="12" viewBox="0 0 24 18"><circle cx="12" cy="9" r="6.5" fill="#cbd5e0" stroke="#718096" stroke-width="1.2"/><path d="M12,2.5 A6.5,6.5 0 0,1 12,15.5 A3.25,3.25 0 0,1 12,9 A3.25,3.25 0 0,0 12,2.5 Z" fill="#4a5568"/></svg></span>`;
+}
+
+const moveDetailCache={};
+async function getMoveData(name,url){
+  if(moveDetailCache[name])return moveDetailCache[name];
+  let d=await getJSON(url),e=(d.effect_entries||[]).find(x=>x.language.name==='en');
+  let out={type:d.type?.name,damage:d.damage_class?.name,power:d.power,accuracy:d.accuracy,pp:d.pp,effect:(e?.short_effect||e?.effect||'').replace(/\$effect_chance/g,d.effect_chance??'')};
+  moveDetailCache[name]=out;return out;
+}
+
+async function movesHTML(p,v){
+  let groups={};
+  p.moves.forEach(m=>(m.version_group_details||[]).filter(d=>d.version_group.name===v).forEach(d=>{
+    let k=d.move_learn_method.name;
+    (groups[k]??=[]).push({name:m.move.name,url:m.move.url,level:d.level_learned_at||0});
+  }));
+  let order=['level-up','machine','egg','tutor',...Object.keys(groups).filter(k=>!['level-up','machine','egg','tutor'].includes(k))];
+  let out='';
+  for(let k of order.filter(k=>groups[k]?.length)){
+    let items=groups[k].sort((a,b)=>a.level-b.level||a.name.localeCompare(b.name)),cards=[];
+    for(let i=0;i<items.length;i+=12){
+      let batch=await Promise.all(items.slice(i,i+12).map(async m=>({m,d:await getMoveData(m.name,m.url)})));
+      cards.push(...batch);
+    }
+    out+=`<div class="move-group"><h4>${LEARN_TH[k]||nice(k)} (${items.length})</h4><div class="move-list">`;
+    out+=cards.map(({m,d})=>{
+      let pow=d.power??'—',acc=d.accuracy===null?'—':d.accuracy+'%',pp=d.pp??'—';
+      let lvlBadge=k==='level-up'?`<span class="move-lvl">Lv.${m.level}</span>`:'';
+      return `<div class="move-row">
+        <div class="move-top">
+          ${lvlBadge}
+          <span class="move-name">${esc(nice(m.name))}</span>
+          ${typeBadgeHTML(d.type||'normal')}
+          ${categoryIcon(d.damage)}
+          <div class="move-stats">
+            <span>Pow <b>${pow}</b></span>
+            <span>Acc <b>${acc}</b></span>
+            <span>PP <b>${pp}</b></span>
+          </div>
+        </div>
+        ${d.effect?`<div class="move-desc">${esc(d.effect)}</div>`:''}
+      </div>`;
+    }).join('');
+    out+='</div></div>';
+  }
+  return out||'<span class="tiny">ไม่มีข้อมูลท่าในเวอร์ชันนี้</span>';
+}
+
+function closeDetail(){$('detailOverlay').classList.remove('open');document.body.style.overflow=''}
+
+function jumpToStatCalc(pokeName){
+  closeDetail();
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab==='calc'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('hidden',x.id!=='calc'));
+  $('calcPokeInput').value=nice(pokeName);
+  loadCalcPokemon(pokeName);
+}
+
+async function openDetail(s,startShiny=false){
+  if(!s)return;
+  let ov=$('detailOverlay'),root=$('detailContent');
+  ov.classList.add('open');document.body.style.overflow='hidden';
+  root.innerHTML='<div class="empty">กำลังโหลดข้อมูล Pokémon…</div>';
+  try{
+    let d=detailCache[s.name];
+    if(!d){
+      let p=await getJSON('https://pokeapi.co/api/v2/pokemon/'+s.name);
+      let sp=await getJSON(p.species.url);
+      let td=await Promise.all(p.types.map(async x=>[x.type.name,await getJSON(x.type.url)]));
+      let ab=await Promise.all(p.abilities.map(async x=>{
+        let a=await getJSON(x.ability.url);
+        let e=a.effect_entries.find(y=>y.language.name==='en');
+        let f=a.flavor_text_entries.filter(y=>y.language.name==='en').slice(-1)[0];
+        return{name:x.ability.name,hidden:x.is_hidden,effect:e?.short_effect||e?.effect||f?.flavor_text||'No description available'};
+      }));
+      let chain=sp.evolution_chain?.url?await getJSON(sp.evolution_chain.url):null;
+      d={p,sp,td:Object.fromEntries(td),ab,chain};
+      detailCache[s.name]=d;
+      try{localStorage.setItem('pbdex_detail_cache_v2',JSON.stringify(detailCache))}catch{}
+    }
+    let {p,sp,td,ab,chain}=d;
+    let match=calcMatch(p.types,td);
+    let total=p.stats.reduce((a,x)=>a+x.base_stat,0);
+    let versions=[...new Set(p.moves.flatMap(m=>m.version_group_details.map(x=>x.version_group.name)))].sort();
+    let v=versions.includes('scarlet-violet')?'scarlet-violet':versions[versions.length-1];
+    let titleText=s.displayName||nice(s.name);
+    let spriteKey=s.spriteOverride||p.id;
+    let isShinyMode=startShiny;
+
+    root.innerHTML=`<div class="detail-top">
+      <img id="detailSpriteImg" src="${imageUrl(spriteKey,isShinyMode)}">
+      <div style="flex:1;min-width:200px">
+        <div class="tiny">#${String(sp.id).padStart(4,'0')} · ${esc(nice(s.name))}</div>
+        <div class="detail-title">${esc(titleText)}</div>
+        <div class="type-row" style="margin-top:5px">${typeBadgesRow(p.types.map(x=>x.type.name),true)}</div>
+        <div class="tiny" style="margin-top:6px">สูง ${(p.height/10).toFixed(1)} m · หนัก ${(p.weight/10).toFixed(1)} kg</div>
+        <div class="controls" style="margin-top:8px">
+          <button class="btn small ${isShinyMode?'shiny-btn':''}" id="toggleDetailShiny">${isShinyMode?'✨ กำลังดูสี Shiny (กดสลับปกติ)':'✨ ดูสี Shiny'}</button>
+          <button class="btn small primary" onclick="jumpToStatCalc('${esc(p.name)}')">คำนวณ Stat / Min-Max ➔</button>
+        </div>
+      </div>
+    </div>
+<div class="detail-section"><h3>ธาตุและความสัมพันธ์แพ้ทาง</h3>${matchup('แพ้ทาง',match.filter(x=>x.mult>1))}${matchup('ต้านทาน',match.filter(x=>x.mult>0&&x.mult<1))}${matchup('ไม่มีผล',match.filter(x=>x.mult===0))}</div>
+<div class="detail-section"><h3>Base Stats · รวม ${total}</h3>${p.stats.map(x=>`<div class="stat-line"><span>${STAT_TH[x.stat.name]||nice(x.stat.name)}</span><div class="stat-track"><i style="width:${Math.min(100,x.base_stat/255*100)}%"></i></div><b>${x.base_stat}</b></div>`).join('')}</div>
+<div class="detail-section"><h3>Abilities</h3><div class="ability-row">${ab.map(a=>`<div class="move-item" style="flex:1;min-width:210px"><b>${esc(nice(a.name))} <span class="chip ${a.hidden?'p':''}">${a.hidden?'Hidden Ability':'Ability'}</span></b><small style="white-space:normal;margin-top:5px">${esc(a.effect)}</small></div>`).join('')}</div></div>
+<div class="detail-section"><h3>Breeding & Species</h3><div class="row"><span class="chip">${esc(gender(sp))}</span>${egg(sp).map(g=>`<span class="chip">${esc(g)}</span>`).join('')}</div><div class="tiny" style="margin-top:7px">Hatch Cycles: ${sp.hatch_counter} · ประมาณ ${sp.hatch_counter*255} ขั้นเดิน · Growth Rate: ${esc(nice(sp.growth_rate.name))}</div><div class="tiny">Catch Rate: ${sp.capture_rate}/255 · Base EXP: ${p.base_experience??'—'}</div><div class="tiny">EV Yield: ${p.stats.filter(x=>x.effort>0).map(x=>`${STAT_TH[x.stat.name]||nice(x.stat.name)} +${x.effort}`).join(' · ')||'ไม่มี'}</div></div>
+<div class="detail-section"><h3>Evolution · เงื่อนไขการเปลี่ยนร่าง</h3><div class="evo-list">${chain?evoNode(chain.chain):'ไม่มีข้อมูลสายวิวัฒนาการ'}</div></div>
+<div class="detail-section"><h3>Moves · ท่าที่เรียนได้</h3><div class="move-controls"><select id="moveVersion" class="field">${versions.map(x=>`<option value="${esc(x)}" ${x===v?'selected':''}>${esc(nice(x))}</option>`).join('')}</select></div><div id="moveGroups"><div class="tiny">กำลังโหลดข้อมูลท่า…</div></div></div>`;
+
+    let spImg=$('detailSpriteImg');
+    attachImgFallback(spImg,spriteKey,isShinyMode);
+    $('toggleDetailShiny').onclick=()=>{
+      isShinyMode=!isShinyMode;
+      delete spImg.dataset.step;
+      spImg.style.visibility='visible';
+      spImg.src=imageUrl(spriteKey,isShinyMode);
+      attachImgFallback(spImg,spriteKey,isShinyMode);
+      $('toggleDetailShiny').classList.toggle('shiny-btn',isShinyMode);
+      $('toggleDetailShiny').textContent=isShinyMode?'✨ กำลังดูสี Shiny (กดสลับปกติ)':'✨ ดูสี Shiny';
+    };
+
+    $('moveVersion').onchange=async e=>{$('moveGroups').innerHTML='<div class="tiny">กำลังโหลดข้อมูลท่า…</div>';$('moveGroups').innerHTML=await movesHTML(p,e.target.value)};
+    $('moveGroups').innerHTML=await movesHTML(p,v);
+  }catch(e){
+    root.innerHTML=`<div class="empty">โหลดรายละเอียดไม่สำเร็จ: ${esc(e.message)}</div>`;
+  }
+}
+$('detailClose').onclick=closeDetail;
+$('detailOverlay').onclick=e=>{if(e.target===$('detailOverlay'))closeDetail()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+
+loadSaved();setupProfileAndThemeUI();setupTabs();setupGroups();setupStatCalc();setupTypeCalc();renderItemsView();fetchAll();
+</script></body></html>
